@@ -1,0 +1,1134 @@
+:root{font-family:Nunito,system-ui,sans-serif;color:#332317;background:#6e4028;line-height:1.5;font-synthesis:none}*{box-sizing:border-box}body{margin:0;min-width:320px;min-height:100vh;background:radial-gradient(circle at 30% 20%,#a96e47aa,transparent 35%),repeating-linear-gradient(93deg,#75452d 0,#8c5738 4px,#70422a 8px,#985f3c 14px);background-attachment:fixed}button,input,select,textarea{font:inherit}button,a{touch-action:manipulation}button{cursor:pointer;border:0;border-radius:8px;padding:.6rem .85rem;background:#603c29;color:#fff}button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #f4bd58;outline-offset:2px}header{position:sticky;z-index:10;top:0;display:flex;align-items:center;gap:1rem;padding:.75rem clamp(1rem,4vw,3rem);background:#2e1c14e8;color:#fff;box-shadow:0 4px 15px #1a0d0788}.brand{font:700 1.7rem Caveat,cursive;color:#ffe0a5;text-decoration:none}nav{display:flex;gap:.35rem;flex:1}nav a{color:#ead8c8;padding:.45rem .7rem;text-decoration:none;border-radius:6px}nav a.active{background:#91603f;color:#fff}.backup{display:flex;gap:.4rem}.backup button{background:#856047}main{padding:clamp(1rem,4vw,3rem);max-width:1500px;margin:auto}.warning{margin:1rem;padding:1rem;background:#ffe2a2;border-radius:8px}.section-title{display:flex;justify-content:space-between;align-items:end;gap:1rem;margin-bottom:1.4rem;color:#fff;text-shadow:0 2px 3px #30170d}.section-title h1{font:700 clamp(2.4rem,7vw,4.7rem)/.9 Caveat,cursive;margin:0}.eyebrow{text-transform:uppercase;letter-spacing:.16em;font-weight:700;margin:0}.new-note{display:flex;align-items:end;gap:.6rem;background:#f4e1bf;padding:.8rem;border-radius:10px;box-shadow:0 5px 15px #2d130c66;text-shadow:none;color:#332317}.new-note label{font-size:.8rem}.new-note input,.new-note select{display:block;padding:.5rem;border:1px solid #b69a73;border-radius:6px}.board{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.column{min-height:60vh;padding:1rem;border-radius:12px;background:#efe2ccbd;box-shadow:inset 0 0 30px #7b573333,0 8px 20px #2d140c55}.column h2{font:700 2rem Caveat,cursive;margin:.2rem}.column h2 span{float:right;background:#76513b;color:#fff;border-radius:50%;font:1rem Nunito;padding:.2rem .55rem}.note{padding:1rem;margin:1rem 0;box-shadow:2px 6px 10px #4d321e55;transform:rotate(-.3deg);border-radius:2px}.note textarea{width:100%;min-height:90px;border:0;resize:vertical;background:transparent;font:600 1.35rem Caveat,cursive}.palette{display:flex;gap:.35rem}.palette button{width:22px;height:22px;padding:0;border:1px solid #665}.palette .chosen{outline:2px solid #332317}.note label{display:block;margin-top:.6rem;font-size:.8rem}.note small{display:block;margin-top:.5rem}.delete{margin-top:.5rem;background:#8e3c33}.journal-layout{display:grid;grid-template-columns:220px 1fr;gap:1rem}.journal-layout aside{background:#dac29c;padding:1rem;border-radius:10px}.journal-layout aside button{width:100%;margin:.3rem 0;text-align:left;background:#866047}.journal-layout aside button.active{background:#3d291d}.book{max-width:900px;margin:auto;width:100%;padding:2rem;background:#4f281f;border:10px solid #3e211a;border-radius:14px;box-shadow:10px 15px 30px #24100888}.paper{min-height:580px;padding:2.5rem;background:repeating-linear-gradient(#fbf1d8 0,#fbf1d8 31px,#b9c9d0 32px);box-shadow:inset 25px 0 30px #9f805733}.paper .page-editor{width:100%;min-height:470px;border:0;background:transparent;resize:none;font:1.2rem/32px Georgia,serif}.page-meta{font:1.5rem Caveat;color:#74503c}.page-buttons{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.6rem;margin-top:1rem}.empty{background:#f4e5c8;padding:3rem;text-align:center}.calculator{max-width:1060px;margin:auto;background:#36322f;padding:1.5rem;border-radius:18px;box-shadow:8px 12px 24px #25100888}.calculator form{display:grid;grid-template-columns:2fr 1fr auto;gap:.7rem;background:#d9d3c3;padding:1rem;border-radius:8px}.calculator label input{display:block;width:100%;padding:.7rem}.calculator form p{grid-column:1/-1;color:#8b1717}.total{background:#d8e0c1;color:#1d3020;text-shadow:none;padding:.6rem 1.2rem;border-radius:6px;text-align:right}.total strong{display:block;font-size:1.8rem}.expense-list{margin-top:1rem;padding:0 1rem}.expense-row{display:grid;grid-template-columns:2fr 1fr auto;gap:.7rem;margin:.5rem 0}.expense-row input,.expense-row select{padding:.7rem;background:#15803d;border:0;border-radius:4px}.modal{position:fixed;inset:0;z-index:20;background:#0009;display:grid;place-items:center;padding:1rem}.modal>div{max-width:520px;background:#fff4d9;padding:2rem;border-radius:12px}.modal button{margin-right:.5rem}
+.backup{margin-left:auto}.note{position:relative;cursor:grab}.note:active{cursor:grabbing}.note::after{content:"";position:absolute;pointer-events:none;top:0;right:0;width:0;height:0;border-style:solid;border-width:0 0 20px 20px;border-color:transparent transparent #0002 transparent;filter:drop-shadow(-1px 1px 1px #4d321e44)}.note-text{min-height:45px;padding-right:1.5rem;white-space:pre-wrap;overflow-wrap:anywhere;font:600 1.05rem Caveat,cursive}.note button,.note summary{cursor:pointer}
+@media(max-width:800px),(orientation:portrait) and (max-width:1100px){header{flex-wrap:wrap}.brand{flex:1}.backup{order:3;width:100%}.board{grid-template-columns:1fr}.column{min-height:250px}.section-title{align-items:stretch;flex-direction:column}.new-note{align-items:stretch;flex-direction:column}.journal-layout{grid-template-columns:1fr}.journal-layout aside{display:flex;overflow-x:auto;gap:.5rem}.journal-layout aside h2{display:none}.journal-layout aside button{width:auto;white-space:nowrap}.book{padding:.6rem}.paper{padding:1.2rem;min-height:500px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+.note{width:50%;min-width:180px;max-width:240px;padding:.55rem;margin:.55rem 0;box-shadow:2px 4px 7px #4d321e55}.note textarea{min-height:45px;font-size:1.05rem}.note small{margin-top:.3rem;font-size:.72rem}.note details{font-size:.78rem}.note .delete{margin-top:.35rem;padding:.4rem .65rem}
+.column{display:flex;flex-wrap:wrap;align-content:flex-start;gap:.55rem}.column h2{width:100%}.note{flex:0 1 calc(50% - .275rem);width:auto;min-width:0;max-width:none;margin:0}
+@media(max-width:480px){.note{flex-basis:100%}}
+.desk-objects{display:flex;justify-content:flex-end;align-items:end;gap:1.2rem;margin:-.5rem 0 1.2rem}.desk-objects a{text-decoration:none;color:#2f2118;box-shadow:5px 8px 14px #2c120b77}.notebook{width:145px;height:105px;padding:1rem;background:#91584a;border-left:13px solid #472d25;border-radius:5px;color:#fff!important;display:flex;flex-direction:column;justify-content:center;transform:rotate(-2deg)}.notebook span{font:700 1.7rem Caveat,cursive}.calc-object{width:100px;padding:.65rem;background:#333;border:5px solid #292929;border-radius:8px;color:#fff!important;text-align:center;transform:rotate(2deg)}.calc-object span{display:block;background:#cdd8ba;color:#243020;line-height:1.2;padding:.3rem;margin-bottom:.4rem;font-family:monospace}.calc-object strong{font-size:.8rem}@media(max-width:800px),(orientation:portrait) and (max-width:1100px){.desk-objects{justify-content:center;margin:.2rem 0 1rem}.notebook{width:130px}.calc-object{width:90px}}
+.color-picker{border:0;margin:0;padding:0;min-width:240px}.color-picker legend{font-size:.8rem}.color-picker button{width:44px;height:44px;padding:0;margin-right:.25rem;border:1px solid #745d45;border-radius:50%;color:#332317}.color-picker button span{opacity:0;font-weight:900}.color-picker button.chosen{box-shadow:inset 0 0 0 3px #fff,0 0 0 3px #332317}.color-picker button.chosen span{opacity:1}.notebook{position:relative;overflow:hidden;background:linear-gradient(105deg,#774337,#a96c5b 55%,#854d42);border-left:0;padding-left:2.1rem;box-shadow:inset 7px 0 #36221d,inset 11px 0 #c89b6d,5px 8px 14px #2c120b77!important}.notebook::after{content:"";position:absolute;inset:8px 8px 8px 19px;border:1px solid #d9ab7b88;border-radius:3px}.notebook-binding{position:absolute;z-index:1;left:5px;top:10px;bottom:10px;width:8px;background:repeating-linear-gradient(#251713 0 5px,#d4aa79 5px 9px);border-radius:4px}.notebook span:not(.notebook-binding),.notebook small{position:relative;z-index:1}.journal-content{min-width:0}.folder-actions{display:flex;justify-content:flex-end;gap:.5rem;margin:0 auto .75rem;max-width:900px}.folder-actions .delete{margin:0}.journal-layout aside button{min-height:44px}@media(max-width:800px),(orientation:portrait) and (max-width:1100px){.color-picker{min-width:0}.folder-actions{justify-content:stretch}.folder-actions button{flex:1}.journal-content{width:100%}}
+.note--dragging{opacity:.42;cursor:grabbing}.column--drag-over{box-shadow:inset 0 0 0 3px #9a633d,inset 0 0 30px #7b573333,0 8px 20px #2d140c55}.note--drop-before::before,.note--drop-after::before,.drop-indicator{content:"";position:absolute;z-index:3;left:0;right:0;height:4px;border-radius:4px;background:#603c29;box-shadow:0 0 0 2px #fff8;pointer-events:none}.note--drop-before::before{top:-.45rem}.note--drop-after::before{bottom:-.45rem}.drop-indicator{position:relative;flex:0 1 calc(50% - .275rem);min-width:0;height:4px;align-self:center}.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}@media(max-width:480px){.drop-indicator{flex-basis:100%}}
+.auth-screen,.loading{min-height:100vh;display:grid;place-items:center;padding:1rem}.auth-card{width:min(420px,100%);display:grid;gap:1rem;background:#f4e1bf;padding:2rem;border-radius:14px;box-shadow:0 10px 30px #1a0d0788}.auth-card h1{margin:0;font:700 2.8rem Caveat,cursive}.auth-card label{display:grid;gap:.3rem}.auth-card input{padding:.7rem;border:1px solid #b69a73;border-radius:6px}.auth-card .secondary{background:#856047}.auth-card .link-button{background:none;color:#603c29;text-decoration:underline;padding:.2rem;justify-self:center}.auth-error{color:#8b1717}.loading{color:#fff;font-size:1.3rem}.sync-status{white-space:nowrap;font-size:.85rem}.identity{max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}@media(max-width:760px){header{align-items:flex-start;flex-wrap:wrap}.backup{width:100%;flex-wrap:wrap}.identity{max-width:130px}.sync-status{margin-left:auto}}
+
+/* Cuenta y sincronización: un bloque estable y legible aun con correos largos. */
+header{justify-content:space-between}.backup{align-items:center;justify-content:flex-end;min-width:0}.backup-actions{display:flex;gap:.4rem}.account-summary{display:grid;gap:.05rem;min-width:12rem;max-width:min(25rem,38vw);padding:.25rem .65rem;border-left:1px solid #ffffff30}.sync-status{display:flex;align-items:center;gap:.4rem;color:#f6dfc5;font-size:.78rem;font-weight:700;letter-spacing:.03em}.sync-dot{width:.55rem;height:.55rem;flex:none;border-radius:50%;background:#d9b45e;box-shadow:0 0 0 3px #d9b45e22}.sync-status--synced .sync-dot{background:#75c98b;box-shadow:0 0 0 3px #75c98b22}.sync-status--error .sync-dot,.sync-status--conflict .sync-dot{background:#ef806f}.identity{max-width:none;overflow:visible;text-overflow:clip;white-space:normal;overflow-wrap:anywhere;color:#fff;font-size:.94rem;line-height:1.2}
+
+/* La libreta conserva el editor real, pero se presenta como un cuadernillo abierto. */
+.book{position:relative;isolation:isolate;overflow:visible;padding:1.35rem 1.6rem 1rem;background:linear-gradient(100deg,#3a1b17,#65352b 48%,#4b251e 52%,#321713);border:0;border-radius:12px 16px 16px 12px;box-shadow:0 3px 0 #28120e,12px 18px 30px #24100899}.book::before{content:"";position:absolute;z-index:-1;inset:8px -7px -7px 9px;border-radius:8px 17px 17px 9px;background:repeating-linear-gradient(0deg,#d4bd91 0 2px,#eee0c1 2px 4px);box-shadow:4px 5px 0 #2c1712}.book::after{content:"";position:absolute;z-index:2;top:1.35rem;bottom:4.5rem;left:1.6rem;width:28px;pointer-events:none;background:linear-gradient(90deg,#5c442433,#fff9e066,transparent)}.paper{position:relative;min-height:580px;padding:2.8rem 3rem 2rem 4.1rem;overflow:hidden;border-radius:5px 9px 9px 4px;background:linear-gradient(90deg,transparent 0 3.15rem,#d99c9488 3.15rem 3.25rem,transparent 3.25rem),repeating-linear-gradient(#fff8df 0,#fff8df 31px,#aabfca 32px);box-shadow:inset 18px 0 25px #8b6d4430,inset -12px 0 18px #8b6d4420,0 2px 4px #1d0c0877}.paper::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(100deg,#fff9 0,#fff0 12%,#7f6a4c0c 100%)}.paper .page-editor{position:relative;z-index:1;padding:0;border-radius:0;color:#34271f;caret-color:#6a382a}.paper small{position:relative;z-index:3;float:right;color:#806a55}.page-meta{position:relative;z-index:3;border-bottom:1px solid #b7947055;padding-bottom:.35rem}.book-ribbon{position:absolute;z-index:4;right:2.5rem;top:-.2rem;width:18px;height:5rem;background:#8f3c39;box-shadow:1px 2px 3px #2d100d66}.book-ribbon::after{content:"";position:absolute;bottom:-1px;border-left:9px solid transparent;border-right:9px solid transparent;border-bottom:9px solid #fff8df}.page-numbers{display:flex;flex-wrap:wrap;gap:.3rem;justify-content:center}.page-number{min-width:2.3rem;padding:.35rem .5rem;background:transparent;color:#4a2e1a;font:700 1rem Nunito,sans-serif}.page-number:hover{background:#ffffff55}.page-number.active{background:#fff3d6;color:#5c2a20;box-shadow:inset 0 0 0 2px #8f3c39}.page-nav{background:transparent;color:#4a2e1a;font-weight:700;padding:.35rem .6rem}.page-nav:hover:not(:disabled){background:#ffffff22}.page-nav:disabled{opacity:.35;cursor:not-allowed}.drag-hint{margin:.25rem 0 .75rem;color:#fff4df;text-align:right;font-weight:700;text-shadow:0 2px 3px #30170d}.note{touch-action:none}.note button,.note details{touch-action:manipulation}
+
+@media(max-width:900px){header{align-items:center;flex-wrap:wrap}.brand{flex:1 1 auto}.backup{flex:1 1 100%;display:grid;grid-template-columns:auto minmax(0,1fr) auto}.account-summary{max-width:none;min-width:0}.backup-actions{min-width:max-content}}
+@media(max-width:600px){header{padding:.65rem .8rem}.backup{grid-template-columns:1fr auto;align-items:stretch}.backup-actions{grid-column:1/-1}.backup-actions button{flex:1}.account-summary{border-left:0;padding:.35rem 0}.identity{font-size:.86rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.book{padding:.75rem .65rem .65rem}.book::after{display:none}.paper{padding:2.4rem 1rem 1.4rem 2.25rem}.paper{background:linear-gradient(90deg,transparent 0 1.55rem,#d99c9488 1.55rem 1.65rem,transparent 1.65rem),repeating-linear-gradient(#fff8df 0,#fff8df 31px,#aabfca 32px)}.book-ribbon{right:1.25rem}.page-buttons{gap:.35rem}.page-numbers{gap:.2rem}.page-number{min-width:2rem;padding:.3rem .4rem;font-size:.9rem}.drag-hint{text-align:left;font-size:.9rem}}
+
+/* Los renglones nacen dentro del editor para conservar la misma base que el texto. */
+.paper{--journal-line-height:32px;background:linear-gradient(90deg,transparent 0 3.15rem,#d99c9488 3.15rem 3.25rem,transparent 3.25rem),#fff8df}.paper .page-editor{font-family:"Segoe Print","Bradley Hand","Comic Sans MS",Caveat,cursive;line-height:var(--journal-line-height);background:repeating-linear-gradient(to bottom,transparent 0,transparent calc(var(--journal-line-height) - var(--journal-rule,1px)),#aabfca calc(var(--journal-line-height) - var(--journal-rule,1px)),#aabfca var(--journal-line-height));background-attachment:local;background-origin:padding-box;background-position:0 0}.paper .page-editor:focus-visible{outline:none}
+@media(max-width:600px){.paper{background:linear-gradient(90deg,transparent 0 1.55rem,#d99c9488 1.55rem 1.65rem,transparent 1.65rem),#fff8df}}
+
+/* El editor es un div editable: preserva saltos de línea literales y muestra un placeholder cuando está vacío. */
+.page-editor{white-space:pre-wrap;overflow-wrap:anywhere}
+.page-editor:empty:before{content:attr(data-placeholder);color:#9c8064;pointer-events:none}
+.journal-toolbar{display:flex;gap:.4rem;margin-bottom:.5rem;position:relative;z-index:3}
+.journal-toolbar button{padding:.35rem .65rem;background:#d9c9a8;color:#332317;font-size:.9rem;line-height:1}
+.journal-toolbar button[aria-pressed="true"]{background:#9c8a68;box-shadow:inset 0 0 0 2px #332317}
+
+.calculator form button{align-self:end;padding:.7rem 1rem}.calculator label{min-width:0}.calculator label>input,.calculator label>select{display:block;width:100%;padding:.7rem}.money-input{display:flex;align-items:center;min-width:0;background:#fff}.money-input>span{flex:none;padding-left:.7rem;font-weight:700}.money-input input{min-width:0;border:0}.expense-row .money-input{background:#15803d;border-radius:4px}.calculator .paid-select,.expense-row .paid-select{background:#8e3c33;color:#fff}.calculator .paid-select.paid,.expense-row .paid-select.paid{background:#bde7c6;color:#332317}.expense-row button{padding:.7rem 1rem}.expense-row small{grid-column:1/-1;color:#ffd1c9}
+.expense-field{min-width:0}.expense-field>label{display:block}.date-input{position:relative;display:flex;align-items:stretch;min-width:0;background:#fff;border-radius:4px}.date-input>input[type=text]{width:100%;min-width:0;padding:.7rem 3.2rem .7rem .7rem;border:0;background:transparent}.date-picker-icon{position:absolute;right:0;top:0;display:grid;place-items:center;width:44px;height:44px;padding:0;border:0;border-radius:0;background:transparent;color:inherit;font-size:1.25rem}.native-date-picker{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;pointer-events:none}.date-input:has(.native-date-picker:focus-visible){outline:3px solid #f4bd58;outline-offset:2px}.expense-row .date-input{background:#15803d}.expense-row .date-input>input[type=text]{background:transparent;border-radius:4px 0 0 4px}
+
+/* Panel de subtotales por categoría de gasto, junto a la lista. */
+.expenses-layout{display:grid;grid-template-columns:1fr 300px;gap:1rem;align-items:start}
+.expense-summary{background:#f4e1bf;padding:1.2rem;border-radius:10px;color:#332317;box-shadow:0 5px 15px #2d130c66}
+.expense-summary h2{font:700 1.8rem Caveat,cursive;margin:0 0 .8rem}
+.expense-summary ul{list-style:none;margin:0;padding:0;display:grid;gap:.5rem}
+.expense-summary li{display:flex;justify-content:space-between;gap:.5rem;font-size:.92rem}
+.expense-summary-total{display:flex;justify-content:space-between;gap:.5rem;margin-top:.9rem;padding-top:.7rem;border-top:1px solid #b69a73;font-size:1.1rem;font-weight:700}
+@media(max-width:800px),(orientation:portrait) and (max-width:1100px){.expenses-layout{grid-template-columns:1fr}}
+
+/* El disquete: ícono de archivo en el escritorio y la página que lista lo guardado. */
+.floppy{position:relative;width:118px;height:105px;padding:1rem .7rem .6rem;background:linear-gradient(160deg,#3a3f4d,#181b22 60%,#101319);border-radius:4px 4px 8px 8px;color:#e8e8ee!important;display:flex;flex-direction:column;justify-content:flex-end;transform:rotate(-3deg);clip-path:polygon(16px 0,100% 0,100% 100%,0 100%,0 16px);transition:transform .15s ease,box-shadow .15s ease}
+.floppy-shutter{position:absolute;top:14px;left:8px;right:8px;height:26px;background:linear-gradient(160deg,#d4d7e0,#8f93a1 55%,#d4d7e0);border-radius:2px;box-shadow:inset 0 1px 2px #fff8,inset 0 -2px 3px #0004}
+.floppy-shutter::after{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44%;height:9px;background:#181b22;border-radius:1px}
+.floppy span:not(.floppy-shutter){position:relative;z-index:1;align-self:flex-start;white-space:nowrap;font:700 1.05rem Caveat,cursive;background:#f4e9d0;color:#332317!important;padding:.1rem .4rem;border-radius:2px;margin-top:.35rem}
+.floppy small{position:relative;z-index:1;align-self:flex-start;white-space:nowrap;background:#f4e9d0cc;color:#5b4632!important;font-size:.65rem;padding:.05rem .35rem;border-radius:2px;margin-top:.3rem}
+.floppy--drag-over{transform:rotate(-3deg) scale(1.06);box-shadow:0 0 0 3px #f4bd58,5px 8px 14px #2c120b77}
+@media(max-width:800px),(orientation:portrait) and (max-width:1100px){.floppy{width:100px;height:96px}}
+.floppy-page{max-width:none;margin:0;display:flex;justify-content:center}
+.floppy-page-body{position:relative;width:min(96%,1400px);aspect-ratio:2/1;display:flex;flex-direction:column;padding:2rem 2rem 2.2rem;background:linear-gradient(160deg,#3a3f4d,#181b22 60%,#101319);border-radius:8px 8px 18px 18px;box-shadow:10px 15px 30px #24100888;clip-path:polygon(52px 0,100% 0,100% 100%,0 100%,0 52px)}
+.floppy-page-shutter{flex:none;position:relative;height:clamp(56px,9%,90px);margin-bottom:1.3rem;background:linear-gradient(160deg,#d4d7e0,#8f93a1 55%,#d4d7e0);border-radius:3px;box-shadow:inset 0 1px 2px #fff8,inset 0 -3px 5px #0004;display:flex;align-items:center;justify-content:center}
+.floppy-page-shutter span{width:44%;height:20px;background:#181b22;border-radius:2px}
+.floppy-page-label{flex:1;min-height:0;overflow-y:auto;background:#f4e9d0;border-radius:4px;padding:1.4rem 1.4rem 1rem;box-shadow:0 2px 6px #0006,inset 0 0 0 1px #d9c29c}
+.floppy-page-label:has(.empty){display:flex;align-items:center;justify-content:center;text-align:center}
+.floppy-page-label .empty{background:transparent;box-shadow:none;padding:2rem 1rem}
+.saved-list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;align-content:flex-start;gap:.8rem}
+.saved-note{position:relative;flex:none;width:190px;height:190px;padding:.75rem;border-radius:2px;box-shadow:2px 6px 10px #4d321e40;transform:rotate(-.4deg);display:flex;flex-direction:column;overflow:hidden}
+.saved-note::after{content:"";position:absolute;pointer-events:none;top:0;right:0;width:0;height:0;border-style:solid;border-width:0 0 20px 20px;border-color:transparent transparent #0002 transparent;filter:drop-shadow(-1px 1px 1px #4d321e44)}
+.saved-note:has(details[open]){height:auto;min-height:190px}
+.saved-note:nth-child(even){transform:rotate(.4deg)}
+.saved-note .note-text{flex:1;overflow:hidden;overflow-wrap:anywhere;font:600 1.05rem Caveat,cursive;padding-right:1.3rem}
+.saved-note small{display:block;margin-top:.4rem;color:#5b4632;font-size:.72rem}
+.saved-note details{font-size:.75rem}
+.saved-note-actions{display:flex;gap:.5rem;margin-top:.5rem}
+.saved-note-actions .delete{background:#8e3c33}
+@media(max-width:600px){.floppy-page-body{padding:1.2rem 1.2rem 1.4rem;width:min(94vw,70vh);aspect-ratio:1}}
+
+/* Meses de gastos: disquete junto al título, carpetas por mes y hoja rayada tipo cuaderno. */
+.title-with-floppy{display:flex;align-items:center;gap:1.1rem}
+.floppy--small{width:76px;height:70px;padding:.5rem .45rem .45rem;clip-path:polygon(11px 0,100% 0,100% 100%,0 100%,0 11px);text-shadow:none;text-decoration:none;flex:none}
+.floppy--small .floppy-shutter{top:8px;left:6px;right:6px;height:18px}
+.floppy--small .floppy-shutter::after{height:6px}
+.floppy--small span:not(.floppy-shutter){font-size:.95rem;margin-top:0}
+.floppy--small:hover{transform:rotate(-3deg) scale(1.06)}
+.month-save{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:end;gap:.7rem;padding-top:.7rem;border-top:1px dashed #9c8a68}
+.month-save label{flex:0 1 16rem}
+.month-save [role=status]{align-self:center;color:#1d5a2c;font-weight:700}
+/* "Cargar mes" usa el mismo azul que el desplegable de carpetas de cada gasto. */
+.calculator .month-save input{background:#1f6fe0;color:#fff;border:2px solid #0d47b0;border-radius:4px;font-weight:600}
+.calculator .month-save input::placeholder{color:#d6e6ff;font-weight:400}
+.back-to-expenses{align-self:center;color:#fff4df;text-decoration:none;font-weight:700;background:#3f281c;padding:.45rem .8rem;border-radius:6px;text-shadow:none}
+.month-folders{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:1rem}
+.month-folder{width:200px;display:flex;flex-direction:column;gap:.4rem}
+.month-folder-open{display:flex;flex-direction:column;align-items:flex-start;gap:.15rem;padding:.9rem;background:#e9c97a;color:#332317;border-radius:4px 10px 8px 8px;box-shadow:2px 5px 9px #4d321e40;text-align:left}
+.month-folder-open:hover{background:#f0d68f}
+.month-folder-icon{font-size:2rem;line-height:1}
+.month-folder-open strong{font:700 1.5rem/1.1 Caveat,cursive;overflow-wrap:anywhere}
+.month-folder-open small{color:#5b4632}
+.month-folder-actions{display:flex;gap:.4rem}
+.month-folder-actions button{flex:1;padding:.4rem .5rem;font-size:.85rem}
+.month-folder-actions .delete,.month-sheet-actions .delete{margin:0;background:#8e3c33}
+.month-sheet-actions{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.9rem}
+.ledger{--line:2.25rem;position:relative;padding:0 1rem 0 3.4rem;background:linear-gradient(90deg,transparent 0 2.6rem,#d99c94 2.6rem 2.7rem,transparent 2.7rem),repeating-linear-gradient(to bottom,#fff8df 0,#fff8df calc(var(--line) - 1px),#aabfca calc(var(--line) - 1px),#aabfca var(--line));line-height:var(--line);border-radius:3px;box-shadow:0 2px 5px #0003;font-family:"Segoe Print","Bradley Hand","Comic Sans MS",Caveat,cursive;color:#34271f}
+.ledger h2{margin:0;height:var(--line);overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font:700 1.6rem/var(--line) Caveat,cursive;color:#74503c}
+.ledger ol{margin:0;padding:0;list-style:none;counter-reset:line}
+.ledger li{display:flex;align-items:flex-start;gap:.5rem;min-height:var(--line);counter-increment:line;position:relative}
+.ledger li::before{content:counter(line);position:absolute;left:-2.9rem;width:2.1rem;text-align:right;color:#b4887a;font-size:.8rem}
+.ledger-text{flex:1;overflow-wrap:anywhere}
+.ledger-paid{color:#1d6a33;font-weight:700}
+.ledger-unpaid{color:#8e3c33;font-weight:700}
+.ledger-empty{margin:0;color:#9c8064}
+.ledger-total{display:flex;justify-content:space-between;gap:1rem;margin:0;padding-top:var(--line);font-weight:700}
+@media(max-width:600px){.title-with-floppy{justify-content:space-between}.ledger{padding-left:2.4rem;font-size:.9rem;background:linear-gradient(90deg,transparent 0 1.8rem,#d99c94 1.8rem 1.9rem,transparent 1.9rem),repeating-linear-gradient(to bottom,#fff8df 0,#fff8df calc(var(--line) - 1px),#aabfca calc(var(--line) - 1px),#aabfca var(--line))}.ledger li::before{left:-2.2rem;width:1.6rem}.month-folder{width:100%}}
+.ledger .ledger-status{display:inline;padding:0 .25rem;margin:0;background:transparent;font:inherit;font-weight:700;line-height:inherit;border-radius:4px;text-decoration:underline dotted;text-underline-offset:3px}
+.ledger .ledger-status.ledger-paid{color:#1d6a33}.ledger .ledger-status.ledger-unpaid{color:#8e3c33}
+.ledger .ledger-status:hover{background:#0000000f}
+.ledger-categories{padding-top:var(--line)}
+.ledger-categories h3{margin:0;font:700 1.35rem/var(--line) Caveat,cursive;color:#74503c}
+.ledger-categories ul{list-style:none;margin:0;padding:0;max-width:26rem}
+.ledger-categories li{display:flex;justify-content:space-between;gap:1rem}
+.ledger-categories li::before{content:none}
+
+/* Desplegable de carpetas en cada gasto: guarda el gasto en su carpeta del disquete. */
+/* La calculadora no es lo bastante ancha para una séptima columna: la celda del mes va justo debajo de su gasto. */
+.expense-row .expense-month{grid-column:1/-1;order:1;margin-bottom:.35rem}.expense-row small{order:2}
+.expense-month{display:flex;align-items:stretch;gap:.35rem;min-width:0}
+.expense-month select{width:9.5rem;min-width:0}
+/* El desplegable de carpetas va en azul para distinguirlo de las celdas del gasto. */
+.expense-row .expense-month select{background:#1f6fe0;color:#fff;border:2px solid #0d47b0;font-weight:600}
+.expense-row .expense-month option{background:#fff;color:#332317}
+.expense-row .expense-month select:disabled{opacity:.7}
+.expense-month button{padding:.7rem .75rem;background:#856047}
+@media(max-width:480px){.expense-month select{flex:1;width:auto}}
+
+/* Renglones de la hoja con Editar y Borrar; al editar, el renglón se abre como un formulario. */
+.ledger-actions{flex:none;display:flex;gap:.3rem;align-items:center;height:var(--line)}
+.ledger-actions button{padding:.15rem .55rem;font:600 .78rem Nunito,sans-serif;line-height:1.4;background:#d9c9a8;color:#332317}
+.ledger-actions .ledger-delete{background:#8e3c33;color:#fff}
+.ledger li.ledger-editing{display:block;padding:.4rem 0;background:#fff8dfee}
+.ledger-edit{display:grid;grid-template-columns:repeat(auto-fit,minmax(9rem,1fr));gap:.45rem;align-items:center;font-family:Nunito,sans-serif;line-height:1.4}
+.ledger-edit>input,.ledger-edit>select{padding:.5rem;border:1px solid #b69a73;border-radius:4px;min-width:0}
+.ledger-edit .money-input,.ledger-edit .date-input{border:1px solid #b69a73}
+.ledger-edit-actions{display:flex;gap:.4rem;grid-column:1/-1}
+.ledger-edit-actions button{padding:.45rem .8rem}
+.ledger-edit .ledger-cancel{background:#d9c9a8;color:#332317}
+.ledger-edit small{grid-column:1/-1;color:#8e3c33}
+.ledger-edit .money-input input{padding:.5rem .5rem .5rem .25rem}
+@media(max-width:600px){.ledger li{flex-wrap:wrap}.ledger-text{flex-basis:100%}.ledger-actions{margin-left:auto}}
+
+/* Tamaño general: la letra base crece con el ancho de la pantalla y las secciones usan todo el espacio disponible.
+   En celulares la base queda en 16px, igual que antes. */
+html{font-size:clamp(16px,.55vw + 10.5px,22px)}
+main{max-width:2200px;padding:clamp(1rem,2.5vw,2.5rem)}
+.section-title{margin-bottom:1.6rem}
+.calculator{max-width:none}
+.expenses-layout{grid-template-columns:minmax(0,1fr) minmax(280px,20rem)}
+.expense-summary li{font-size:1rem}
+@media(min-width:801px) and (orientation:landscape),(min-width:1101px){.journal-layout{grid-template-columns:minmax(220px,16rem) minmax(0,1fr)}}
+.book,.folder-actions{max-width:1400px}
+.paper{min-height:max(580px,72vh)}
+.paper{--journal-line-height:2rem}.paper .page-editor{min-height:max(470px,58vh);font-size:1.25rem}
+.floppy-page-body{width:100%;max-width:1900px;aspect-ratio:auto;min-height:max(520px,75vh)}
+.month-folder{width:15rem}
+.note small,.note details{font-size:.8rem}
+.note-text,.note textarea{font-size:1.2rem}
+/* El disquete de Mis gastos se ve grande para encontrarlo rápido. */
+.floppy--small{zoom:1.45}
+@media(min-width:900px){.desk-objects{zoom:1.3}.floppy--small{zoom:1.9}}
+@media(max-width:600px){.floppy-page-body{width:100%;aspect-ratio:auto;min-height:70vh}}
+/* Con la letra más grande, los subtotales pasan debajo de la calculadora hasta que la pantalla tiene lugar para ambos. */
+@media(max-width:1459px){.expenses-layout{grid-template-columns:minmax(0,1fr)}}
+/* Los objetos del escritorio tienen medidas fijas: su texto se mide sobre 16px y todo el objeto se agranda junto con zoom. */
+.desk-objects,.floppy--small{font-size:16px}
+.notebook{padding:1em;padding-left:2.1em}.notebook span:not(.notebook-binding){font-size:1.7em}
+.calc-object{padding:.65em}.calc-object span{padding:.3em;margin-bottom:.4em}.calc-object strong{font-size:.8em}
+.floppy{padding:1em .7em .6em}.floppy span:not(.floppy-shutter){font-size:1.05em;padding:.1em .4em;margin-top:.35em}.floppy small{font-size:.65em;padding:.05em .35em;margin-top:.3em}
+.floppy--small{padding:.5em .45em .45em}.floppy--small span:not(.floppy-shutter){font-size:.95em;margin-top:0}
+.date-input>input[type=text]{padding-right:48px}
+.color-picker{min-width:max-content;white-space:nowrap}.new-note button{white-space:nowrap}
+@media(max-width:800px),(orientation:portrait) and (max-width:1100px){.color-picker{min-width:0;white-space:normal}}
+
+/* Botón Editar de las notas: mismo azul que los controles de meses en Mis gastos. */
+.note-buttons{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.35rem}
+.note-buttons .delete{margin:0}
+.note .note-edit-button{padding:.4rem .65rem;background:#1f6fe0;color:#fff;border:2px solid #0d47b0;font-weight:600}
+.note .note-edit-button:disabled{opacity:.6;cursor:not-allowed}
+.note .note-cancel{padding:.4rem .65rem;background:#ffffffaa;color:#332317}
+.note-edit textarea{display:block;width:100%;min-height:4.5rem;padding:.4rem;border:2px solid #1f6fe0;border-radius:4px;background:#fffef6;resize:vertical;font:600 1.2rem Caveat,cursive}
+.note .note-buttons{flex-wrap:nowrap}.note .note-buttons button{padding:.3rem .55rem;font-size:.85rem;line-height:1.3;white-space:nowrap}
+.note .note-edit .note-buttons{flex-wrap:wrap}
+
+/* Guardadas: tarjetas que muestran el texto completo y carpetas a las que se arrastran las notas. */
+.saved-note{width:15rem;height:auto;min-height:12rem;overflow:visible}
+.saved-note .note-text{flex:none;overflow:visible;white-space:pre-wrap;font-size:1.25rem;line-height:1.25;margin-bottom:.3rem}
+.saved-note small{font-size:.8rem}
+.saved-note details{font-size:.82rem}
+.saved-note-actions{flex-wrap:wrap;margin-top:auto;padding-top:.5rem}
+.saved-note-actions button{padding:.4rem .7rem;font-size:.9rem}
+.saved-note--dragging{opacity:.45}
+.saved-note[draggable]{cursor:grab}
+.saved-move{margin-top:.45rem;padding:.3rem .4rem;font-size:.85rem;border:2px solid #0d47b0;border-radius:4px;background:#1f6fe0;color:#fff;font-weight:600}
+.saved-move option{background:#fff;color:#332317}
+.saved-folders{display:flex;flex-wrap:wrap;align-items:stretch;gap:.7rem;margin-bottom:1.1rem;padding-bottom:1rem;border-bottom:1px dashed #b69a73}
+.saved-folder{display:flex;flex-direction:column;align-items:flex-start;gap:.1rem;min-width:9rem;max-width:16rem;padding:.6rem .9rem;background:#e9c97a;color:#332317;border:2px solid transparent;border-radius:4px 10px 8px 8px;box-shadow:2px 4px 8px #4d321e33;text-align:left}
+.saved-folder>span{font-size:1.6rem;line-height:1}
+.saved-folder strong{font:700 1.35rem/1.1 Caveat,cursive;overflow-wrap:anywhere}
+.saved-folder small{color:#5b4632;font-size:.8rem}
+.saved-folder:hover{background:#f0d68f}
+.saved-folder.active{background:#3d291d;color:#fff4df}.saved-folder.active small{color:#e8d3b4}
+.saved-folder--drop{border-color:#1f6fe0;box-shadow:0 0 0 3px #1f6fe066,2px 4px 8px #4d321e33;transform:scale(1.04)}
+.saved-folder-new{display:flex;align-items:center;gap:.4rem;margin-left:auto}
+.saved-folder-new input{width:11rem;padding:.55rem;border:1px solid #b69a73;border-radius:6px}
+.saved-folder-new button:disabled{opacity:.55;cursor:not-allowed}
+.saved-folder-header{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem;margin-bottom:1rem}
+.saved-folder-header h2{margin:0 auto 0 0;font:700 2rem Caveat,cursive}
+.saved-folder-header .delete{margin:0}
+.saved-empty{color:#5b4632;font-style:italic}
+@media(max-width:600px){.saved-note{width:100%}.saved-folder-new{margin-left:0;width:100%}.saved-folder-new input{flex:1}}
+@media(max-width:600px){.saved-folder{flex:1 1 calc(50% - .35rem);min-width:0;max-width:none}}
+/* Reordenar carpetas arrastrándolas: una barra azul marca dónde va a quedar. */
+.saved-folder{position:relative;cursor:pointer;user-select:none}
+.saved-folder[draggable]{cursor:grab}
+.saved-folder:focus-visible{outline:3px solid #f4bd58;outline-offset:2px}
+.saved-folder--dragging{opacity:.45}
+.saved-folder--insert-before::before,.saved-folder--insert-after::after{content:"";position:absolute;top:-.2rem;bottom:-.2rem;width:5px;border-radius:3px;background:#1f6fe0;box-shadow:0 0 0 2px #fff8}
+.saved-folder--insert-before::before{left:-.5rem}.saved-folder--insert-after::after{right:-.5rem}
+.saved-folder-shift{padding:.45rem .7rem;background:#1f6fe0;color:#fff;border:2px solid #0d47b0}
+.saved-folder-shift:disabled{opacity:.4;cursor:not-allowed}
+.saved-notes-top{scroll-margin-top:7rem}
+/* Ordenar tarjetas de Guardadas: una barra azul al costado marca dónde va a quedar la nota. */
+.saved-note--insert-before{box-shadow:-7px 0 0 -1px #1f6fe0,2px 6px 10px #4d321e40}
+.saved-note--insert-after{box-shadow:7px 0 0 -1px #1f6fe0,2px 6px 10px #4d321e40}
+.saved-note-shift{display:flex;gap:.25rem;margin-left:auto}
+.saved-note-shift button{padding:.3rem .5rem;font-size:.8rem;background:#1f6fe0;color:#fff;border:2px solid #0d47b0}
+.saved-note-shift button:disabled{opacity:.35;cursor:not-allowed}
+
+/* Kalam (SIL OFL 1.1), letra manuscrita incluida en la app para que se vea igual en todos los dispositivos. */
+@font-face{font-family:"Kalam";font-style:normal;font-weight:700;font-display:swap;src:url("../assets/fonts/kalam-bold-latin.woff2") format("woff2")}
+/* Accesos entre secciones (Mi diario y Mis gastos): en blanco y con letra manuscrita, uno abajo del otro a la derecha del título. */
+.section-links{display:flex;flex:none;flex-direction:column;align-items:flex-start;gap:.05rem;align-self:center}
+.section-links a{color:#fff;text-decoration:none;font:700 clamp(1rem,1.35vw,1.3rem)/1.25 Kalam,"Segoe Print","Bradley Hand",cursive;text-shadow:0 2px 3px #30170d}
+.section-links a:hover,.section-links a:focus-visible{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
+@media(min-width:801px) and (orientation:landscape),(min-width:1101px){.section-links{margin:0 auto}}
+@media(max-width:800px),(orientation:portrait) and (max-width:1100px){.section-links{align-self:flex-start}}
+/* Recuadro marrón claro semitransparente con puntas redondeadas que agrupa los dos accesos. */
+.section-links{padding:.35rem .9rem;background:#d8b48c59;border:1px solid #f3dcc04d;border-radius:12px;box-shadow:0 3px 10px #2d130c40;backdrop-filter:blur(2px)}
+/* Los desplegables de categoría y pago necesitan su ancho mínimo para que "Gastos personales" o "No pagado" no queden cortados. */
+.calculator select{appearance:none;padding-right:2rem;text-overflow:clip;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23332317' stroke-width='2'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .7rem center}
+.calculator select.paid-select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E")}
+.calculator select,.calculator select.paid-select,.calculator select.paid-select.paid{background-repeat:no-repeat;background-position:right .7rem center}
+.calculator form select:not(.paid-select){background-color:#fff}
+.calculator select.paid-select.paid{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23332317' stroke-width='2'/%3E%3C/svg%3E")}
+/* El acomodo de la calculadora depende de su ancho real (no del de la pantalla), así nunca se aprietan los desplegables. */
+.calculator{container-type:inline-size;width:100%}
+.calculator form,.expense-row{grid-template-columns:minmax(0,1fr)}
+.calculator form>*,.expense-row>*{grid-column:1/-1}
+@container (min-width:30rem){
+.calculator form,.expense-row{grid-template-columns:minmax(0,1fr) minmax(12rem,1fr)}
+.calculator form>label,.calculator form>.expense-field,.expense-row>input,.expense-row>select,.expense-row>.money-input{grid-column:auto}
+.calculator form>label:first-child{grid-column:1/-1}
+}
+@container (min-width:53rem){
+.calculator form,.expense-row{grid-template-columns:minmax(6rem,1.2fr) minmax(12rem,1.2fr) minmax(9rem,1fr) minmax(6.5rem,1fr) minmax(8.5rem,1fr) minmax(5.5rem,auto)}
+.calculator form>label:first-child,.calculator form>button,.expense-row>.date-input,.expense-row>button{grid-column:auto}
+}
+/* Menú de carpetas del mes: siempre se despliega hacia abajo. */
+.month-picker{position:relative;display:flex;min-width:9.5rem}
+.expense-row .month-picker-button{white-space:nowrap;display:flex;align-items:center;justify-content:space-between;gap:.4rem;width:100%;padding:.7rem;background:#1f6fe0;color:#fff;border:2px solid #0d47b0;border-radius:4px;font-weight:600;text-align:left}
+.expense-row .month-picker-button:disabled{opacity:.7;cursor:not-allowed}
+.month-picker-list{position:absolute;z-index:15;top:calc(100% + .25rem);left:0;min-width:100%;max-height:14rem;overflow-y:auto;margin:0;padding:.25rem 0;list-style:none;background:#fff;color:#332317;border:2px solid #0d47b0;border-radius:6px;box-shadow:0 8px 18px #1a0d0788}
+.month-picker-list li{padding:.55rem .8rem;cursor:pointer;white-space:nowrap}
+.month-picker-list li.active{background:#dbe8fb}
+.month-picker-list li[aria-selected=true]{font-weight:700}
+@media(max-width:480px){.month-picker{flex:1;width:auto}}
+/* Subtotales por mes. */
+.summary-month{display:grid;gap:.25rem;margin-bottom:.9rem;font-size:.85rem;font-weight:700}
+.summary-month select{padding:.55rem 2rem .55rem .6rem;border:1px solid #b69a73;border-radius:6px;background:#fffaf0;font-weight:400}
+.expense-summary>small[role=alert]{display:block;color:#8b1717}
+/* Notas del escritorio más chicas: tres por fila en cada columna. */
+.note{flex:0 1 calc((100% - 1.1rem)/3);padding:.45rem}
+.note-text,.note textarea{font-size:1.05rem}
+.note small,.note details{font-size:.72rem}
+.note .note-buttons{flex-wrap:wrap;gap:.25rem}.note .note-buttons button{padding:.25rem .45rem;font-size:.75rem}
+.drop-indicator{flex-basis:calc((100% - 1.1rem)/3)}
+@media(max-width:480px){.column{gap:.4rem;padding:.6rem}.note,.drop-indicator{flex-basis:calc((100% - .8rem)/3)}.note{padding:.35rem}.note-text,.note textarea{font-size:.95rem;padding-right:.6rem}.note small,.note details{font-size:.62rem}.note .note-buttons button{padding:.2rem .35rem;font-size:.68rem}}
+/* Notas cuadradas siempre: la letra se achica sola para que el texto entre (ver useFitText) y el historial
+   se abre flotando encima. Cuántas entran por fila depende del ancho de la columna: dos, o tres si la columna es ancha. */
+.note{aspect-ratio:1;display:flex;flex-direction:column;min-height:0}
+.note-text,.note-edit{flex:1 1 auto;min-height:0;overflow-y:auto}
+.note-edit{display:flex;flex-direction:column}.note-edit textarea{flex:1;min-height:0;resize:none}
+.note small,.note details,.note-buttons{flex:none}
+.note-text{overflow:hidden;line-height:1.15;padding-right:1rem}
+.note small,.note details{font-size:.74rem;line-height:1.3}.note small{margin-top:.2rem}
+.note .note-buttons{margin-top:.25rem}.note .note-buttons button{padding:.2rem .45rem;font-size:.78rem}
+.note details{position:relative}
+.note-edit textarea{font-size:.95rem}
+.note-history{position:absolute;z-index:6;top:100%;left:-.2rem;min-width:100%;width:max-content;max-width:14rem;padding:.35rem .5rem;background:#fffaf0;border-radius:6px;box-shadow:0 4px 12px #2d140c66;font-size:.72rem}
+.column{container-type:inline-size}
+.column .note,.column .drop-indicator{flex-basis:calc((100% - .55rem)/2)}
+@container(min-width:560px){.column .note,.column .drop-indicator{flex-basis:calc((100% - 1.1rem)/3)}}
+@media(max-width:480px){.column .note,.column .drop-indicator{flex-basis:calc((100% - .4rem)/2)}.note-text{padding-right:.8rem}.note textarea{font-size:.95rem}.note small,.note details{font-size:.72rem}}
+/* Mi diario y Mis gastos: accesos como objetos del escritorio (un escritorio y la calculadora de gastos). */
+.section-objects{display:flex;align-items:end;gap:1.1rem;font-size:16px;align-self:center;text-shadow:none}
+.section-objects a{text-decoration:none;box-shadow:5px 8px 14px #2c120b77}
+.section-objects .calc-object{width:90px}
+.desk-object{display:flex;flex-direction:column;align-items:center;gap:.2rem;width:120px;padding:.45rem .5rem .4rem;background:#f4e1bf;border-radius:8px;color:#332317;transform:rotate(-2deg)}
+.desk-object svg{display:block;width:100%;height:auto}
+.desk-object strong{font-size:.8rem}
+.section-objects a:hover,.section-objects a:focus-visible{transform:rotate(0) translateY(-2px)}
+@media(min-width:801px) and (orientation:landscape),(min-width:1101px){.section-title:has(>.section-objects){display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)}.section-title:has(>.section-objects)>button,.section-title:has(>.section-objects)>.total{justify-self:end;align-self:end}.section-objects{justify-self:center}}
+@media(max-width:800px),(orientation:portrait) and (max-width:1100px){.section-objects{align-self:flex-start}}
+.section-objects .notebook{width:120px;height:100px;padding:.8rem .8rem .8rem 1.9rem}.section-objects .notebook span:not(.notebook-binding){font-size:1.5rem;line-height:1}
+/* Renglones del diario: negrita, tachado, color y emoticones no agrandan la línea, así el texto queda siempre sobre su renglón. */
+.paper .page-editor :is(b,strong,i,em,u,s,strike,del,font,span,a){line-height:1}
+.paper .page-editor :is(div,p){margin:0;padding:0}
+.emoji-picker{display:inline-flex}
+.emoji-picker>button{font-size:1rem}
+.emoji-grid{position:absolute;z-index:6;top:calc(100% + .35rem);left:0;max-width:100%;display:block;width:18.6rem;max-height:17rem;overflow-y:auto;overscroll-behavior:contain;padding:.4rem;background:#fff8df;border:1px solid #b69a73;border-radius:8px;box-shadow:0 8px 18px #2d130c55}
+.journal-toolbar .emoji-grid button{width:2.4rem;height:2.4rem;padding:0;background:transparent;font-size:1.35rem;line-height:1}
+.journal-toolbar .emoji-grid button:hover,.journal-toolbar .emoji-grid button:focus-visible{background:#ead8b8}
+
+/* Alto de renglón en píxeles enteros: con medios píxeles algunos renglones se veían más claros o directamente no se veían. */
+.paper{--journal-line-height:32px}
+@supports (width:round(nearest,2rem,1px)){.paper{--journal-line-height:round(nearest,2rem,1px)}}
+/* Con zoom menor a 100 % un renglón de 1px ocupa menos de un píxel real y a veces no se dibuja: se engrosa lo justo para que siempre ocupe uno. */
+@media (max-resolution:.99dppx){.paper{--journal-rule:1.25px}}
+@media (max-resolution:.79dppx){.paper{--journal-rule:1.5px}}
+@media (max-resolution:.66dppx){.paper{--journal-rule:2px}}
+.emoji-group{display:grid;grid-template-columns:repeat(auto-fill,2.4rem);gap:.2rem;margin-bottom:.35rem}
+.emoji-group-name{grid-column:1/-1;position:sticky;top:-.4rem;z-index:1;padding:.2rem .1rem;background:#fff8df;color:#74503c;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+/* Meme del escritorio: arriba de "No iniciado", con el mismo ancho que esa columna (sus bordes coinciden con los del rectángulo).
+   La fila usa las mismas tres columnas que el tablero; los objetos del escritorio ocupan las otras dos. */
+.desk-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:1rem;align-items:end;margin-bottom:1rem}
+.desk-art{grid-column:1;grid-row:1/span 2;display:block;width:100%;height:auto;aspect-ratio:2/1;object-fit:cover;border-radius:12px;box-shadow:0 8px 20px #2d140c55;pointer-events:none;user-select:none}
+.desk-row .desk-objects,.desk-row .drag-hint{grid-column:2/-1}
+.desk-row .drag-hint{margin-bottom:0}
+@media(max-width:800px),(orientation:portrait) and (max-width:1100px){.desk-row{grid-template-columns:minmax(0,1fr)}.desk-row .desk-objects,.desk-row .drag-hint{grid-column:1}.desk-art{grid-row:3;margin-top:.75rem}}
+/* Mi diario: íconos más grandes y a la derecha del encabezado. */
+.section-objects--large{zoom:1.3}
+@media(min-width:801px) and (orientation:landscape),(min-width:1101px){.section-title:has(>.section-objects--large){grid-template-columns:minmax(0,1fr) auto;column-gap:1.4rem}.section-title>.section-objects--large{justify-self:end}}
+/* Imagen apoyada arriba del cuaderno, en el espacio libre entre el título y la tapa. */
+/* Meme del diario: sentado en el borde de arriba del libro, con las piernas colgando sobre la hoja.
+   El asiento está al 69% de la altura de la imagen, así que se sube ese tanto por encima del borde.
+   Va a la derecha, 4rem antes de los íconos (que empiezan a ~610px del borde derecho del libro); su ancho es el 60% de su alto. */
+.book-art{display:none}
+@media(min-width:1160px){.book-art{display:block;position:absolute;z-index:5;top:calc(var(--sit-height) * -.69);left:max(2rem,calc(100% - 630px - 4rem - var(--sit-height) * .6));--sit-height:15rem;height:var(--sit-height);width:auto;pointer-events:none;user-select:none;filter:drop-shadow(4px 6px 5px #2d140c66)}}
+@media(min-width:1280px){.book-art{--sit-height:18rem}}
+/* Las piernas cuelgan ~31% de su alto sobre la hoja: la hoja empieza un poco más abajo para que no tapen el título. */
+@media(min-width:1160px){.book .paper{padding-top:4.4rem}}
+@media(min-width:1280px){.book .paper{padding-top:5.2rem}}
+/* Mis gastos: la calculadora arranca arriba de su columna (antes "margin:auto" la centraba en vertical junto a Subtotales). */
+.expenses-layout>.calculator{margin:0}
+/* Libreta de "Mi diario": un poco más ancha y con letra más chica, así la palabra entra entera con cualquier fuente. */
+.section-objects .notebook{width:135px}.section-objects .notebook span:not(.notebook-binding){font-size:1.3rem}
+/* Mis gastos: íconos grandes donde termina el rectángulo de gastos e imagen en el medio, apoyada sobre su borde. */
+.calc-art{display:none}
+@media(min-width:801px) and (orientation:landscape),(min-width:1101px){
+.section-title:has(>.calc-art){display:grid;grid-template-columns:auto minmax(0,1fr) auto;column-gap:1rem;align-items:start}
+.section-title:has(>.calc-art)>.title-with-floppy{grid-column:1;grid-row:1}
+.section-title:has(>.calc-art)>.section-objects{grid-column:3;grid-row:1;justify-self:end;align-self:end}
+/* El meme va en la misma fila que los íconos, lo más grande que entra en esa fila, con su borde de abajo apoyado
+   justo sobre el borde de arriba del rectángulo (1.6rem más abajo). Si no hay lugar para centrarlo en la pantalla,
+   va centrado en el lugar libre entre el disquete y los íconos (y se oculta si ese lugar es muy chico). */
+.calc-art{display:block;grid-column:2;grid-row:1;position:relative;align-self:stretch;container-type:inline-size;pointer-events:none;user-select:none}
+.calc-art img{position:absolute;z-index:2;left:50%;bottom:-1.6rem;transform:translateX(-50%);width:auto;height:auto;max-width:100%;max-height:calc(100% + 1.6rem);border-radius:10px;box-shadow:0 6px 14px #2d140c88}
+@container (max-width:7rem){.calc-art img{display:none}}
+}
+/* Mis gastos en pantallas anchas: el meme queda bien en el medio de la pantalla. */
+@media(min-width:1860px){.calc-art{grid-column:1/-1}.calc-art img{max-width:30%}}
+/* Mis gastos en pantallas medianas: no hay lugar para el meme; los íconos pasan a otra línea si no entran. */
+@media(min-width:801px) and (max-width:1150px) and (orientation:landscape),(min-width:1101px) and (max-width:1150px){
+  .calc-art{display:none}
+  .section-title:has(>.calc-art)>.section-objects{grid-column:2/-1;flex-wrap:wrap;justify-content:flex-end}
+}
+/* Mi diario: los íconos de Escritorio y Gastos van arriba de los botones de la carpeta, alineados a la derecha. */
+.journal-objects{display:flex;justify-content:flex-end;max-width:1400px;margin:0 auto .75rem}.journal-objects .section-objects{flex:0 0 auto}
+/* Mis gastos: ícono de calculadora abajo de Subtotales y la calculadora flotante que se arrastra por la pantalla. */
+.pocket-calc-toggle{display:flex;align-items:center;gap:.6rem;margin-top:1rem;padding:.5rem .8rem;background:#fffaf0;color:#332317;border:1px solid #b69a73;font-weight:700}
+.pocket-calc-toggle svg{width:34px;height:45px;flex:none}
+.pocket-calc-toggle:hover,.pocket-calc-toggle[aria-expanded=true]{background:#f4e1bf}
+.pocket-calc{position:fixed;z-index:30;width:260px;padding:0 .8rem .9rem;background:#f2efe6;border:3px solid #7d6a55;border-radius:18px;box-shadow:8px 14px 28px #1a0d0799;color:#332317;outline:none}
+.pocket-calc:focus-visible{outline:3px solid #f4bd58;outline-offset:2px}
+.pocket-calc-bar{display:flex;align-items:center;justify-content:space-between;margin:0 -.8rem .6rem;padding:.35rem .4rem .35rem .9rem;border-bottom:1px solid #d4c7b3;cursor:grab;touch-action:none;user-select:none;font-weight:700;font-size:.9rem}
+.pocket-calc-bar:active{cursor:grabbing}
+.pocket-calc-close{width:36px;height:36px;padding:0;background:transparent;color:#332317;font-size:1.5rem;line-height:1}
+.pocket-calc-close:hover{background:#e4dccd}
+.pocket-calc-screen{display:grid;justify-items:end;padding:.4rem .7rem;margin-bottom:.8rem;background:#9fc3a0;border-radius:6px;box-shadow:inset 0 2px 6px #2f4a3066;font-variant-numeric:tabular-nums;overflow:hidden}
+.pocket-calc-screen small{min-height:1.2em;font-size:.85rem;color:#2f4a30}
+.pocket-calc-screen output{font-size:1.9rem;font-weight:700;line-height:1.2;max-width:100%;overflow-wrap:anywhere;text-align:right}
+.pocket-calc-keys{display:grid;grid-template-columns:repeat(4,1fr);gap:.45rem}
+.pocket-calc-key{min-height:44px;padding:0;background:#b8ab98;color:#2b2118;font-size:1.2rem;font-weight:700;box-shadow:0 3px #8f826f}
+.pocket-calc-key:active{transform:translateY(2px);box-shadow:0 1px #8f826f}
+.pocket-calc-key--op,.pocket-calc-key--equals{background:#1f6fe0;color:#fff;box-shadow:0 3px #0d47b0}
+.pocket-calc-key--clear{background:#e07a3f;color:#fff;box-shadow:0 3px #a9531f}
+/* Mis gastos: letras blancas sobre el verde oscuro de cada gasto (las opciones del menú siguen oscuras sobre blanco). */
+.expense-row input,.expense-row select,.expense-row .money-input{color:#fff}
+.expense-row input::placeholder{color:#cdeed6}
+.expense-row select option{background:#fff;color:#332317}
+.expense-row select:not(.paid-select){appearance:none;padding-right:2.2rem;background:#15803d url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E") no-repeat right .8rem center}
+/* Calendario: almanaque de mesa como acceso desde las secciones (muestra el día de hoy). */
+.calendar-object{position:relative;display:flex;flex-direction:column;align-items:center;width:100px;padding:0 0 .35em;background:#fff;border-radius:8px;color:#1f2937!important;text-decoration:none;transform:rotate(-2deg);overflow:visible}
+.calendar-object::before{content:"";position:absolute;inset:0 0 auto;height:1.55em;background:#e5534b;border-radius:8px 8px 0 0}
+.calendar-object-rings{position:absolute;top:-.45em;left:0;right:0;display:flex;justify-content:space-around;padding:0 1.4em}
+.calendar-object-rings i{width:.4em;height:.95em;background:#4b4f58;border-radius:.2em}
+.calendar-object-month{position:relative;margin-top:.25em;font-weight:900;font-size:.95em;letter-spacing:.08em;color:#1f2937}
+.calendar-object-day{font-weight:900;font-size:2.3em;line-height:1.05;color:#1f2937}
+.calendar-object strong{font-size:.75em;color:#4b4f58}
+.desk-objects .calendar-object{box-shadow:5px 8px 14px #2c120b77}
+.section-objects .calendar-object{width:92px}
+.calendar-object:hover,.calendar-object:focus-visible{transform:rotate(0) translateY(-2px)}
+
+
+/* Colores por tipo (los gastos de Mis gastos usan el verde de Pagos). */
+.cal-cat--salud{--cat:#2563eb;--cat-text:#fff;--cat-soft:#dbe7fd}
+.cal-cat--pagos{--cat:#15803d;--cat-text:#fff;--cat-soft:#d6f0de}
+.cal-cat--trabajo{--cat:#eab308;--cat-text:#3a2a00;--cat-soft:#fdf2c4}
+.cal-cat--personal{--cat:#8b5cf6;--cat-text:#fff;--cat-soft:#ebe2fd}
+.cal-cat--cumpleanos{--cat:#ec4899;--cat-text:#fff;--cat-soft:#fcdeec}
+.cal-cat--otros{--cat:#6b7280;--cat-text:#fff;--cat-soft:#e5e7eb}
+.cal-dot{display:inline-block;width:.8rem;height:.8rem;border-radius:50%;background:var(--cat);flex:none}
+
+/* La hoja del calendario: franja roja con anillos, como un almanaque de pared. */
+.cal-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,330px);gap:1.4rem;align-items:start}
+.cal-sheet{position:relative;margin-top:1.1rem;background:#fff;border-radius:18px;box-shadow:10px 15px 30px #24100888;color:#1f2937}
+.cal-sheet::after{content:"";position:absolute;right:0;bottom:0;width:46px;height:46px;background:linear-gradient(135deg,#fff 0 48%,#d9d9d9 50%,#efefef 75%);border-radius:0 0 18px 0;box-shadow:-3px -3px 6px #0000001a}
+.cal-rings{position:absolute;top:-1.1rem;left:0;right:0;display:flex;justify-content:space-between;padding:0 18%;pointer-events:none}
+.cal-rings span{width:12px;height:2.4rem;background:linear-gradient(90deg,#34373e,#6b6f78 50%,#34373e);border-radius:6px;box-shadow:0 2px 3px #0005}
+.cal-band{position:relative;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.2rem 1.2rem .8rem;border-radius:18px 18px 0 0;overflow:hidden;
+background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='none' stroke='%23fff' stroke-opacity='.2' stroke-width='1.6' stroke-linecap='round'%3E%3Ccircle cx='20' cy='20' r='11'/%3E%3Cpath d='M20 20V12M20 20l5 3'/%3E%3Cpath d='M56 50h14M56 74h14M58 50c0 8 10 8 10 12s-10 4-10 12M68 50c0 8-10 8-10 12s10 4 10 12'/%3E%3Ccircle cx='66' cy='18' r='6'/%3E%3Cpath d='M66 18v-4M66 18h3'/%3E%3Ccircle cx='22' cy='64' r='2'/%3E%3C/g%3E%3C/svg%3E") 0 0/84px 84px,
+radial-gradient(circle at 50% 120%,#4f8df0 0,#2563eb 45%,#1e3a8a 100%)}
+.cal-band>*{position:relative;z-index:1}
+.cal-band-clock{position:absolute!important;z-index:0!important;left:50%;top:50%;width:150px;height:150px;transform:translate(-50%,-50%);color:#fff;opacity:.22;pointer-events:none}
+/* Mes y año en una sola línea (OCTUBRE 2026) para que la banda sea más baja y el mes entre sin bajar. */
+.cal-band h2{display:flex;flex-wrap:nowrap;white-space:nowrap;min-width:0;align-items:baseline;justify-content:center;column-gap:.45em;margin:0;line-height:1;text-align:center}
+.cal-band h2 span,.cal-band h2 small{font:900 clamp(2rem,4.4vw,3.1rem)/1 Nunito,system-ui,sans-serif;text-transform:uppercase;letter-spacing:.06em;color:#fff;text-shadow:0 2px 6px #0b1d4a88}
+.cal-arrow{width:48px;height:48px;padding:0;border-radius:50%;background:#fff3;color:#fff;font-size:2rem;line-height:1;font-weight:700}
+.cal-arrow:hover{background:#fff6}
+.cal-toolbar{display:flex;align-items:center;justify-content:space-between;gap:.8rem;padding:.75rem 1.2rem 0}
+.cal-legend{display:flex;flex-wrap:wrap;gap:.35rem .9rem;margin:0;padding:0;list-style:none;font-size:.85rem}
+.cal-legend li{display:flex;align-items:center;gap:.3rem}
+.cal-today{padding:.4rem .9rem;background:#cfe8f3;color:#1f2937;font-weight:700}
+.cal-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));padding:.6rem 1.2rem 1.6rem}
+.cal-weekday{padding:.4rem 0;text-align:center;font-weight:900;font-size:.9rem;letter-spacing:.04em;color:#1f2937;border-bottom:2px solid #e5e7eb}
+.cal-weekday--weekend{color:#e5534b}
+.cal-day{display:flex;flex-direction:column;align-items:stretch;gap:.25rem;min-height:104px;padding:.35rem;background:transparent;color:#1f2937;border:0;border-right:1px solid #ececec;border-bottom:1px solid #ececec;border-radius:0;text-align:left;font-weight:400;min-width:0}
+.cal-day:nth-child(7n){border-right:0}
+.cal-day:hover{background:#f7f4ee}
+.cal-day--selected{background:#fff6dc;box-shadow:inset 0 0 0 2px #f4bd58}
+.cal-day--selected:hover{background:#fff1c8}
+.cal-day-number{display:grid;place-items:center;width:2rem;height:2rem;font-weight:900;font-size:1.15rem;border-radius:50%}
+.cal-day--weekend .cal-day-number{color:#e5534b}
+.cal-day--outside{opacity:.38}
+.cal-day--today .cal-day-number{background:#cfe8f3;color:#1f2937;box-shadow:0 0 0 3px #a9d3e6}
+.cal-chips{display:grid;gap:.2rem;min-width:0}
+.cal-chip{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;padding:.15rem .4rem;background:var(--cat);color:var(--cat-text);border-radius:5px;font-size:.88rem;font-weight:700;line-height:1.25;overflow:hidden;overflow-wrap:break-word}
+.cal-chip b{font-weight:900}
+.cal-chip--done{opacity:.55;text-decoration:line-through}
+.cal-more{font-size:.72rem;font-weight:700;color:#6b7280}
+
+/* Panel del día elegido. */
+.cal-day-panel{position:sticky;top:6rem;display:grid;gap:1rem;align-content:start;max-height:calc(100vh - 7rem);overflow-y:auto;margin-top:1.1rem;padding:0 .4rem .6rem 0}
+.cal-empty{margin:0;color:#6b5a48}
+.cal-items{display:grid;gap:.6rem;margin:0;padding:0;list-style:none}
+.cal-item{display:grid;gap:.5rem;padding:.6rem .7rem;background:var(--cat-soft);border-left:6px solid var(--cat);border-radius:8px}
+.cal-item-text{display:flex;flex-wrap:wrap;align-items:baseline;gap:.15rem .4rem;overflow-wrap:anywhere}
+.cal-item-text b{font-weight:900}
+.cal-item-text small{width:100%;font-size:.78rem;color:#5b4a3a}
+.cal-done{text-decoration:line-through;opacity:.7}
+.cal-item-actions{display:flex;gap:.4rem}
+.cal-item-actions button{padding:.35rem .7rem;font-size:.85rem;margin:0}
+.cal-item-link{justify-self:start;font-size:.85rem;font-weight:700;color:#15803d}
+.cal-hint{margin:1rem 0 0;font-size:.85rem;color:#6b5a48}
+
+@media(max-width:1000px){.cal-layout{grid-template-columns:1fr}.cal-day-panel{position:static}}
+@media(max-width:700px){
+.cal-band{padding:.7rem .6rem .6rem;gap:.4rem}
+.cal-arrow{width:40px;height:40px;flex:none}
+.cal-band h2 span,.cal-band h2 small{font-size:clamp(1rem,4.6vw,2rem);letter-spacing:.03em}
+.cal-toolbar{flex-direction:column;align-items:stretch;padding:.6rem .6rem 0}
+.cal-legend{font-size:.78rem}
+.cal-grid{padding:.4rem .4rem 1.4rem}
+.cal-weekday{font-size:.72rem}
+.cal-day{min-height:64px;padding:.2rem;align-items:center}
+.cal-day-number{width:1.7rem;height:1.7rem;font-size:.95rem}
+.cal-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:.15rem}
+.cal-chip{display:block;width:.55rem;height:.55rem;padding:0;border-radius:50%;font-size:0}
+.cal-more{font-size:.6rem}
+}
+/* En celular los accesos de arriba no se agrandan y bajan de línea si no entran (ahora son hasta cuatro con el calendario). */
+@media(max-width:800px),(orientation:portrait) and (max-width:1100px){.section-objects--large{zoom:1}.section-objects{flex-wrap:wrap;gap:.8rem;max-width:100%}}
+/* Mis gastos: con el calendario son tres accesos; un poco más chicos para que la imagen del medio siga entrando. */
+/* Calendario: lista "¿Son fechas?" (flecha para ponerla en el calendario, X para dejar de preguntar) y cambio de fecha de una nota. */
+.cal-doubts>p{margin:0 0 .6rem;font-size:.85rem;color:#6b5a48}
+.cal-doubts ul{display:grid;gap:.4rem;margin:0;padding:0;list-style:none}
+.cal-doubt{display:grid;grid-template-columns:minmax(0,1fr) auto auto;grid-template-areas:"text text text" "day ok no";align-items:center;gap:.35rem;padding:.5rem .6rem;background:#fff5cf;border-left:5px solid #e0b23c;border-radius:8px}
+.cal-doubt-text{grid-area:text;font-weight:700;overflow-wrap:anywhere}
+.cal-doubt button{width:40px;height:36px;padding:0;font-size:1.25rem;font-weight:900;line-height:1}
+.cal-doubt-ok{grid-area:ok;background:#15803d}
+.cal-doubt-ok:disabled{opacity:.45;cursor:not-allowed}
+.cal-doubt-no{grid-area:no;background:#8e3c33}
+@media(max-width:700px){.cal-band-clock{width:110px;height:110px}}
+/* Calendario: tarjeta "Agregar tarea" (qué es, día, hora y categoría) y categoría editable de cada cosa del día. */
+.cal-add{display:grid;gap:.55rem}
+.cal-add label{display:grid;gap:.2rem;font-size:.85rem;font-weight:700;min-width:0}
+.cal-add input,.cal-add select{min-width:0;padding:.5rem .6rem;border:1px solid #cdbfa8;border-radius:8px;background:#fff;font-weight:400}
+.cal-add-row{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:.5rem}
+.cal-add button:disabled{opacity:.55;cursor:not-allowed}
+
+/* Escritorio: al agregar una nota con una posible fecha se pregunta en el momento. */
+.date-ask{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem 1rem;max-width:640px;margin:-.4rem 0 1.2rem auto;padding:.7rem .9rem;background:#fff5cf;border:2px dashed #e0b23c;border-radius:12px;box-shadow:0 6px 16px #2d130c55}
+.date-ask>strong{font-size:1.05rem}
+.date-ask .cal-doubt{flex:1;min-width:260px;background:transparent;border-left:0;padding:0}
+/* Calendario: el panel de la derecha en tres recuadros separados, cada uno con su color (día en azul, agregar en verde, dudas en ámbar). */
+.cal-card{--card:#2563eb;--card-dark:#1e40af;--card-soft:#fffdf8;overflow:hidden;background:var(--card-soft);border-radius:14px;box-shadow:0 10px 24px #24100866;color:#2b2118}
+.cal-card--day{--card:#2563eb;--card-dark:#1e3a8a}
+.cal-card--add{--card:#16a34a;--card-dark:#15803d}
+.cal-card--doubts{--card:#f59e0b;--card-dark:#b45309;--card-soft:#fffbeb}
+.cal-card-head{display:flex;align-items:center;gap:.6rem;padding:.75rem 1rem;background:linear-gradient(135deg,var(--card),var(--card-dark));color:#fff}
+.cal-card-head svg{flex:none;width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.cal-card-head h2,.cal-card-head h3{flex:1;margin:0;font:800 1.1rem/1.2 Nunito,system-ui,sans-serif;letter-spacing:.01em}
+.cal-card-head h2{font-size:1.25rem}
+.cal-card-head h2::first-letter{text-transform:uppercase}
+.cal-card-count{min-width:1.7rem;padding:.1rem .5rem;border-radius:999px;background:#ffffff38;font-weight:800;text-align:center}
+.cal-card-body{padding:.9rem 1rem 1rem}
+.cal-card--add button[type=submit],.cal-card--add .cal-add>button{background:var(--card-dark)}
+@media(max-width:1000px){.cal-day-panel{max-height:none;overflow:visible;padding:0}}
+/* Calendario en computadora: título y hoja más arriba, accesos apenas más chicos y cartel más bajo, para ver el mes entero sin bajar. */
+@media(min-width:1001px){
+.cal-page{margin-top:-1.6rem}
+.cal-page .section-title{margin-bottom:.6rem}
+.cal-page .section-objects--large{zoom:1.12}
+.cal-page .cal-band{padding:.45rem 1.2rem .4rem}
+.cal-page .cal-band h2 span,.cal-page .cal-band h2 small{font-size:clamp(1.9rem,3.2vw,2.5rem)}
+.cal-page .cal-band-clock{width:96px;height:96px}
+.cal-page .cal-arrow{width:42px;height:42px;font-size:1.7rem}
+.cal-page .cal-toolbar{padding:.5rem 1.2rem 0}
+.cal-page .cal-today{padding:.3rem .8rem}
+.cal-page .cal-grid{padding:.3rem 1.2rem 1rem}
+.cal-page .cal-weekday{padding:.25rem 0}
+.cal-grid--compact .cal-day{min-height:0;overflow:hidden;gap:.15rem;padding:.2rem .3rem}
+.cal-grid--compact .cal-day-number{width:1.7rem;height:1.7rem;font-size:1rem}
+.cal-grid--compact .cal-day{position:relative}
+.cal-grid--compact .cal-chip{display:block;white-space:nowrap;text-overflow:ellipsis;font-size:.82rem}
+.cal-grid--compact .cal-more{position:absolute;top:.35rem;right:.4rem;padding:.05rem .4rem;background:#eef2f7;border-radius:999px;font-size:.72rem;color:#334155}
+}
+/* Mi diario en computadora: la libreta (con los accesos, los botones y la imagen) sube al espacio libre junto al título, y los accesos quedan más separados de los botones. */
+.journal-objects{margin-bottom:1.5rem}
+@media(min-width:801px) and (orientation:landscape),(min-width:1101px){.journal-content{margin-top:-6.5rem}}
+/* Escritorio: nota nueva sin fecha, se ofrece "Agregar fecha" y "Hora" con Agregar o Rechazar. */
+.date-add{align-items:end}
+.date-add p{flex:1 0 100%;margin:0;overflow-wrap:anywhere}
+.date-add p span{margin-left:.3rem;color:#6b5a48}
+.date-add label{display:grid;gap:.2rem;font-size:.85rem;font-weight:700}
+.date-add input{padding:.45rem .5rem;border:1px solid #b69a73;border-radius:6px;background:#fffaf0;font-weight:400}
+.date-add-actions{display:flex;gap:.5rem;margin-left:auto}
+.date-add-actions button{padding:.5rem .9rem}
+.date-add-actions button:disabled{opacity:.55;cursor:not-allowed}
+.date-add-reject{background:#8e3c33}
+/* Calendario: editar categoría, fecha (dd/mm/aaaa) y hora de cada cosa del día, uno debajo del otro. */
+.cal-item-form{display:grid;gap:.45rem}
+.cal-item-form label,.cal-item-field>label{display:grid;gap:.2rem;font-size:.8rem;font-weight:700;color:#5b4a3a}
+.cal-item-field{display:grid;gap:.2rem}
+.cal-item-form select,.cal-item-form .time-input{min-width:0;padding:.45rem .55rem;border:1px solid #cbd5e1;border-radius:8px;background:#fff;font-weight:400;font-size:.95rem}
+.cal-item-form .date-input,.cal-add .date-input,.cal-doubt .date-input,.date-add .date-input{border:1px solid #cbd5e1;border-radius:8px;background:#fff}
+.cal-item-form .date-input>input[type=text],.cal-add .date-input>input[type=text],.cal-doubt .date-input>input[type=text],.date-add .date-input>input[type=text]{padding:.45rem 2.6rem .45rem .55rem;background:transparent;border:0;font-size:.95rem}
+.cal-item-form .cal-item-actions{margin-top:.15rem}
+.cal-add-field{display:grid;gap:.2rem;font-size:.85rem;font-weight:700;min-width:0}
+.cal-add .time-input,.date-add .time-input{min-width:0;padding:.5rem .6rem;border:1px solid #cbd5e1;border-radius:8px;background:#fff;font-weight:400}
+.date-add-field{display:grid;gap:.2rem;font-size:.85rem;font-weight:700}
+.date-add .date-input{min-width:11rem}
+.date-add .time-input{width:6.5rem}
+.cal-doubt .date-input{grid-area:day;min-width:0}
+.cal-item-form .date-picker-icon,.cal-add .date-picker-icon,.cal-doubt .date-picker-icon,.date-add .date-picker-icon{width:2.4rem;height:100%;font-size:1.05rem}
+/* Calendario: cada cosa del día muestra sus datos y "Editar"; los campos aparecen recién al tocarlo. */
+.cal-item-actions .cal-edit-button{padding:.4rem .9rem;margin:0}
+.cal-cancel{background:#fff;color:#1f2937;box-shadow:inset 0 0 0 1px #cbd5e1}
+.cal-cancel:hover{background:#f1f5f9}
+.cal-item-form .cal-item-actions button{margin:0}
+/* Juegos: joystick en los accesos, tarjetas de juegos y "¡Cuidado, bloques!" casi en pantalla completa. */
+.games-object{display:flex;flex-direction:column;align-items:center;gap:.2rem;width:110px;padding:.55rem .55rem .4rem;background:#3b2f6b;border-radius:10px;color:#fff!important;text-decoration:none;transform:rotate(2deg)}
+.games-object svg{display:block;width:100%;height:auto;filter:drop-shadow(0 2px 2px #0006)}
+.games-object strong{font-size:.8rem}
+.desk-objects .games-object{box-shadow:5px 8px 14px #2c120b77}
+.section-objects .games-object{width:100px}
+.games-object:hover,.games-object:focus-visible{transform:rotate(0) translateY(-2px)}
+.games-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:1.2rem}
+.game-card{display:flex;flex-direction:column;height:100%;background:#2b2452;border:6px solid #1c1738;border-radius:14px;color:#fff;text-decoration:none;overflow:hidden;box-shadow:8px 12px 24px #25100888;transition:transform .15s}
+.game-card:hover,.game-card:focus-visible{transform:translateY(-3px)}
+.game-card>svg{display:block;width:100%;height:auto}
+.game-card-text{flex:1;display:grid;align-content:start;gap:.3rem;padding:1rem 1.1rem .4rem}
+.game-card-text strong{font-size:1.35rem}
+.game-card-text span{color:#ddd6fe}
+.game-card-text small{color:#facc15;font-weight:700}
+.game-card-play{align-self:flex-end;margin:.4rem 1rem 1rem;padding:.45rem 1rem;background:#22c55e;color:#062b13;border-radius:999px;font-weight:900}
+.game-card-foot{display:flex;align-items:center;justify-content:flex-end;gap:.6rem;margin:.4rem 1rem 1rem}
+.game-card-foot small{display:grid;min-width:0;color:#facc15;font-weight:800;font-size:.85rem;line-height:1.2;text-align:right;white-space:nowrap}
+.game-card-foot small b{font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fde68a}
+.game-card-foot .game-card-play{margin:0;flex:none}
+.runner{position:fixed;inset:0;z-index:30;display:flex;flex-direction:column;gap:.5rem;padding:.6rem clamp(.5rem,2vw,1.2rem) .8rem;background:#0f0c26;color:#fff}
+.runner-bar{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap}
+.runner-bar h1{flex:1;margin:0;font:900 clamp(1.1rem,2.6vw,1.6rem)/1.1 Nunito,system-ui,sans-serif;letter-spacing:.02em}
+.runner-back{color:#c4b5fd;text-decoration:none;font-weight:700;padding:.35rem .2rem}
+.runner-scores{display:flex;gap:1rem;font-size:.9rem;color:#c4b5fd}
+.runner-scores strong{color:#fff;font-size:1.15rem;margin-left:.25rem;font-variant-numeric:tabular-nums}
+.runner-bar button{background:#4c3d99;padding:.4rem .9rem}
+.runner-stage{position:relative;flex:1;min-height:0;display:grid;place-items:center;touch-action:none}
+.runner-stage canvas{display:block;border-radius:6px;box-shadow:0 0 0 3px #4c3d99,0 10px 30px #0008}
+.runner-overlay{position:absolute;inset:0;display:grid;place-items:center;padding:1rem;background:#0f0c26b3}
+.runner-overlay>div{max-width:460px;padding:1.4rem 1.6rem;background:#2b2452;border:3px solid #4c3d99;border-radius:14px;text-align:center}
+.runner-overlay h2{margin:0 0 .6rem;font-size:1.7rem}
+.runner-overlay p{margin:0 0 .9rem;color:#ddd6fe}
+.runner-overlay button{padding:.7rem 1.6rem;background:#22c55e;color:#062b13;font-weight:900;font-size:1.1rem}
+.runner-keys kbd{display:inline-block;min-width:1.6em;padding:.05em .4em;border:1px solid #8b7fd1;border-bottom-width:3px;border-radius:5px;background:#1d1a44;font:700 .85em Nunito,system-ui,sans-serif}
+.runner-pad{display:none;gap:.6rem;user-select:none;-webkit-user-select:none}
+.runner-pad button{flex:1;min-height:64px;font-size:1.6rem;background:#4c3d99;touch-action:none}
+.runner-pad .runner-jump{flex:1.4;background:#22c55e;color:#062b13;font-weight:900;font-size:1.2rem}
+.runner-pad button:active{filter:brightness(1.25)}
+@media(pointer:coarse),(max-width:800px),(orientation:portrait) and (max-width:1100px){.runner-pad{display:flex}.runner-keys{display:none}}
+/* Solitario 3.000: mesa futurista oscura con grilla de neón, cartas de vidrio y destellos eléctricos. */
+.sol{--neon:#22d3ee;--green:#39ff88;background:#050816;background-image:radial-gradient(ellipse at 50% 120%,#0e3a5c88,transparent 60%),linear-gradient(#22d3ee14 1px,transparent 1px),linear-gradient(90deg,#22d3ee14 1px,transparent 1px);background-size:100% 100%,32px 32px,32px 32px;font-family:ui-monospace,"Courier New",monospace}
+.sol .runner-bar h1{font-family:ui-monospace,"Courier New",monospace;font-weight:900;text-transform:uppercase;letter-spacing:.12em;color:#e0faff;text-shadow:0 0 8px var(--neon),0 0 18px #22d3ee88}
+.sol .runner-back{color:var(--neon);font-weight:900}
+.sol .runner-scores{color:#bae6fd;font-weight:700;align-items:center;flex-wrap:wrap}
+.sol .sol-box{display:inline-flex;align-items:baseline;gap:.2rem;padding:.2rem .6rem;background:#0b1430cc;border:2px solid var(--neon);border-radius:8px;box-shadow:0 0 10px #22d3ee66,inset 0 0 10px #22d3ee22;text-transform:uppercase;font-size:.78rem;letter-spacing:.08em}
+.sol .sol-box strong{font-size:1.35rem;color:#e0faff;text-shadow:0 0 8px var(--neon)}
+.sol .sol-box--points{border-color:var(--green);box-shadow:0 0 10px #39ff8866,inset 0 0 10px #39ff8822}
+.sol .sol-box--points strong{color:var(--green);text-shadow:0 0 8px var(--green);min-width:3ch;text-align:right}
+.sol-pop{position:absolute;left:50%;top:38%;z-index:160;transform:translateX(-50%);padding:.4rem 1rem;background:#04130bdd;border:2px solid var(--green);border-radius:10px;box-shadow:0 0 18px #39ff8888;color:var(--green);font:900 clamp(1.3rem,4vw,2.2rem) ui-monospace,"Courier New",monospace;letter-spacing:.06em;text-shadow:0 0 10px var(--green);white-space:nowrap;pointer-events:none;animation:sol-pop 1.2s ease-out forwards}
+.sol-pop--bad{border-color:#ff3d81;color:#ff3d81;text-shadow:0 0 10px #ff3d81;box-shadow:0 0 18px #ff3d8188}
+@media(max-width:800px),(orientation:portrait) and (max-width:1100px){.sol .sol-box{padding:.1rem .45rem;font-size:.65rem}.sol .sol-box strong{font-size:1.05rem}}
+@keyframes sol-pop{0%{opacity:0;transform:translate(-50%,10px) scale(.8)}15%{opacity:1;transform:translate(-50%,0) scale(1.08)}70%{opacity:1;transform:translate(-50%,-14px) scale(1)}100%{opacity:0;transform:translate(-50%,-30px)}}
+.sol-total{font-family:ui-monospace,"Courier New",monospace;font-weight:700}
+.sol .runner-bar button{background:#0b1430;color:#e0faff;border:2px solid var(--neon);border-radius:8px;font-weight:900;box-shadow:0 0 10px #22d3ee55}
+.sol .runner-bar button:hover{background:#12305a}
+.sol .runner-bar button:active{filter:brightness(1.3)}
+.sol .runner-bar button:disabled{opacity:.4;cursor:default}
+.sol-board{position:relative;flex:1;min-height:0;display:flex;flex-direction:column;gap:var(--gap);width:100%;max-width:1500px;margin:0 auto;touch-action:none;user-select:none;-webkit-user-select:none}
+.sol-top{display:flex;gap:var(--gap)}
+.sol-spacer{flex:1}
+.sol-slot{position:relative;flex:none;width:var(--cw);height:var(--ch);padding:0;border-radius:8px;background:#0b143066;border:2px dashed #22d3ee55;color:#22d3ee88}
+.sol-waste{border-color:transparent;background:none;width:calc(var(--cw)*1.44)}
+.sol-slot-mark{position:absolute;inset:0;display:grid;place-items:center;font:900 calc(var(--cw)*.42) ui-monospace,"Courier New",monospace;color:#22d3ee55;text-shadow:0 0 8px #22d3ee55}
+.sol-slot--king{position:absolute;top:0;left:0}
+.sol-slot--target{outline:2px solid var(--green);outline-offset:3px;box-shadow:0 0 16px #39ff8888}
+.sol-stock{cursor:pointer}
+.sol-stock .sol-card{position:absolute;inset:0}
+.sol-count{position:absolute;right:-6px;bottom:-6px;z-index:2;min-width:1.6em;padding:0 .3em;background:#0b1430;border:2px solid var(--neon);border-radius:6px;color:#e0faff;font-weight:900;font-size:calc(var(--cw)*.16 + 4px);box-shadow:0 0 8px #22d3ee88}
+.sol-redo{font-size:calc(var(--cw)*.5);line-height:var(--ch)}
+.sol-tableau{display:grid;grid-template-columns:repeat(7,var(--cw));justify-content:space-between;gap:var(--gap)}
+.sol-column{position:relative;width:var(--cw)}
+/* Carga de neón verde tipo radiación detrás de cada columna y cada base: con pocas cartas apenas se
+   nota y, a medida que se suman, se vuelve mucho más luminosa y late cada vez más rápido. */
+.sol-charge{--glow:calc(var(--charge)*var(--charge));position:absolute;left:-6px;right:-6px;top:-6px;border-radius:12px;pointer-events:none;
+  background:radial-gradient(ellipse at 50% 55%,rgb(80 255 120/calc(.12 + var(--glow)*.85)),rgb(40 230 90/calc(.08 + var(--glow)*.6)) 60%,rgb(20 200 70/calc(.04 + var(--glow)*.35)));
+  border:1px solid rgb(110 255 140/calc(.3 + var(--charge)*.7));
+  box-shadow:0 0 calc(8px + var(--glow)*70px) calc(var(--glow)*14px) rgb(60 255 110/calc(.25 + var(--charge)*.75)),inset 0 0 calc(4px + var(--glow)*26px) rgb(170 255 120/calc(.15 + var(--glow)*.7));
+  animation:sol-rad calc(2.6s - var(--charge)*1.8s) ease-in-out infinite;transition:height .15s,box-shadow .4s,background .4s}
+.sol-charge::after{content:"";position:absolute;inset:0;border-radius:inherit;background:repeating-linear-gradient(180deg,rgb(170 255 140/calc(var(--glow)*.2)) 0 2px,transparent 2px 7px);mix-blend-mode:screen;animation:sol-scan 1.8s linear infinite}
+@keyframes sol-rad{50%{filter:brightness(calc(1.15 + var(--charge)*.6)) saturate(1.2)}}
+@keyframes sol-scan{to{background-position:0 28px}}
+.sol-charged{--glow:calc(var(--charge)*var(--charge));border-style:solid;border-color:rgb(150 255 190/calc(.3 + var(--charge)*.7));background:radial-gradient(ellipse,rgb(80 255 120/calc(.1 + var(--glow)*.8)),rgb(30 220 80/calc(var(--glow)*.4)));box-shadow:0 0 calc(8px + var(--glow)*70px) calc(var(--glow)*14px) rgb(60 255 110/calc(.25 + var(--charge)*.75));animation:sol-rad calc(2.6s - var(--charge)*1.8s) ease-in-out infinite}
+/* Destello de electricidad verde cuando una carta cae en su lugar (los rayos se redibujan y titilan). */
+.sol-zap{position:absolute;left:-10%;width:120%;height:var(--ch);z-index:120;pointer-events:none;animation:sol-zap .75s ease-out forwards}
+.sol-zap::before{content:"";position:absolute;inset:-18%;border-radius:50%;background:radial-gradient(circle,#f0fff4 0,#7dffb0cc 22%,#39ff8855 45%,#39ff8800 70%);animation:sol-flash .75s steps(1) forwards}
+.sol-zap svg{position:absolute;inset:-6% 0;width:100%;height:112%;overflow:visible;transition:opacity .03s}
+.sol-bolt-glow{fill:none;stroke:#39ff88;stroke-linecap:round;stroke-linejoin:round;opacity:.55;filter:blur(1.5px)}
+.sol-bolt-core{fill:none;stroke:#f2fff7;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 2px #7dffb0)}
+@keyframes sol-flash{0%{opacity:1}12%{opacity:.25}20%{opacity:.95}34%{opacity:.4}46%{opacity:.85}62%{opacity:.2}74%{opacity:.6}100%{opacity:0}}
+@keyframes sol-zap{0%,80%{opacity:1}100%{opacity:0}}
+.sol-card{position:absolute;top:0;left:0;width:var(--cw);height:var(--ch);padding:0;border:0;border-radius:calc(var(--cw)*.08);background:none;filter:drop-shadow(0 3px 5px #000a);transition:top .12s,left .12s;touch-action:none}
+.sol-card:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+.sol-card--lifted{filter:drop-shadow(0 0 10px #22d3eeaa) drop-shadow(0 10px 12px #000c);cursor:grabbing}
+.sol-card--shake{animation:sol-shake .3s steps(3)}
+@keyframes sol-shake{25%{translate:-5px 0}50%{translate:5px 0}75%{translate:-3px 0}}
+.sol-face,.sol-back{position:absolute;inset:0;display:block;background-size:100% 100%;background-repeat:no-repeat}
+.sol-finish{position:absolute;left:50%;bottom:4%;z-index:150;transform:translateX(-50%);padding:.7rem 1.4rem;background:#04130b;color:var(--green);border:2px solid var(--green);font-weight:900;border-radius:10px;box-shadow:0 0 16px #39ff8888;text-shadow:0 0 8px var(--green)}
+.sol .runner-overlay{background:#050816cc}
+.sol .runner-overlay>div{background:#0b1430;border:2px solid var(--neon);border-radius:14px;box-shadow:0 0 24px #22d3ee88}
+.sol .runner-overlay h2{font-family:ui-monospace,"Courier New",monospace;font-weight:900;letter-spacing:.12em;color:#e0faff;text-shadow:0 0 10px var(--neon)}
+.sol .runner-overlay p{color:#bae6fd}
+.sol .runner-overlay button{background:#04130b;color:var(--green);border:2px solid var(--green);border-radius:10px;box-shadow:0 0 14px #39ff8888}
+.sol-confetti{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.sol-confetti span{position:absolute;top:-10%;width:28px;height:28px;animation:sol-fall linear infinite}
+.sol-confetti svg{width:100%;height:100%}
+@keyframes sol-fall{to{transform:translateY(120vh) rotate(360deg)}}
+@media(max-width:800px),(orientation:portrait) and (max-width:1100px){.sol.runner{padding-left:4px;padding-right:4px}.sol .runner-bar{gap:.4rem .7rem;padding:0 .4rem}.sol .runner-bar button{padding:.35rem .6rem;font-size:.85rem}}
+/* Tiki-Taka: estadio de noche, cancha rayada, marcador de TV siempre visible y botones grandes para el celular. */
+.tt{background:radial-gradient(ellipse at 50% 0,#14532d 0,#052e16 55%,#02140a 100%);overflow:auto}
+.tt.runner{gap:.35rem;padding:.4rem .6rem .5rem}
+.tt .runner-bar h1{flex:0 1 auto}
+.tt .runner-back{color:#86efac}
+.tt-head{flex:1;display:flex;align-items:center;justify-content:center;gap:.9rem;min-width:0}
+.tt-coach{display:grid;justify-items:end;line-height:1.1;color:#bbf7d0;min-width:0}
+.tt-coach small{font-size:.7rem;font-weight:900;letter-spacing:.12em;color:#86efac}
+.tt-coach strong{font-size:1.05rem;color:#fff;max-width:11rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tt-coach--rival{justify-items:start}
+.tt-board{display:grid;justify-items:center;gap:.2rem;padding:.35rem 1.2rem .4rem;background:#0b1220;border:2px solid #334155;border-radius:14px;box-shadow:0 4px 14px #0008;color:#e2e8f0}
+.tt-board-row{display:flex;align-items:center;gap:1rem;font-weight:900;font-size:1.2rem}
+.tt-board strong{font:900 2.2rem/1 "Courier New",ui-monospace,monospace;color:#fde047;letter-spacing:.06em;white-space:nowrap}
+.tt-board-time{padding:.05rem .7rem;background:#16a34a;color:#fff;border-radius:6px;font-weight:900;font-size:.95rem;font-variant-numeric:tabular-nums}
+.tt-team{display:flex;align-items:center;gap:.45rem;max-width:14rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tt-team i{flex:none;width:1.05rem;height:1.05rem;border-radius:3px;border:2px solid}
+.tt-rival{display:flex;align-items:center;gap:.6rem}
+.tt-rival-kit svg{width:40px;height:40px;display:block}
+.tt-team--rival{flex-direction:row-reverse}
+.tt-team--rival b{overflow:hidden;text-overflow:ellipsis;font-weight:inherit}
+.tt-setup{width:min(820px,100%);margin:.3rem auto 1.5rem;padding:1.1rem 1.3rem;background:#0b1f14;border:2px solid #166534;border-radius:16px;box-shadow:0 12px 30px #0008}
+.tt-setup h2{margin:0 0 .8rem;font-size:1.6rem}
+.tt-fields{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.tt-fields label{display:grid;gap:.25rem;font-weight:700;color:#bbf7d0}
+.tt-fields input{padding:.65rem .75rem;border:2px solid #166534;border-radius:10px;background:#052e16;color:#fff;font-weight:700}
+.tt-setup fieldset{margin:1rem 0 0;padding:0;border:0}
+.tt-setup legend{margin-bottom:.45rem;font-weight:700;color:#bbf7d0}
+.tt-kits{display:grid;grid-template-columns:repeat(9,1fr);gap:.4rem}
+.tt-kits button{display:grid;justify-items:center;gap:.1rem;padding:.3rem .15rem;background:#052e16;border:2px solid #166534;border-radius:10px;color:#dcfce7;font-size:.66rem;font-weight:800;line-height:1.1}
+.tt-kits button svg{width:100%;max-width:44px;height:auto}
+.tt-kits button[aria-pressed="true"]{border-color:#fde047;background:#14532d}
+.tt-formations{display:grid;grid-template-columns:repeat(5,1fr);gap:.5rem}
+.tt-formations button{display:grid;gap:.3rem;padding:.4rem;background:#052e16;border:2px solid #166534;border-radius:10px;color:#fff;font-weight:900}
+.tt-formations button[aria-pressed="true"]{border-color:#fde047;background:#14532d}
+.tt-formations svg{width:100%;height:auto;border-radius:4px}
+.tt-tip{margin:.8rem 0 0;color:#86efac;font-size:.9rem}
+.tt-rival{margin:.8rem 0;font-size:1.05rem}
+.tt-rival strong{color:#fde047}
+.tt-go{width:100%;padding:.9rem;background:#fde047;color:#052e16;font-size:1.2rem;font-weight:900;border-radius:12px}
+.tt-record{margin:.7rem 0 0;text-align:center;color:#bbf7d0;font-size:.9rem}
+.tt-stage{position:relative;flex:1;min-height:0;touch-action:none}
+.tt-stage canvas{display:block;cursor:pointer}
+.tt-bottom{display:flex;align-items:center;gap:.6rem}
+.tt-line{flex:1;margin:0;padding:.45rem .8rem;background:#0b1220cc;border-radius:10px;font-weight:700;min-height:2.4rem;display:flex;align-items:center}
+.tt-shoot{display:grid;justify-items:center;min-width:7.5rem;padding:.5rem 1.1rem;background:#ef4444;color:#fff;font-size:1.15rem;font-weight:900;border-radius:12px;box-shadow:0 4px 0 #991b1b}
+.tt-shoot small{font-size:.75rem;opacity:.9}
+.tt-shoot:disabled{background:#475569;box-shadow:0 4px 0 #1e293b;opacity:.6;cursor:default}
+.tt-shoot:not(:disabled){animation:tt-pulse .8s infinite alternate}
+@keyframes tt-pulse{to{transform:scale(1.06)}}
+.tt-goal{position:absolute;inset:0;z-index:5;display:flex;align-items:center;justify-content:center;gap:clamp(.5rem,2vw,1.5rem);padding:1rem;pointer-events:none;animation:tt-pop .5s ease-out;background:radial-gradient(closest-side,#0006,#0000)}
+/* La misma letra para el gol y para los carteles del Mundial. */
+.tt-shout{font:900 clamp(1.6rem,7.5vw,5.8rem)/1.02 Nunito,system-ui,sans-serif;color:#fde047;text-shadow:0 6px 0 #92400e,0 0 30px #000;text-align:center;text-transform:uppercase;letter-spacing:.01em;overflow-wrap:normal;word-break:keep-all;hyphens:none}
+h2.tt-shout{display:flex;align-items:center;justify-content:center;gap:.8rem;font-size:clamp(1.3rem,3.2vw,2.4rem);margin:.2rem 0 .6rem}
+.tt-trophy{flex:none;width:clamp(70px,14vw,150px);height:auto;filter:drop-shadow(0 6px 14px #000a);animation:tt-shine 1.6s ease-in-out infinite alternate}
+h2 .tt-trophy{width:clamp(56px,10vw,90px)}
+@keyframes tt-shine{to{transform:rotate(-6deg) scale(1.06);filter:drop-shadow(0 0 18px #fde047aa)}}
+.tt-go-row{display:flex;gap:.7rem;flex-wrap:wrap;justify-content:center}
+.tt-go-row .tt-go{flex:1 1 200px}
+.tt-go-row .tt-go:not(.tt-go--cup){background:#22c55e;color:#052e16}
+.tt .tt-go--cup{background:linear-gradient(180deg,#fde047,#f59e0b);color:#422006}
+.tt-cup-end{max-width:min(680px,94vw)!important}
+@media(max-width:700px){.tt-goal,h2.tt-shout{flex-direction:column}.tt-shout{font-size:clamp(1.5rem,8.5vw,3rem)}h2.tt-shout{font-size:clamp(1.2rem,6vw,1.8rem)}}
+.tt-round{margin:0;color:#86efac!important;font-weight:900;text-transform:uppercase;letter-spacing:.1em;font-size:.85rem}
+.tt-penalties{font-weight:900;color:#fde047!important}
+@keyframes tt-pop{from{transform:scale(.3);opacity:0}}
+/* Atajada: abajo de la cancha, para ver la pelota venir. */
+.tt-save{position:absolute;left:50%;bottom:.6rem;transform:translateX(-50%);width:min(440px,calc(100% - 1rem));padding:.7rem .9rem;background:#0b1220ee;border:3px solid #ef4444;border-radius:14px;text-align:center;box-shadow:0 8px 24px #000a}
+.tt-save h2{margin:0 0 .4rem;font-size:1.25rem}
+.tt-save p{margin:0;color:#cbd5e1}
+.tt-timer{height:8px;margin-bottom:.55rem;background:#1e293b;border-radius:999px;overflow:hidden}
+.tt-timer span{display:block;height:100%;background:#ef4444;transform-origin:left;animation:tt-time linear forwards}
+@keyframes tt-time{from{transform:scaleX(1)}to{transform:scaleX(0)}}
+/* En pantallas verticales tu arco queda abajo: la atajada va arriba para no taparlo. */
+@media(max-aspect-ratio:1/1){.tt-save{top:.6rem;bottom:auto}}
+.tt-sides{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem}
+.tt-sides button{padding:.75rem .3rem;background:#16a34a;font-weight:900;font-size:1rem;border-radius:10px;box-shadow:0 4px 0 #14532d}
+.tt .runner-overlay>div{background:#0b1f14;border-color:#16a34a}
+.tt-final{font:900 1.5rem "Courier New",ui-monospace,monospace;color:#fde047!important}
+.tt-end-actions{display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap}
+.tt-end-actions button+button{background:#334155;color:#fff}
+@media(max-width:800px),(orientation:portrait) and (max-width:1100px){
+  .tt.runner{padding:.3rem .3rem .4rem}
+  .tt .runner-bar{gap:.3rem .6rem}
+  .tt-head{flex:1 1 100%;width:100%;display:grid;grid-template-columns:1fr 1fr;grid-template-areas:'board board' 'left right';gap:.2rem .5rem}
+  .tt-head .tt-board{grid-area:board;justify-self:center}
+  .tt-coach{grid-area:left;display:flex;align-items:baseline;gap:.3rem;justify-content:flex-start;padding-left:.4rem}
+  .tt-coach--rival{grid-area:right;justify-content:flex-end;padding:0 .4rem 0 0}
+  .tt-coach small{font-size:.6rem}
+  .tt-coach strong{font-size:.8rem;max-width:9rem}
+  .tt-board{padding:.25rem .5rem}
+  .tt-board-row{gap:.4rem;font-size:.8rem}
+  .tt-board strong{font-size:1.45rem}
+  .tt-team{max-width:6.8rem}
+  .tt-fields{grid-template-columns:1fr}
+  .tt-kits{grid-template-columns:repeat(6,1fr)}
+  .tt-formations{grid-template-columns:repeat(3,1fr)}
+  .tt-line{font-size:.82rem}
+  .tt-shoot{min-width:6rem;padding:.5rem .7rem}
+}
+/* Aviso de encerrado en ¡Cuidado, bloques!: cuenta regresiva arriba de la cancha. */
+.runner-trap{position:absolute;top:10%;left:50%;transform:translateX(-50%);padding:.6rem 1.2rem;background:#7f1d1df0;border:3px solid #fca5a5;border-radius:12px;color:#fff;font-weight:900;font-size:clamp(1.1rem,3vw,1.6rem);white-space:nowrap;pointer-events:none;animation:runner-blink .5s steps(2) infinite alternate;box-shadow:0 8px 24px #000a}
+.runner-trap strong{font-size:1.3em;color:#fde047;margin-left:.2rem}
+@keyframes runner-blink{to{background:#b91c1cf0}}
+
+/* Trepaluna */
+.trepa-main{flex:1;min-height:0;display:flex;gap:.5rem}
+.trepa .runner-jump{white-space:nowrap}
+.trepa .runner-stage{flex:1;min-width:0}
+.trepa .runner-stage canvas{border-radius:8px}
+/* A la derecha: tiempo, metros y un medidor de altura con las etapas. */
+.trepa-side{flex:0 0 clamp(120px,13vw,190px);display:flex;flex-direction:column;gap:.5rem;min-height:0;padding:.6rem;background:#1d1a44;border:3px solid #4c3d99;border-radius:12px}
+.trepa-stat{display:flex;flex-direction:column;align-items:center;gap:.15rem;padding:.35rem;background:#0f0c26;border-radius:8px}
+.trepa-stat span{color:#c4b5fd;font-weight:800;text-transform:uppercase;font-size:.72rem;letter-spacing:.1em}
+.trepa-stat strong{font:900 clamp(1.2rem,2.2vw,2rem)/1 Nunito,system-ui,sans-serif;font-variant-numeric:tabular-nums;color:#fde047}
+.trepa-stat+.trepa-stat strong{color:#86efac}
+.trepa-meter{position:relative;flex:1;min-height:120px;display:flex;gap:.45rem;padding:.4rem 0 .2rem}
+.trepa-meter-track{position:relative;width:14px;border-radius:7px;background:linear-gradient(0deg,#8fb3d6 0 16.7%,#7cc4f5 16.7% 36.7%,#e2e8f0 36.7% 50%,#6d28d9 50% 76.7%,#0b1026 76.7%);box-shadow:inset 0 0 0 2px #ffffff22}
+.trepa-meter-best,.trepa-meter-fill{position:absolute;left:0;right:0;bottom:0;border-radius:7px}
+.trepa-meter-best{background:#ffffff44}
+.trepa-meter-fill{background:linear-gradient(0deg,#22c55e,#facc15);transition:height .15s linear}
+.trepa-meter-record{position:absolute;left:-5px;right:-5px;height:3px;background:#f43f5e;border-radius:2px;box-shadow:0 0 6px #f43f5e}
+.trepa-meter-marks{position:relative;flex:1}
+.trepa-meter-marks span{position:absolute;left:0;transform:translateY(50%);font-size:.7rem;font-weight:800;line-height:1.05;color:#ddd6fe}
+.trepa-meter-marks small{display:block;font-size:.62rem;font-weight:700;color:#94a3b8}
+.trepa-toast{position:absolute;top:8%;left:50%;transform:translateX(-50%);max-width:90%;padding:.55rem 1.1rem;background:#1d1a44e6;border:3px solid #a78bfa;border-radius:12px;font-weight:900;font-size:clamp(.95rem,2.4vw,1.3rem);text-align:center;pointer-events:none;animation:trepa-pop .25s ease-out;box-shadow:0 8px 24px #0008}
+@keyframes trepa-pop{from{transform:translate(-50%,-10px);opacity:0}}
+.trepa-record{position:absolute;top:30%;left:50%;transform:translate(-50%,-50%) rotate(-4deg);padding:.5rem 1.3rem;background:linear-gradient(180deg,#fde047,#f59e0b);border:4px solid #fff;border-radius:16px;color:#7c2d12;font:900 clamp(1.6rem,5vw,3.2rem)/1.05 Nunito,system-ui,sans-serif;text-align:center;text-transform:uppercase;white-space:nowrap;pointer-events:none;box-shadow:0 10px 30px #000a;animation:trepa-record 2.6s ease-out forwards}
+@keyframes trepa-record{0%{transform:translate(-50%,-50%) rotate(-4deg) scale(.2);opacity:0}12%{transform:translate(-50%,-50%) rotate(-4deg) scale(1.15);opacity:1}20%{transform:translate(-50%,-50%) rotate(-4deg) scale(1)}85%{opacity:1}100%{opacity:0;transform:translate(-50%,-70%) rotate(-4deg)}}
+.trepa-gameover{font:900 clamp(2.4rem,7vw,4rem)/1 "Courier New",ui-monospace,monospace!important;color:#ef4444;letter-spacing:.08em;text-shadow:4px 4px 0 #450a0a}
+.trepa-win{font:900 clamp(1.6rem,4.5vw,2.4rem)/1.1 Nunito,system-ui,sans-serif!important;color:#fde047;text-shadow:0 4px 0 #92400e}
+@media(max-width:800px),(orientation:portrait) and (max-width:1100px){
+  .trepa.runner{padding:.4rem .4rem .5rem;gap:.35rem}
+  .trepa-main{position:relative}
+  .trepa-side{position:absolute;top:6px;right:6px;z-index:2;flex:none;flex-direction:row;gap:.3rem;padding:.25rem;background:#1d1a44d9;border-width:2px}
+  .trepa-stat{padding:.2rem .45rem}
+  .trepa-stat span{font-size:.55rem}
+  .trepa-stat strong{font-size:1.05rem}
+  .trepa-meter{display:none}
+  .trepa .runner-scores{font-size:.75rem}.trepa .runner-scores strong{font-size:.95rem}
+  .trepa-toast{top:64px}
+  .trepa .runner-pad button{min-height:56px}
+}
+
+/* Calendario: imagen apoyada arriba del mes, en el espacio libre sobre la hoja. */
+/* El borde recto de abajo de la imagen coincide con el borde de abajo del encabezado del mes. Va pegada a
+   la derecha del título, los dos juntos en el medio, y el título se achica solo para que siempre entre. */
+.cal-page .cal-band-wrap{--art:0px;--pad:1.2rem;--padb:.6rem;--arrow:42px;--gap:1rem;container-type:inline-size}
+.cal-page .cal-band{overflow:visible;justify-content:flex-start;gap:var(--gap);padding-left:var(--pad);padding-right:var(--pad);padding-bottom:var(--padb)}
+.cal-page .cal-band-clock{height:calc(100% - 6px);width:auto;aspect-ratio:1}
+.cal-page .cal-band h2{flex:0 1 auto;margin:0 auto} /* mes y año bien en el medio del encabezado */
+.cal-page .cal-band h2 span,.cal-page .cal-band h2 small{font-size:min(2.5rem,calc((100cqi - var(--art) - 2 * var(--arrow) - 2 * var(--pad) - 4 * var(--gap)) / (var(--len) * .8)))}
+.cal-page .cal-band-wrap .cal-arrow{width:var(--arrow);height:var(--arrow);flex:none}
+.cal-page .cal-band-wrap .cal-arrow:last-child{margin-left:0}
+/* Meme del calendario: ocupa el lugar libre del encabezado (entre el título y los íconos), lo más grande que entra,
+   con su borde de abajo apoyado sobre el borde de arriba del calendario (margen del encabezado + 1.1rem de la hoja). */
+.cal-page{--title-gap:1.4rem}
+.cal-page .section-title{margin-bottom:var(--title-gap)}
+.cal-art-room{position:relative;pointer-events:none;user-select:none}
+.cal-art{position:absolute;z-index:3;left:50%;bottom:calc(-1 * (var(--title-gap) + 1.1rem));transform:translateX(-50%);width:auto;height:auto;max-width:100%;max-height:calc(100% + var(--title-gap) + 1.1rem);border-radius:10px 10px 0 0;box-shadow:0 -4px 14px #24100866}
+@media(min-width:801px) and (orientation:landscape),(min-width:1101px){
+  .cal-page .section-title{display:grid;grid-template-columns:auto minmax(0,1fr) auto;column-gap:1rem;align-items:end}
+  .cal-art-room{align-self:stretch}
+  /* El mes y el año van a la izquierda (debajo de "Calendario") y el meme baja hasta el borde de abajo del
+     encabezado azul del mes, así queda más grande. El encabezado azul tiene un alto fijo para saber dónde termina. */
+  .cal-page{--band-h:3.4rem}
+  .cal-page .cal-band{height:var(--band-h);padding-top:0;padding-bottom:0;align-items:center}
+  .cal-page .cal-band h2{margin:0}
+  .cal-page .cal-band-wrap .cal-arrow:last-child{margin-left:auto}
+  .cal-page .cal-band h2 span,.cal-page .cal-band h2 small{font-size:min(2.5rem,calc((40cqi - var(--arrow) - var(--pad) - var(--gap)) / (var(--len) * .8)))}
+  .cal-art{bottom:calc(-1 * (var(--title-gap) + 1.1rem + var(--band-h)));max-height:calc(100% + var(--title-gap) + 1.1rem + var(--band-h));border-radius:10px}
+}
+@media(min-width:1001px){.cal-page .cal-band-wrap{--padb:.4rem}}
+@media(max-width:800px),(orientation:portrait) and (max-width:1100px){
+  .cal-page .cal-band-wrap{--pad:.6rem;--gap:.4rem}
+  .cal-art-room{order:3;display:flex;justify-content:center;align-items:flex-end;height:9rem;margin-bottom:calc(-1 * (var(--title-gap) + 1.1rem))}
+  .cal-art{position:relative;left:auto;bottom:auto;transform:none;max-height:100%}
+}
+/* Calendario en pantallas medianas: no hay lugar para el meme en el encabezado; los íconos pasan a otra línea si no entran. */
+@media(min-width:801px) and (max-width:1150px) and (orientation:landscape),(min-width:1101px) and (max-width:1150px){
+  .cal-art-room{display:none}
+  .cal-page .section-title>.section-objects{grid-column:2/-1;flex-wrap:wrap;justify-content:flex-end}
+}
+/* Líneas de los días punteadas, un poco más gruesas y gris claro; fines de semana en verde; nombre completo de los días
+   (abreviado en el celular). */
+/* Puntos dibujados a mano (así se elige su tamaño y su separación): 3px cada uno, cada 9px. */
+.cal-day{position:relative;border-right:0;border-bottom:0;--dot:#c4c8ce}
+.cal-day::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(circle,var(--dot) 1.5px,transparent 1.8px) right top/3px 9px repeat-y,
+             radial-gradient(circle,var(--dot) 1.5px,transparent 1.8px) left bottom/9px 3px repeat-x}
+.cal-day:nth-child(7n)::after{background:radial-gradient(circle,var(--dot) 1.5px,transparent 1.8px) left bottom/9px 3px repeat-x}
+.cal-weekday{border-bottom:2px solid #c4c8ce;text-transform:uppercase;font-size:min(.9rem,1vw);letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cal-weekday--weekend,.cal-day--weekend .cal-day-number{color:#15803d}
+.cal-weekday-short{display:none}
+/* Los días de otros meses se ven más claros, pero sus líneas quedan iguales que las demás. */
+.cal-day--outside{opacity:1}.cal-day--outside>*{opacity:.38}
+@media(max-width:700px){.cal-weekday-full{display:none}.cal-weekday-short{display:inline}}
+/* Días cuadrados (en la compu el alto de cada fila lo pone Calendar.tsx). */
+.cal-day{aspect-ratio:1;min-height:0;overflow:hidden}
+/* Juegos: las tarjetas van justo debajo del encabezado y la imagen ocupa el lugar libre entre el título y los
+   íconos, lo más grande que entra, centrada y llegando hasta un poquito antes de las tarjetas. */
+.games-title{--title-gap:1.4rem;margin-bottom:var(--title-gap)}
+.games-heading{align-self:start}
+.games-art{position:relative;pointer-events:none;user-select:none}
+.games-art img{position:absolute;left:50%;bottom:calc(-1 * var(--title-gap) + .5rem);transform:translateX(-50%);width:auto;height:auto;max-width:100%;max-height:calc(100% + var(--title-gap) - .5rem);border-radius:12px;box-shadow:0 8px 22px #000b}
+@media(min-width:801px) and (orientation:landscape),(min-width:1101px){
+  .section-title.games-title{display:grid;grid-template-columns:auto minmax(0,1fr) auto;column-gap:1rem;align-items:end}
+  .games-art{align-self:stretch}
+}
+@media(max-width:800px),(orientation:portrait) and (max-width:1100px){
+  .games-art{display:flex;justify-content:center;height:10rem;margin:.25rem 0 .25rem}
+  .games-art img{position:static;transform:none;max-height:100%}
+}
+
+/* Con los cinco juegos en una fila (pantallas anchas), Tiki-Taka queda en el medio: el meme va centrado en la
+   pantalla, justo arriba de esa tarjeta (sin pasarse sobre el título ni los íconos). */
+@media(min-width:1896px){
+  .games-heading{grid-column:1;grid-row:1}
+  .games-title>.section-objects{grid-column:3;grid-row:1}
+  .games-art{grid-column:1/-1;grid-row:1}
+  .games-art img{max-width:40%}
+}
+
+/* ¡Huye de la serpiente! */
+.snk{background:radial-gradient(ellipse at 50% 0,#166534 0,#052e16 70%)}
+.snk .runner-back{color:#86efac}
+/* Tiempo, puntos, récord y largo a la derecha del jardín. */
+.snk-main{flex:1;min-height:0;display:flex;gap:.6rem}
+.snk .runner-stage{flex:1;min-width:0}
+.snk-side{flex:0 0 clamp(130px,13vw,180px);display:flex;flex-direction:column;justify-content:center;gap:.6rem;padding:.6rem;background:#052e16cc;border:3px solid #a16207;border-radius:12px}
+.snk-stat{display:flex;flex-direction:column;align-items:center;gap:.15rem;padding:.45rem .3rem;background:#14532d;border-radius:8px;text-align:center}
+.snk-stat span{color:#bbf7d0;font-weight:800;text-transform:uppercase;font-size:.7rem;letter-spacing:.08em;line-height:1.15}
+.snk-stat strong{font:900 clamp(1.3rem,2.2vw,2rem)/1 Nunito,system-ui,sans-serif;font-variant-numeric:tabular-nums;color:#fff}
+.snk-stat--points strong{color:#fde047}
+.snk-stat--len strong{color:#86efac}
+.snk .runner-bar button{background:#15803d}
+.snk .runner-stage canvas{border-radius:10px;box-shadow:0 0 0 4px #14532d,0 0 0 7px #a16207,0 12px 30px #000a}
+.snk .runner-overlay>div{background:#14532d;border-color:#a16207}
+.snk .runner-overlay h2{color:#fde047}
+.snk-pad button{background:#15803d}
+.snk-toast{position:absolute;top:8%;left:50%;transform:translateX(-50%);max-width:90%;padding:.55rem 1.1rem;background:#14532de6;border:3px solid #fde047;border-radius:12px;color:#fff;font-weight:900;font-size:clamp(.95rem,2.4vw,1.3rem);text-align:center;white-space:nowrap;pointer-events:none;animation:trepa-pop .25s ease-out;box-shadow:0 8px 24px #0008}
+@media(max-width:800px),(orientation:portrait) and (max-width:1100px){
+  .snk-main{flex-direction:column;gap:.4rem}
+  .snk-side{flex:none;order:-1;flex-direction:row;padding:.3rem;gap:.3rem}
+  .snk-stat{flex:1;padding:.25rem .2rem}
+  .snk-stat span{font-size:.55rem}
+  .snk-stat strong{font-size:1.05rem}
+}
+/* Objetos del escritorio en el celular: no se aplastan; si no entran en una fila, pasan a la siguiente. */
+@media(max-width:800px),(orientation:portrait) and (max-width:1100px){.desk-objects{flex-wrap:wrap;justify-content:center;align-items:center;gap:1rem 1.1rem}.desk-objects>*{flex-shrink:0}}
+@media(max-width:480px){.desk-objects{zoom:.85}}
+/* ¡El piso es de lava! (usa la pantalla de Trepaluna con colores de fuego) */
+.lava.runner{background:radial-gradient(ellipse at 50% 100%,#7f1d1d 0,#1c0a0a 70%)}
+.lava .runner-back{color:#fdba74}
+.lava .runner-scores{color:#fdba74}
+.lava .runner-bar button,.lava .runner-pad button{background:#9a3412}
+.lava .runner-pad .runner-jump{background:#22c55e}
+.lava .runner-stage canvas{box-shadow:0 0 0 3px #9a3412,0 10px 30px #000a}
+.lava .runner-overlay{background:#1c0a0ab3}
+.lava .runner-overlay>div{background:#431407;border-color:#ea580c}
+.lava .runner-overlay p{color:#fed7aa}
+.lava-title{color:#fdba74;text-shadow:0 3px 0 #7c2d12}
+.lava-side{background:#2a0e0a!important;border-color:#9a3412!important}
+.lava-side .trepa-stat{background:#160605}
+.lava-side .trepa-stat span{color:#fdba74}
+.lava-stat strong{color:#f97316!important}
+.lava-heli strong{color:#86efac!important}
+.lava-meter-track{background:linear-gradient(0deg,#57534e,#a8a29e)!important}
+.lava-meter-lava{position:absolute;left:0;right:0;bottom:0;border-radius:7px;background:linear-gradient(0deg,#7f1d1d,#f97316 85%,#fde047);box-shadow:0 0 8px #f97316;transition:height .2s linear}
+.lava-toast{background:#431407e6!important;border-color:#fb923c!important}
+/* Ciudad Tiburón (usa la pantalla de Trepaluna con colores de tormenta y de bomberos) */
+.tib.runner{background:radial-gradient(ellipse at 50% 100%,#123a4a 0,#070b16 70%)}
+.tib .runner-back,.tib .runner-scores{color:#fca5a5}
+.tib .runner-bar button,.tib .runner-pad button{background:#991b1b}
+.tib .runner-pad .runner-jump{background:#22c55e}
+.tib .runner-stage canvas{box-shadow:0 0 0 3px #991b1b,0 10px 30px #000a}
+.tib .runner-overlay{background:#070b16b3}
+.tib .runner-overlay>div{background:#1b2638;border-color:#ef4444}
+.tib .runner-overlay p{color:#e2e8f0}
+.tib-title{color:#fca5a5;text-shadow:0 3px 0 #7f1d1d}
+.tib-side{background:#111a2a!important;border-color:#991b1b!important}
+.tib-side .trepa-stat{background:#070b16}
+.tib-side .trepa-stat span{color:#fca5a5}
+.tib-time strong{color:#fde047!important}
+.tib-hurry strong{color:#f87171!important;animation:tib-pulse .6s ease-in-out infinite alternate}
+@keyframes tib-pulse{to{transform:scale(1.12)}}
+.tib-saved strong{color:#86efac!important}
+.tib-kinds{font-size:.72rem;font-weight:800;color:#cbd5e1;white-space:nowrap}
+.tib-sharks strong{color:#7dd3fc!important}
+.tib-meter-track{background:linear-gradient(0deg,#1e3a4a,#334155)!important}
+.tib-meter-fill{background:linear-gradient(0deg,#16a34a,#86efac)!important}
+.tib-toast{background:#1b2638e6!important;border-color:#ef4444!important}
+@media(max-height:620px){.tib-side .trepa-meter{display:none}}
+@media(max-width:800px),(orientation:portrait) and (max-width:1100px){.tib-kinds{display:none}}
+/* ===== Diseño adaptable: celulares y tablets en horizontal y ventanas medianas (801–1279px apaisado). =====
+   Todo lo de acá abajo solo se aplica en pantallas de menos de 1280px: en la notebook el diseño queda igual. */
+@media(pointer:coarse) and (min-width:801px) and (max-width:1279px) and (orientation:landscape){
+  /* Escritorio: si el formulario de nueva nota no entra al lado del título, pasa abajo con todo el ancho. */
+  .section-title:has(>.new-note){flex-wrap:wrap}
+  .section-title>.new-note{flex:0 1 auto;margin-left:auto}
+  .section-title>.new-note input{min-width:0}
+  /* Los objetos del escritorio van en una fila con todo el ancho (nunca se aplastan) y el meme queda
+     abajo, arriba de "No iniciado", al lado del aviso de arrastrar. */
+  .desk-row .desk-objects{grid-column:1/-1;grid-row:1;justify-content:center;margin:0 0 1rem}
+  .desk-row .desk-art{grid-row:2}
+  .desk-row .drag-hint{grid-row:2;grid-column:2/-1}
+  .desk-objects>*{flex-shrink:0}
+}
+@media(pointer:coarse) and (min-width:801px) and (max-width:999px) and (orientation:landscape){.desk-objects{zoom:1.05}}
+@media(pointer:coarse) and (min-width:801px) and (max-width:1100px) and (orientation:landscape){
+  /* Columnas angostas: una nota por fila, así la letra no queda diminuta. */
+  @container(max-width:330px){.column .note,.column .drop-indicator{flex-basis:100%}}
+}
+/* Celulares: los accesos a otras secciones nunca quedan uno solo en una fila: si son 4 van en una grilla de 2×2
+   centrada; si son 3, en una fila. */
+@media(max-width:600px){
+  .section-objects{align-self:center;justify-content:center}
+  .section-objects:has(>:nth-child(4)){display:grid;grid-template-columns:repeat(2,max-content);justify-content:center;justify-items:center;align-items:center;gap:1rem 1.8rem}
+  .section-objects:not(:has(>:nth-child(4))){flex-wrap:nowrap}
+  .journal-objects{justify-content:center}
+}
+@media(max-width:374px){.section-objects:not(:has(>:nth-child(4))){zoom:.9}}
+/* Mi diario en pantallas más chicas: el meme también se sienta en el borde de arriba del libro (a la izquierda,
+   más chico) y se le deja lugar arriba para que no tape los botones; la hoja empieza debajo de sus piernas. */
+@media(max-width:800px),(orientation:portrait) and (max-width:1159px),(pointer:coarse) and (max-width:1159px){
+  .book{--sit-height:clamp(8rem,24vw,12rem);margin-top:calc(var(--sit-height) * .69)}
+  .book-art{display:block;position:absolute;z-index:5;top:calc(var(--sit-height) * -.69);left:clamp(1rem,6vw,3rem);height:var(--sit-height);width:auto;pointer-events:none;user-select:none;filter:drop-shadow(4px 6px 5px #2d140c66)}
+  .book .paper{padding-top:calc(var(--sit-height) * .31 + 1.2rem)}
+}
+/* Mi diario en celulares y tablets en horizontal: la libreta no sube junto al título (no hay lugar) y los
+   íconos quedan de tamaño normal, a la derecha arriba de los botones. */
+@media(pointer:coarse) and (min-width:801px) and (max-width:1100px) and (orientation:landscape){
+  .journal-content{margin-top:0}
+  .journal-objects .section-objects--large{zoom:1}
+}
+/* Mis gastos: donde el meme no entra en la fila del título, va en su propia fila, centrado y entero,
+   apoyado sobre el rectángulo de gastos. */
+@media(max-width:800px),(orientation:portrait) and (max-width:1100px){
+  .calc-art{display:block;width:100%;pointer-events:none;user-select:none}
+  .calc-art img{display:block;width:100%;max-width:34rem;height:auto;margin:0 auto -.4rem;border-radius:10px;box-shadow:0 6px 14px #2d140c88}
+}
+@media(pointer:coarse) and (min-width:801px) and (max-width:1859px) and (orientation:landscape){
+  .section-title:has(>.calc-art)>.section-objects{grid-column:2/-1}
+  .calc-art{display:block;grid-column:1/-1;grid-row:2;align-self:auto;container-type:normal}
+  .calc-art img{display:block;position:static;transform:none;width:auto;max-width:100%;height:min(15rem,45vh);margin:0 auto -1.6rem}
+}
+@media(pointer:coarse) and (min-width:1101px) and (max-width:1279px) and (orientation:landscape){.section-title:has(>.calc-art)>.section-objects{zoom:1.1}}
+/* Mis gastos fuera de la notebook: entre 848 y 1088px de ancho las 6 columnas quedan apretadas (cortan el texto),
+   así que se usan dos columnas; el concepto siempre ocupa toda la fila. */
+@media(max-width:800px),(orientation:portrait) and (max-width:1279px),(pointer:coarse) and (max-width:1279px){
+  @container (min-width:30rem){.expense-row>input:first-child{grid-column:1/-1}}
+  @container (min-width:53rem) and (max-width:68rem){
+    .calculator form,.expense-row{grid-template-columns:minmax(0,1fr) minmax(12rem,1fr)}
+    .calculator form>label:first-child,.calculator form>button,.expense-row>button{grid-column:1/-1}
+  }
+}
+@media(max-width:480px){.expense-row>input:first-child{padding-left:.55rem;padding-right:.55rem}}
+/* Tablets táctiles grandes en horizontal: también dos columnas (más cómodas para tocar y sin texto cortado). */
+@media(pointer:coarse) and (min-width:1280px){
+  @container (min-width:30rem){.expense-row>input:first-child{grid-column:1/-1}}
+  @container (min-width:53rem) and (max-width:80rem){
+    .calculator form,.expense-row{grid-template-columns:minmax(0,1fr) minmax(12rem,1fr)}
+    .calculator form>label:first-child,.calculator form>button,.expense-row>button{grid-column:1/-1}
+  }
+}
+/* Barra de arriba en el celular: compacta (dos líneas) para que no ocupe media pantalla al quedar fija.
+   Arriba el nombre y Salir; abajo Exportar, Importar y el estado de sincronización con la cuenta. */
+@media(max-width:600px){
+  header{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:.45rem .6rem;padding:.55rem .8rem}
+  header .brand{grid-column:1;grid-row:1;font-size:1.45rem;line-height:1.1}
+  header .backup{display:contents}
+  header .backup>button{grid-column:2;grid-row:1;justify-self:end;width:auto;min-width:0;padding:.4rem .9rem;font-size:.9rem}
+  header .backup-actions{grid-column:1;grid-row:2;display:flex;gap:.4rem}
+  header .backup-actions button{flex:0 1 auto;padding:.4rem .75rem;font-size:.9rem}
+  header .account-summary{grid-column:2;grid-row:2;justify-self:end;text-align:right;padding:0;border:0;min-width:0;max-width:11rem}
+  header .sync-status{justify-content:flex-end;font-size:.75rem}
+  header .identity{display:block;font-size:.72rem;line-height:1.2;overflow-wrap:anywhere;-webkit-line-clamp:unset}
+}
+/* Celulares en horizontal (pantalla muy baja): la barra no queda fija arriba, así no tapa el contenido. */
+@media(pointer:coarse) and (max-height:520px) and (max-width:1279px) and (orientation:landscape){header{position:static}}
+/* Calendario fuera de la notebook (pantallas de menos de 1280px o táctiles), con lugar para texto (más de 700px):
+   cada tarea se lee entera (la celda crece si hace falta) y los días de la semana tienen un tamaño legible. */
+@media(min-width:701px) and (max-width:800px),(min-width:701px) and (orientation:portrait),(min-width:701px) and (pointer:coarse){
+  .cal-day{min-height:auto;overflow:visible}
+  .cal-chip{display:block;-webkit-line-clamp:none;white-space:normal;overflow:visible;overflow-wrap:break-word;hyphens:auto;font-size:clamp(.7rem,1.05vw,.86rem);line-height:1.2}
+  .cal-weekday{font-size:clamp(.66rem,1vw,.85rem);text-overflow:clip}
+}
+@media(min-width:701px) and (max-width:800px),(pointer:coarse) and (min-width:701px) and (max-width:999px),(orientation:portrait) and (min-width:701px) and (max-width:999px){.cal-weekday-full{display:none}.cal-weekday-short{display:inline}}
+/* Calendario en horizontal mediano: el meme va en su propia fila, centrado, apoyado sobre el encabezado azul,
+   y los íconos quedan en una sola fila. */
+@media(pointer:coarse) and (min-width:801px) and (max-width:1150px) and (orientation:landscape){
+  .cal-art-room{display:flex;grid-column:1/-1;grid-row:2;justify-content:center;align-items:flex-end;height:9rem;margin-bottom:calc(-1 * (var(--title-gap) + 1.1rem))}
+  .cal-art{position:relative;left:auto;bottom:auto;transform:none;max-height:100%;border-radius:10px 10px 0 0}
+  .cal-page .section-title>.section-objects{flex-wrap:nowrap}
+  .cal-page .section-objects--large{zoom:1}
+}
+@media(pointer:coarse) and (min-width:1001px) and (max-width:1150px){.cal-layout{grid-template-columns:1fr}.cal-day-panel{position:static;max-height:none}}
+/* Juegos en horizontal mediano: el meme va en su propia fila, centrado y entero, llegando hasta las tarjetas;
+   los íconos quedan en una sola fila al lado del título. */
+@media(pointer:coarse) and (min-width:801px) and (max-width:1279px) and (orientation:landscape){
+  .games-title>.section-objects{grid-column:2/-1;grid-row:1;justify-self:end;flex-wrap:nowrap}
+  .games-art{display:flex;justify-content:center;grid-column:1/-1;grid-row:2;height:11rem;margin-top:.6rem}
+  .games-art img{position:static;transform:none;max-height:100%;max-width:100%}
+}
+@media(pointer:coarse) and (min-width:801px) and (max-width:1100px) and (orientation:landscape){.games-title>.section-objects--large{zoom:1}}
+/* Juegos en pantallas bajas (celular en horizontal): el cartel de inicio siempre entra entero (si hace falta,
+   se desplaza adentro) y los controles táctiles son más bajos para dejarle lugar al juego. */
+.runner-overlay>div{max-height:100%;overflow-y:auto}
+@media(pointer:coarse) and (max-height:520px) and (max-width:1279px){
+  .runner{padding-top:.35rem;padding-bottom:.4rem;gap:.35rem}
+  .runner-overlay{padding:.4rem}
+  .runner-overlay>div{max-width:min(560px,100%);padding:.7rem 1rem}
+  .runner-overlay h2{font-size:1.25rem;margin-bottom:.3rem}
+  .runner-overlay p{font-size:.85rem;line-height:1.35;margin-bottom:.5rem}
+  .runner-overlay button{padding:.45rem 1.3rem;font-size:1rem}
+  .runner-pad button{min-height:44px;font-size:1.25rem}
+  .trepa .runner-pad button{min-height:44px}
+  .runner-pad .runner-jump{font-size:1.05rem}
+}
+/* Trepaluna: en pantallas bajas el medidor no tiene lugar para todas las etiquetas sin pisarse: se ve solo la barra. */
+@media(pointer:coarse) and (max-height:620px),(max-width:800px) and (max-height:620px){.trepa-meter-marks span:not(:first-child):not(:last-child){display:none}}
+/* Tiki-Taka: los países se acomodan solos según el ancho (nunca se salen de la pantalla) y los nombres largos
+   entran en dos líneas. */
+@media(max-width:800px),(orientation:portrait) and (max-width:1100px){
+  .tt-kits{grid-template-columns:repeat(auto-fill,minmax(4rem,1fr))}
+  .tt-kits button{min-width:0;font-size:min(.66rem,2.75vw);overflow-wrap:normal}
+}
+
+/* SkynetBall: el T-800 tira humanos en miniatura al tacho en la oficina de Skynet. */
+.bol{background:radial-gradient(ellipse at 50% 0,#3b0a0e 0,#09070c 70%)}
+.bol .runner-back{color:#ff6b6b}
+.bol h1{color:#fff;text-shadow:0 0 10px #ff2a2a}
+.bol-main{flex:1;min-height:0;display:flex;gap:.6rem}
+.bol .runner-stage{flex:1;min-width:0;cursor:crosshair}
+.bol .runner-stage canvas{border-radius:6px;box-shadow:0 0 0 2px #ff2a2a,0 0 24px #ff2a2a66,0 12px 30px #000a}
+.bol-side{flex:0 0 clamp(130px,13vw,190px);display:flex;flex-direction:column;justify-content:center;gap:.55rem;padding:.6rem;background:#0b0a10e6;border:2px solid #ff2a2a;border-radius:8px;box-shadow:0 0 18px #ff2a2a55,inset 0 0 18px #ff2a2a22}
+.bol-stat{display:flex;flex-direction:column;align-items:center;gap:.15rem;padding:.45rem .3rem;background:#16131c;border:1px solid #ff2a2a55;border-radius:6px;text-align:center}
+.bol-stat span{color:#ff8a8a;font:800 .7rem/1.15 "Courier New",monospace;text-transform:uppercase;letter-spacing:.1em}
+.bol-stat strong{font:900 clamp(1.3rem,2.2vw,2rem)/1 "Courier New",monospace;font-variant-numeric:tabular-nums;color:#fff;text-shadow:0 0 8px #ff2a2a}
+.bol-stat--points strong{color:#ff4d4d}
+.bol-stat--small strong{font-size:clamp(.8rem,1.2vw,1.05rem)}
+.bol-hurry strong{color:#ff2a2a;animation:trepa-pop .5s ease-out infinite alternate}
+.bol .runner-bar button{background:#b91c1c}
+.bol .runner-overlay>div{background:#0f0c14f2;border-color:#ff2a2a;color:#f1f5f9}
+.bol .runner-overlay h2{color:#ff4d4d}
+.bol .runner-overlay button{background:#b91c1c;color:#fff}
+.bol-toast{position:absolute;top:8%;left:50%;transform:translateX(-50%);max-width:90%;padding:.55rem 1.1rem;background:#0b0a10e6;border:2px solid #ff2a2a;border-radius:8px;color:#fff;font-weight:900;font-size:clamp(.95rem,2.4vw,1.3rem);text-align:center;white-space:nowrap;pointer-events:none;animation:trepa-pop .25s ease-out;box-shadow:0 0 18px #ff2a2a66}
+@media(max-width:800px),(orientation:portrait) and (max-width:1100px){
+  .bol-main{flex-direction:column;gap:.4rem}
+  .bol-side{flex:none;order:-1;flex-direction:row;padding:.3rem;gap:.3rem}
+  .bol-stat{flex:1;padding:.25rem .2rem}
+  .bol-stat span{font-size:.55rem}
+  .bol-stat strong{font-size:1.05rem}
+  .bol-toast{white-space:normal}
+}
