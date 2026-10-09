@@ -880,6 +880,7 @@ h2 .tt-trophy{width:clamp(56px,10vw,90px)}
    íconos, lo más grande que entra, centrada y llegando hasta un poquito antes de las tarjetas. */
 .games-title{--title-gap:1.4rem;margin-bottom:var(--title-gap)}
 .games-heading{align-self:start}
+.games-byline{margin:.35rem 0 0;font-size:.9rem;font-weight:700;letter-spacing:.08em;opacity:.8}
 .games-art{position:relative;pointer-events:none;user-select:none}
 .games-art img{position:absolute;left:50%;bottom:calc(-1 * var(--title-gap) + .5rem);transform:translateX(-50%);width:auto;height:auto;max-width:100%;max-height:calc(100% + var(--title-gap) - .5rem);border-radius:12px;box-shadow:0 8px 22px #000b}
 @media(min-width:801px) and (orientation:landscape),(min-width:1101px){

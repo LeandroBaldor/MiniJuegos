@@ -41,7 +41,7 @@ test('¡El piso es de lava!: se abre desde Juegos, corre el tiempo, la lava avis
   await expect(page.getByTestId('lava-time')).toHaveText(paused ?? '');
   await page.getByRole('button', { name: 'Seguir' }).first().click();
   await page.getByRole('link', { name: '‹ Juegos' }).click();
-  await expect(page.getByRole('heading', { name: 'Juegos', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'MiniJuegos', exact: true })).toBeVisible();
 });
 
 test('Ciudad Tiburón: se abre desde Juegos, corre el tiempo para atrás, cuenta rescatados y tiburones y se pausa', async ({ page }) => {
@@ -61,7 +61,7 @@ test('Ciudad Tiburón: se abre desde Juegos, corre el tiempo para atrás, cuenta
   await expect(page.getByTestId('tib-time')).toHaveText(paused ?? '');
   await page.getByRole('button', { name: 'Seguir' }).first().click();
   await page.getByRole('link', { name: '‹ Juegos' }).click();
-  await expect(page.getByRole('heading', { name: 'Juegos', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'MiniJuegos', exact: true })).toBeVisible();
 });
 
 test('SkynetBall: se abre desde Juegos, se juega por cuartos, se tira arrastrando el mouse, corre el tiempo y se pausa', async ({ page }) => {
@@ -83,12 +83,12 @@ test('SkynetBall: se abre desde Juegos, se juega por cuartos, se tira arrastrand
   await expect(page.getByTestId('bol-time')).toHaveText(paused ?? '');
   await page.getByRole('button', { name: 'Seguir' }).first().click();
   await page.getByRole('link', { name: '‹ Juegos' }).click();
-  await expect(page.getByRole('heading', { name: 'Juegos', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'MiniJuegos', exact: true })).toBeVisible();
 });
 
 test('la sección Juegos abre ¡Cuidado, bloques! y el juego suma puntos', async ({ page }) => {
   await page.goto('/MiniJuegos/');
-  await expect(page.getByRole('heading', { name: 'Juegos', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'MiniJuegos', exact: true })).toBeVisible();
   // Solo los juegos: sin encabezado, sin cuenta y sin los accesos a las otras secciones.
   await expect(page.locator('header')).toHaveCount(0);
   await expect(page.getByRole('navigation', { name: 'Ir a otras secciones' })).toHaveCount(0);
@@ -101,7 +101,7 @@ test('la sección Juegos abre ¡Cuidado, bloques! y el juego suma puntos', async
   await page.getByRole('button', { name: 'Seguir' }).first().click();
   await expect(page.getByTestId('runner-points')).not.toHaveText('0');
   await page.getByRole('link', { name: '‹ Juegos' }).click();
-  await expect(page.getByRole('heading', { name: 'Juegos', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'MiniJuegos', exact: true })).toBeVisible();
 });
 
 test('el Solitario 3.000 se abre desde Juegos, da vuelta cartas y deshace', async ({ page }) => {
@@ -119,7 +119,7 @@ test('el Solitario 3.000 se abre desde Juegos, da vuelta cartas y deshace', asyn
   await expect(page.getByTestId('solitaire-moves')).toHaveText('0');
   await expect(page.locator('.sol-waste .sol-card')).toHaveCount(0);
   await page.getByRole('link', { name: '‹ Juegos' }).click();
-  await expect(page.getByRole('heading', { name: 'Juegos', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'MiniJuegos', exact: true })).toBeVisible();
 });
 
 test('Tiki-Taka: se elige el país y el DT, arranca el partido y el rival sigue jugando', async ({ page }) => {
@@ -158,7 +158,7 @@ test('Trepaluna: se abre desde Juegos, corre el tiempo, muestra la altura y se p
   await expect(page.getByTestId('trepa-time')).toHaveText(paused ?? '');
   await page.getByRole('button', { name: 'Seguir' }).first().click();
   await page.getByRole('link', { name: '‹ Juegos' }).click();
-  await expect(page.getByRole('heading', { name: 'Juegos', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'MiniJuegos', exact: true })).toBeVisible();
 });
 
 test('Tiki-Taka: el Mundial arranca en octavos de final', async ({ page }) => {
@@ -182,7 +182,7 @@ test('¡Huye de la serpiente!: se abre desde Juegos, suma puntos con las bolitas
   await expect(page.getByRole('heading', { name: 'Pausa' })).toBeVisible();
   await page.getByRole('button', { name: 'Seguir' }).first().click();
   await page.getByRole('link', { name: '‹ Juegos' }).click();
-  await expect(page.getByRole('heading', { name: 'Juegos', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'MiniJuegos', exact: true })).toBeVisible();
 });
 
 // Diseño adaptable: en celulares y tablets (en vertical y en horizontal) ninguna sección se sale de la pantalla
