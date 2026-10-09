@@ -11,6 +11,13 @@ test('Juegos: las tarjetas van justo debajo del encabezado y el meme ocupa el lu
     expect(meme.x).toBeGreaterThanOrEqual(title.x + title.width);
     expect(cards.y - (title.y + title.height)).toBeLessThan(60);
   }
+  // El reloj va a la derecha del meme, del mismo tamaño y sin pisarlo.
+  const clock = (await page.locator('.games-clock').boundingBox())!;
+  expect(Math.abs(clock.width - meme.width)).toBeLessThanOrEqual(2);
+  expect(Math.abs(clock.height - meme.height)).toBeLessThanOrEqual(2);
+  expect(clock.x).toBeGreaterThanOrEqual(meme.x + meme.width);
+  expect(clock.y + clock.height).toBeLessThanOrEqual(cards.y);
+  await expect(page.locator('.games-clock')).toHaveAttribute('aria-label', /^Son las \d\d:\d\d$/);
 });
 
 test('Juegos: en pantallas anchas el meme queda centrado arriba de Tiki-Taka, en el medio de la pantalla', async ({ page }) => {
