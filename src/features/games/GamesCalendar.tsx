@@ -49,15 +49,15 @@ export function GamesCalendar() {
         </g>;
       })}
       {/* Día de la semana y las rayas. */}
-      <text x="420" y="240" textAnchor="middle" fill="#141010" className="games-calendar-weekday">{weekday}</text>
+      <text x="420" y="240" textAnchor="middle" fill="#0b0808" className="games-calendar-weekday">{weekday}</text>
       <path d="M80 285H232M608 285H760" stroke="#141010" strokeWidth="5" />
       <rect x="244" y="277" width="352" height="16" rx="3" fill="#dc2626" />
       {/* Número del día, una raya y el mes con el año. */}
-      <text x="250" y="575" textAnchor="middle" fill="#141010" className="games-calendar-day">{day}</text>
+      <text x="250" y="575" textAnchor="middle" fill="#0b0808" className="games-calendar-day">{day}</text>
       <path d="M462 330V590" stroke="#141010" strokeWidth="5" />
-      <text x="632" y="440" textAnchor="middle" fill="#141010" className="games-calendar-month"
+      <text x="632" y="440" textAnchor="middle" fill="#0b0808" className="games-calendar-month"
         textLength={Math.min(300, month.length * 44)} lengthAdjust="spacingAndGlyphs">{month}</text>
-      <text x="632" y="560" textAnchor="middle" fill="#141010" className="games-calendar-year"
+      <text x="632" y="560" textAnchor="middle" fill="#0b0808" className="games-calendar-year"
         textLength="230" lengthAdjust="spacingAndGlyphs">{year}</text>
     </svg>
   </div>;

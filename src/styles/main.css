@@ -893,7 +893,8 @@ h2 .tt-trophy{width:clamp(56px,10vw,90px)}
 .games-clock svg,.games-calendar svg{display:block;width:100%;height:100%}
 .games-clock-time{font:800 220px system-ui,"Segoe UI",Roboto,sans-serif;font-variant-numeric:tabular-nums}
 /* Calendario entre el meme y el reloj: mismo alto, más angosto (840 × 666). */
-.games-calendar{aspect-ratio:840/666}
+.games-calendar{aspect-ratio:840/666;text-shadow:none}
+.games-calendar text{text-rendering:geometricPrecision}
 .games-calendar-weekday{font:700 120px Georgia,"Times New Roman",serif}
 .games-calendar-day{font:900 290px Impact,"Arial Black","Roboto Condensed",system-ui,sans-serif}
 .games-calendar-month{font:900 92px Impact,"Arial Narrow","Roboto Condensed",system-ui,sans-serif}
