@@ -4,7 +4,8 @@ test('Juegos: las tarjetas van justo debajo del encabezado y el meme ocupa el lu
   await page.goto('/MiniJuegos/#/juegos');
   const meme = (await page.locator('.games-art img').boundingBox())!;
   const cards = (await page.locator('.games-list').boundingBox())!;
-  const title = (await page.locator('.games-title h1').boundingBox())!;
+  // El encabezado es el recuadro negro con el título, la bajada y la firma.
+  const title = (await page.locator('.games-heading').boundingBox())!;
   expect(meme.width).toBeGreaterThan(80);
   expect(meme.y + meme.height).toBeLessThanOrEqual(cards.y);
   if (page.viewportSize()!.width > 800) {
