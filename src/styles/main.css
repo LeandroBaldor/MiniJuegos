@@ -1173,7 +1173,9 @@ body::after{inset:0;background:repeating-linear-gradient(0deg,#ffffff07 0 1px,tr
 /* El título con brillo neón para que combine con el fondo. */
 .games-title{text-shadow:0 2px 3px #000}
 /* Título, bajada y firma adentro de un recuadro negro: la bajada en celeste, "MiniJuegos" en blanco y la firma en violeta. */
-.games-heading{background:#000;border:2px solid #39ff1455;border-radius:14px;padding:.7rem 1.1rem .8rem;box-shadow:0 0 18px #39ff1426,0 8px 22px #000b}
+/* Contorno neón en el verde más claro del fondo (el de los hexágonos encendidos), con un destello que se
+   desvanece hacia afuera. */
+.games-heading{background:#000;border:3px solid #39ff14;border-radius:14px;padding:.7rem 1.1rem .8rem;box-shadow:0 0 4px #39ff14,0 0 12px #39ff14cc,0 0 26px #39ff1488,0 0 48px #39ff1444,inset 0 0 10px #39ff1440}
 .games-title h1{color:#fff;text-shadow:0 0 12px #ffffff55}
 .games-title .eyebrow{color:#38bdf8}
 .games-byline{color:#a855f7}
