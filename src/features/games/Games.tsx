@@ -16,6 +16,8 @@ import { readSnakeRecord } from './ReverseSnake';
 import { formatLavaTime, readLavaRecord } from './LavaFloor';
 import { readPaperRecord } from './PaperBall';
 import { formatSharkTime, readSharkRecord } from './SharkCity';
+import { GamesCalendar } from './GamesCalendar';
+import { GamesClock } from './GamesClock';
 import memeJigsaw from '../../assets/images/meme-jigsaw.jpg';
 
 // Portadas de las tarjetas: una captura de cada juego en plena acción.
@@ -37,7 +39,7 @@ export function Games() {
   return <section className="games-page">
     <div className="section-title games-title">
       <div className="games-heading"><p className="eyebrow">Para cortar un rato</p><h1>MiniJuegos</h1><p className="games-byline">By YEYO</p></div>
-      <div className="games-art" aria-hidden="true"><img src={memeJigsaw} alt="" width={1200} height={666} draggable={false} /></div>
+      <div className="games-art" aria-hidden="true"><img src={memeJigsaw} alt="" width={1200} height={666} draggable={false} /><GamesCalendar /><GamesClock /></div>
     </div>
     <ul className="games-list">
       <li>
