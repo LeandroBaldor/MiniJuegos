@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BACK_IMAGE, CARD_H, CARD_W, cardImage, SUIT_PATHS, suitColor } from './futureCards';
+import { playBell, playCardFlip, playCardZap, playShuffle, playStart, playWinFanfare, preloadSolitaireSounds, unlockSounds } from './sounds';
+import { EndBanner } from './EndBanner';
 import { bestTarget, canFinish, canMove, cardName, deal, draw, finalScore, finishStep, isWon, liveScore, move, picked, SUITS, timeBonus, type Card, type From, type Solitaire, type To } from './solitaire';
 
 const RECORD_KEY = 'escritorio-personal-juegos:solitario-record';
@@ -83,6 +85,7 @@ export function PixelSolitaire() {
   const [drag, setDrag] = useState<Drag | null>(null);
   const [shake, setShake] = useState<string | null>(null);
   const [finishing, setFinishing] = useState(false);
+  const [paused, setPaused] = useState(false);
   const [record, setRecord] = useState(readSolitaireRecord);
   const [newRecord, setNewRecord] = useState(false);
   const [pop, setPop] = useState<{ text: string; good: boolean; id: number } | null>(null);
@@ -110,9 +113,18 @@ export function PixelSolitaire() {
   }, []);
 
   useEffect(() => {
-    if (!started || won) return;
+    if (!started || won || paused) return;
     const id = setInterval(() => setSeconds(s => s + 1), 1000);
     return () => clearInterval(id);
+  }, [started, won, paused]);
+
+  // Pausa con la P (o Escape): el reloj se frena y el tablero queda tapado.
+  useEffect(() => {
+    const down = (event: KeyboardEvent) => {
+      if ((event.key === 'p' || event.key === 'P' || event.key === 'Escape') && started && !won) setPaused(v => !v);
+    };
+    window.addEventListener('keydown', down);
+    return () => window.removeEventListener('keydown', down);
   }, [started, won]);
 
   useEffect(() => {
@@ -135,6 +147,10 @@ export function PixelSolitaire() {
 
   const commit = useCallback((next: Solitaire | null, to?: To) => {
     if (!next) return false;
+    unlockSounds(); preloadSolitaireSounds();
+    // Sonidos: un as que llega a las bases suena como una campana; una carta sobre otra, un chispazo.
+    if (to?.kind === 'foundation' && next.foundations[to.pile].length === 1) playBell();
+    else if (to) playCardZap();
     // Destello eléctrico verde donde cayó la carta.
     if (to) setZap({ pile: `${to.kind === 'foundation' ? 'f' : 't'}${to.pile}`, id: Date.now() });
     // Cartelito con los puntos de la jugada (y festejo si se completó un palo).
@@ -151,6 +167,7 @@ export function PixelSolitaire() {
     if (!won || !started) return;
     const best = readSolitaireRecord();
     const score = finalScore(game, seconds);
+    playWinFanfare();
     if (!best || best.score === undefined || score > best.score) { const value = { seconds, moves: game.moves, score }; saveRecord(value); setRecord(value); setNewRecord(true); }
   }, [won]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -162,7 +179,7 @@ export function PixelSolitaire() {
     return () => clearTimeout(id);
   }, [finishing, game, won]);
 
-  const restart = () => { setGame(deal()); setHistory([]); setSeconds(0); setStarted(false); setFinishing(false); setNewRecord(false); };
+  const restart = () => { playStart(); setPaused(false); setGame(deal()); setHistory([]); setSeconds(0); setStarted(false); setFinishing(false); setNewRecord(false); };
   const undo = () => { if (!history.length || finishing) return; setGame(history[history.length - 1]); setHistory(h => h.slice(0, -1)); };
 
   // Tocar una carta (sin arrastrarla) la manda sola a su lugar; si no tiene adónde ir, tiembla.
@@ -231,13 +248,14 @@ export function PixelSolitaire() {
         <span>Movimientos <strong data-testid="solitaire-moves">{game.moves}</strong></span>
         {record && <span>Récord <strong>{record.score !== undefined ? `${record.score} pts` : clock(record.seconds)}</strong></span>}
       </div>
+      {started && !won && <button type="button" onClick={() => setPaused(v => !v)}>{paused ? 'Seguir' : 'Pausa'}</button>}
       <button type="button" onClick={undo} disabled={!history.length || finishing}>Deshacer</button>
       <button type="button" onClick={restart}>Nueva partida</button>
     </div>
     <div ref={boardRef} onPointerMove={onMove} onPointerUp={endDrag} onPointerCancel={() => setDrag(null)}
       className="sol-board" style={{ '--cw': `${cw}px`, '--ch': `${ch}px`, '--gap': `${gap}px` } as React.CSSProperties}>
       <div className="sol-top">
-        <button type="button" className={`sol-slot sol-stock${game.stock.length ? '' : ' sol-slot--empty'}`} onClick={() => !finishing && commit(draw(game))}
+        <button type="button" className={`sol-slot sol-stock${game.stock.length ? '' : ' sol-slot--empty'}`} onClick={() => { if (finishing) return; unlockSounds(); preloadSolitaireSounds(); if (game.stock.length) playCardFlip(); else if (game.waste.length) playShuffle(); commit(draw(game)); }}
           aria-label={game.stock.length ? `Mazo: ${game.stock.length} cartas, dar vuelta una` : 'Volver a armar el mazo'}>
           {game.stock.length ? <span className="sol-card sol-card--back" aria-hidden="true"><CardBack /></span> : <span className="sol-redo" aria-hidden="true">↻</span>}
           {game.stock.length > 0 && <small className="sol-count" aria-hidden="true">{game.stock.length}</small>}
@@ -276,12 +294,18 @@ export function PixelSolitaire() {
       </div>
       {pop && <div key={pop.id} className={`sol-pop${pop.good ? '' : ' sol-pop--bad'}`} aria-live="polite">{pop.text}</div>}
       {canFinish(game) && !finishing && <button type="button" className="sol-finish" onClick={() => setFinishing(true)}>Terminar solo ▶</button>}
+      {paused && !won && <div className="runner-overlay" role="dialog" aria-labelledby="sol-paused">
+        <div>
+          <h2 id="sol-paused">Pausa</h2>
+          <button type="button" onClick={() => setPaused(false)} autoFocus>Seguir</button>
+        </div>
+      </div>}
       {won && <div className="runner-overlay" role="dialog" aria-labelledby="sol-won">
         <div className="sol-confetti" aria-hidden="true">
           {Array.from({ length: 28 }, (_, i) => <span key={i} style={{ left: `${(i * 37) % 100}%`, animationDelay: `${(i % 7) * 0.25}s`, animationDuration: `${2.4 + (i % 5) * 0.4}s` }}><NeonSuit suit={SUITS[i % 4]} /></span>)}
         </div>
         <div>
-          <h2 id="sol-won">¡GANASTE!</h2>
+          <EndBanner win id="sol-won" />
           <p>Lo terminaste en <strong>{clock(seconds)}</strong> con <strong>{game.moves}</strong> movimientos.</p>
           <p className="sol-total">Jugadas <strong>{liveScore(game, seconds)}</strong> + Premio por velocidad <strong>{timeBonus(seconds)}</strong> = <strong>{finalScore(game, seconds)} puntos</strong>{newRecord && ' ¡Nuevo récord!'}</p>
           <button type="button" onClick={restart} autoFocus>Jugar de nuevo</button>

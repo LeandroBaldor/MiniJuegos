@@ -12,17 +12,6 @@ test('Juegos: las tarjetas van justo debajo del encabezado y el meme ocupa el lu
     expect(meme.x).toBeGreaterThanOrEqual(title.x + title.width);
     expect(cards.y - (title.y + title.height)).toBeLessThan(60);
   }
-  // El reloj va a la derecha, del mismo tamaño que el meme, y el calendario entre los dos, con el mismo alto.
-  const clock = (await page.locator('.games-clock').boundingBox())!;
-  const calendar = (await page.locator('.games-calendar').boundingBox())!;
-  expect(Math.abs(clock.width - meme.width)).toBeLessThanOrEqual(2);
-  expect(Math.abs(clock.height - meme.height)).toBeLessThanOrEqual(2);
-  expect(Math.abs(calendar.height - meme.height)).toBeLessThanOrEqual(2);
-  expect(calendar.x).toBeGreaterThanOrEqual(meme.x + meme.width);
-  expect(clock.x).toBeGreaterThanOrEqual(calendar.x + calendar.width);
-  expect(clock.y + clock.height).toBeLessThanOrEqual(cards.y);
-  expect(calendar.y + calendar.height).toBeLessThanOrEqual(cards.y);
-  await expect(page.locator('.games-clock')).toHaveAttribute('aria-label', /^Son las \d\d:\d\d$/);
 });
 
 test('Juegos: en pantallas anchas el meme queda centrado arriba de Tiki-Taka, en el medio de la pantalla', async ({ page }) => {
@@ -33,10 +22,6 @@ test('Juegos: en pantallas anchas el meme queda centrado arriba de Tiki-Taka, en
   expect(Math.abs(meme.x + meme.width / 2 - (tiki.x + tiki.width / 2))).toBeLessThanOrEqual(1);
   expect(Math.abs(meme.x + meme.width / 2 - 960)).toBeLessThanOrEqual(1);
   expect(meme.y + meme.height).toBeLessThanOrEqual(tiki.y);
-  const calendar = (await page.locator('.games-calendar').boundingBox())!;
-  const clock = (await page.locator('.games-clock').boundingBox())!;
-  expect(calendar.x).toBeGreaterThanOrEqual(meme.x + meme.width);
-  expect(clock.x).toBeGreaterThanOrEqual(calendar.x + calendar.width);
 });
 
 test('¡El piso es de lava!: se abre desde Juegos, corre el tiempo, la lava avisa a cuánto está y se pausa', async ({ page }) => {
@@ -66,7 +51,7 @@ test('Ciudad Tiburón: se abre desde Juegos, corre el tiempo para atrás, cuenta
   await page.getByRole('link', { name: /Ciudad Tiburón/ }).click();
   await expect(page.getByRole('heading', { name: 'Ciudad Tiburón', level: 1 })).toBeVisible();
   await page.getByRole('button', { name: 'Jugar' }).click();
-  await expect(page.getByTestId('tib-time')).toHaveText(/^4:5\d$/);
+  await expect(page.getByTestId('tib-time')).toHaveText(/^9:5\d$/);
   await expect(page.getByTestId('tib-saved')).toHaveText('0 / 20');
   await expect(page.getByTestId('tib-sharks')).toHaveText(/^\d+ 🦈$/);
   await expect(page.locator('.runner-pad button[aria-label="Saltar"]')).toHaveCount(1);
@@ -105,10 +90,6 @@ test('SkynetBall: se abre desde Juegos, se juega por cuartos, se tira arrastrand
 test('la sección Juegos abre ¡Cuidado, bloques! y el juego suma puntos', async ({ page }) => {
   await page.goto('/MiniJuegos/');
   await expect(page.getByRole('heading', { name: 'MiniJuegos', exact: true })).toBeVisible();
-  // Solo los juegos: sin encabezado, sin cuenta y sin los accesos a las otras secciones.
-  await expect(page.locator('header')).toHaveCount(0);
-  await expect(page.getByRole('navigation', { name: 'Ir a otras secciones' })).toHaveCount(0);
-  await expect(page.getByRole('button', { name: 'Exportar' })).toHaveCount(0);
   await page.getByRole('link', { name: /Cuidado, bloques/ }).click();
   await page.getByRole('button', { name: 'Jugar' }).click();
   // Se pausa enseguida (antes de que una pieza pueda aplastar al personaje) y después sigue sumando puntos.

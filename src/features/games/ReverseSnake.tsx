@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { level, newGame, score, step, takeEvents, type Dir, type Game } from './reverseSnake';
+import { playAppleStep, playGameOver, playSnakeEat, playStart } from './sounds';
+import { EndBanner } from './EndBanner';
 
 const RECORD_KEY = 'escritorio-personal-juegos:serpiente-record';
 export const readSnakeRecord = () => { try { return Number(localStorage.getItem(RECORD_KEY)) || 0; } catch { return 0; } };
@@ -222,6 +224,7 @@ export function ReverseSnake() {
   }, []);
 
   const start = useCallback(() => {
+    playStart();
     const stage = stageRef.current;
     if (!stage) return;
     const { cols, rows } = gridFor(stage.clientWidth, stage.clientHeight);
@@ -253,8 +256,12 @@ export function ReverseSnake() {
       if (!g) return;
       const dt = Math.max(0, Math.min(0.05, (now - last) / 1000));
       last = now;
+      const ax = g.apple.x, ay = g.apple.y;
       step(g, { dir: held.current[held.current.length - 1] ?? null }, dt);
+      // Sonido: los pasitos de la manzana.
+      if (g.apple.x !== ax || g.apple.y !== ay) playAppleStep();
       for (const e of takeEvents(g)) {
+        if (e.type === 'ate' || e.type === 'caught') playSnakeEat();
         if (e.type === 'tangled') setToast({ text: '¡La serpiente se enredó! +300', id: now });
         if (e.type === 'cleared') setToast({ text: '¡Limpiaste el jardín! +200', id: now });
         if (e.type === 'ate') setToast({ text: '🍏 La serpiente se comió una manzana verde y creció', id: now });
@@ -265,7 +272,7 @@ export function ReverseSnake() {
       setHud(p => p.points === shown.points && p.length === shown.length && p.seconds === shown.seconds ? p : shown);
       if (g.over) {
         if (shown.points > readSnakeRecord()) { saveRecord(shown.points); setRecord(shown.points); setNewRecord(true); }
-        setStatus('over');
+        setStatus('over'); playGameOver();
         return;
       }
       frame = requestAnimationFrame(tick);
@@ -340,7 +347,8 @@ export function ReverseSnake() {
             <button type="button" onClick={() => setStatus('playing')} autoFocus>Seguir</button>
           </>}
           {status === 'over' && <>
-            <h2 id="snk-message">¡Te comieron! 🐍</h2>
+            <EndBanner win={false} id="snk-message" />
+            <p className="end-reason">¡Te comieron! 🐍</p>
             <p>Aguantaste <strong>{clock(hud.seconds)}</strong> e hiciste <strong>{hud.points}</strong> puntos. La serpiente llegó a medir {hud.length}.{newRecord && ' ¡Nuevo récord!'}</p>
             <button type="button" onClick={start} autoFocus>Jugar de nuevo</button>
           </>}

@@ -29,7 +29,7 @@ export const BOUNCE = 16; // el toldo te tira para arriba (unas 4,3 unidades)
 export const ZIP_SPEED = 7, HANG = 1.05;
 export const WATER_Y = -0.45; // nadando, los pies quedan a esta altura
 export const FLOAT_Y = 0.15; // arriba de las cosas que flotan
-export const TIME_LIMIT = 300, GOAL = 20;
+export const TIME_LIMIT = 600, GOAL = 20;
 export const WIND = 1.6, WIND_AIR = 2.8; // lo que te empuja el viento fuerte, parado y en el aire (unidades por segundo)
 export const WIND_TURN = 7, WIND_CALM = 1.5; // cada 7 s cambia de lado; al cambiar hay un rato de calma
 export const WIND_DRIFT = 0.7; // lo que el viento empuja a las cosas que flotan
@@ -91,24 +91,35 @@ export interface Shark {
   id: number; type: SharkType; lane: number; x: number; dir: 1 | -1;
   state: 'patrol' | 'approach' | 'warn' | 'jump' | 'chase' | 'bite';
   t: number; y: number; vy: number; vx: number; target: number; hunger: number; rest: number; turn: number; born: number;
+  ate?: boolean; // en este salto ya agarró a alguien (cierra la boca)
 }
 export const PLAYER_TARGET = -1;
+// Tiburones voladores: cuelgan de un arnés con un motor y una hélice de helicóptero. Patrullan el cielo arriba
+// del bombero; cuando lo ven se frenan, avisan (luz roja y la hélice que acelera) y se tiran en picada. Si lo
+// agarran se lo llevan volando. Adentro de un edificio no te ven.
+export interface Flyer { id: number; type: SharkType; x: number; y: number; dir: 1 | -1; state: 'cruise' | 'warn' | 'dive' | 'climb' | 'carry'; t: number; vx: number; vy: number; cool: number; dist: number }
+export const FLYER_LEN = 2.4, FLY_SPEED = 3.2, FLY_DIVE = 10, FLY_WARN = 1.3, FLY_SIGHT = 7;
+export const FLYER_SIZE: Record<SharkType, number> = { blanco: 1, martillo: 0.95, ballena: 1.3 };
+export const flyerLen = (f: Flyer) => FLYER_LEN * FLYER_SIZE[f.type];
+export const flyersAt = (t: number) => t < 25 ? 0 : t < 80 ? 1 : t < 150 ? 2 : 3;
+export const flyerMouth = (f: Flyer) => { const len = flyerLen(f), sp = Math.hypot(f.vx, f.vy) || 1, k = f.state === 'dive' || f.state === 'carry' ? 1 : 0; return { x: f.x + (k ? (f.vx / sp) * len * 0.45 : f.dir * len * 0.45), y: f.y + (k ? (f.vy / sp) * len * 0.45 : -len * 0.03) }; };
 
 // `inside`: el edificio donde estás adentro (en un departamento). `zipT` y `zipFrom`: para colgarse de a poco.
 export interface Player { x: number; y: number; vx: number; vy: number; facing: 1 | -1; ground: Plat | null; climb: Climb | null; zip: Zip | null; swimming: boolean; climbCooldown: number; coyote: number; inside: number | null; zipT: number; zipFrom: number; fling: number }
 export interface Input { left: boolean; right: boolean; jump: boolean; down: boolean; up: boolean }
-export type LoseReason = 'shark' | 'time';
+export type LoseReason = 'shark' | 'flyer' | 'time';
 export type SharkEvent =
   | { type: 'jump' } | { type: 'splash' } | { type: 'bounce' } | { type: 'zip' }
-  | { type: 'saved'; kind: RescueKind; count: number } | { type: 'taken'; kind: RescueKind }
+  | { type: 'saved'; kind: RescueKind; count: number } | { type: 'taken'; kind: RescueKind; x: number }
   | { type: 'sharkJump' } | { type: 'more'; count: number } | { type: 'newType'; shark: SharkType }
   | { type: 'wind'; dir: 1 | -1 } | { type: 'hurry'; left: number } | { type: 'enter' }
   | { type: 'galeWarn'; dir: 1 | -1 } | { type: 'gale'; dir: 1 | -1 }
+  | { type: 'flyerNew' } | { type: 'flyerWarn' } | { type: 'flyerDive' }
   | { type: 'lose'; reason: LoseReason } | { type: 'gameover' } | { type: 'win' };
 
 export interface City { width: number; blocks: Block[]; lanes: Lane[]; plats: Plat[]; climbs: Climb[]; zips: Zip[]; walls: Wall[]; debris: Debris[]; decor: Decor[]; startX: number; startY: number }
 export interface SharkGame extends City {
-  time: number; saved: number; savedKinds: RescueKind[]; rescues: Rescue[]; sharks: Shark[]; player: Player;
+  time: number; saved: number; savedKinds: RescueKind[]; rescues: Rescue[]; sharks: Shark[]; flyers: Flyer[]; player: Player;
   dying: { t: number; reason: LoseReason; shark: number } | null; over: boolean; won: boolean; events: SharkEvent[];
   rand: () => number; nextId: number; seen: Set<SharkType>; hurried: number; gust: number; windPower: number; fx: Fx[];
   gale: Gale;
@@ -266,7 +277,7 @@ export function newShark(seed?: number): SharkGame {
   const city = buildCity();
   const rand = rng(seed ?? Math.floor(Math.random() * 2 ** 31));
   const g: SharkGame = {
-    ...city, time: 0, saved: 0, savedKinds: [], rescues: [], sharks: [], dying: null, over: false, won: false, events: [],
+    ...city, time: 0, saved: 0, savedKinds: [], rescues: [], sharks: [], flyers: [], dying: null, over: false, won: false, events: [],
     rand, nextId: 10000, seen: new Set(), hurried: 0, gust: 0, windPower: 1, fx: [], gale: { warnAt: 0, start: 0, end: 0, dir: 1, told: 0 },
     player: { x: city.startX, y: city.startY, vx: 0, vy: 0, facing: 1, ground: city.plats.find(p => p.kind === 'roof' && p.y === city.startY && p.x < city.startX && p.x + p.w > city.startX) ?? null, climb: null, zip: null, swimming: false, climbCooldown: 0, coyote: 0, inside: null, zipT: 0, zipFrom: 0, fling: 0 },
   };
@@ -374,6 +385,8 @@ function lose(g: SharkGame, reason: LoseReason, shark = -1) {
   const p = g.player;
   g.dying = { t: 0, reason, shark };
   p.climb = null; p.zip = null; p.vx = 0; p.ground = null;
+  const f = g.flyers.find(k => k.id === shark);
+  if (f) { f.state = 'carry'; f.t = 0; }
   const s = g.sharks.find(k => k.id === shark);
   if (s) {
     if (s.y < 0) addFx(g, 'splash', s.x, sharkLen(s) * 0.45);
@@ -404,6 +417,14 @@ export function step(g: SharkGame, input: Input, dt: number) {
       p.x += (m.x - p.x) * k; p.y += (m.y - PLAYER_H * 0.5 - p.y) * k; p.swimming = false;
       if (before < CHOMP && g.dying.t >= CHOMP) { addFx(g, 'blood', m.x, 3, m.y); addFx(g, 'blood', m.x, 2.4, Math.max(0, m.y - 0.6)); } // cierra la boca
       if (wasUp && s.y <= 0) { g.events.push({ type: 'splash' }); addFx(g, 'splash', s.x, sharkLen(s) * 0.5); addFx(g, 'blood', s.x, 3.5); }
+    }
+    const f = g.flyers.find(k => k.id === g.dying!.shark);
+    if (f) {
+      // El tiburón volador cierra la boca y se va para arriba con el bombero.
+      f.vx = f.dir * FLY_SPEED * 0.8; f.vy = Math.min(6, f.vy + 14 * dt); f.x += f.vx * dt; f.y += f.vy * dt;
+      const m = flyerMouth(f), k = g.dying.t < CHOMP ? Math.min(1, dt * 16) : 1;
+      p.x += (m.x - p.x) * k; p.y += (m.y - PLAYER_H * 0.5 - p.y) * k; p.swimming = false;
+      if (before < CHOMP && g.dying.t >= CHOMP) addFx(g, 'blood', m.x, 1.1, m.y);
     }
     if (g.dying.t > DIE_T) { g.over = true; g.events.push({ type: 'gameover' }); }
     return;
@@ -442,6 +463,7 @@ export function step(g: SharkGame, input: Input, dt: number) {
   movePlayer(g, input, dt, t);
   rescue(g);
   sharks(g, dt);
+  flyers(g, dt);
 
   // Llegan más tiburones con el tiempo; los rescatados (o los que se llevaron) se reponen.
   const want = sharksAt(t);
@@ -587,6 +609,19 @@ export function sharkPose(s: Shark) {
   const dir: 1 | -1 = out ? (s.vx > 0.05 ? 1 : s.vx < -0.05 ? -1 : s.dir) : s.dir;
   return { dir, a: out ? Math.atan2(s.vy, 4) * 0.9 : 0 };
 }
+// La boca: nadando la tienen cerrada. Cuando saltan del agua para atacar la abren y, al agarrar a alguien, la
+// cierran de golpe (se lo comen); si no agarraron a nadie, la cierran al caer de vuelta al agua.
+export const CLOSE_VY = -3;
+export function mouthOpen(s: Shark, g: SharkGame) {
+  if (s.state === 'bite') return !(g.dying && g.dying.shark === s.id && g.dying.t >= CHOMP);
+  if (s.state === 'jump') return !s.ate && s.vy > CLOSE_VY;
+  return false;
+}
+// Los tiburones voladores abren la boca cuando se tiran en picada y la cierran al agarrar al bombero.
+export function flyerMouthOpen(f: Flyer, g: SharkGame) {
+  if (f.state === 'carry') return !(g.dying && g.dying.shark === f.id && g.dying.t >= CHOMP);
+  return f.state === 'dive';
+}
 // Dónde está la boca (en el medio de las mandíbulas).
 export function sharkMouth(s: Shark) {
   const L = sharkLen(s), { dir, a } = sharkPose(s), [along, down] = SHARKS[s.type].mouth.map(f => f * L);
@@ -613,9 +648,9 @@ function sharks(g: SharkGame, dt: number) {
       if (!g.dying && p.inside === null && p.x + PLAYER_W / 2 > box.x1 && p.x - PLAYER_W / 2 < box.x2 && p.y < box.y2 && p.y + PLAYER_H > box.y1) { s.state = 'bite'; lose(g, 'shark', s.id); return; }
       for (const r of g.rescues) {
         if (r.state !== 'drift') continue;
-        if (Math.abs(rescueX(r) - s.x) < 0.3 * L && box.y2 > FLOAT_Y) { r.state = 'taken'; r.at = g.time; r.fromX = rescueX(r); r.fromY = FLOAT_Y; removePlat(g, r.plat); g.events.push({ type: 'taken', kind: r.kind }); addFx(g, 'blood', r.fromX, r.kind === 'persona' ? 2.6 : 2, FLOAT_Y + 0.3); }
+        if (Math.abs(rescueX(r) - s.x) < 0.3 * L && box.y2 > FLOAT_Y) { r.state = 'taken'; r.at = g.time; r.fromX = rescueX(r); r.fromY = FLOAT_Y; removePlat(g, r.plat); s.ate = true; g.events.push({ type: 'taken', kind: r.kind, x: r.fromX }); addFx(g, 'blood', r.fromX, r.kind === 'persona' ? 2.6 : 2, FLOAT_Y + 0.3); }
       }
-      if (s.y <= swimY(s) && s.vy < 0) { s.y = swimY(s); s.vy = 0; s.state = 'patrol'; s.rest = SHARK_REST; s.target = 0; g.events.push({ type: 'splash' }); addFx(g, 'splash', s.x, L * 0.5); }
+      if (s.y <= swimY(s) && s.vy < 0) { s.y = swimY(s); s.vy = 0; s.ate = false; s.state = 'patrol'; s.rest = SHARK_REST; s.target = 0; g.events.push({ type: 'splash' }); addFx(g, 'splash', s.x, L * 0.5); }
       continue;
     }
     const prey = s.target === PLAYER_TARGET ? null : g.rescues.find(r => r.id === s.target && r.state === 'drift');
@@ -669,3 +704,49 @@ function sharks(g: SharkGame, dt: number) {
 export const takeEvents = (g: SharkGame) => g.events.splice(0);
 export const timeLeft = (g: SharkGame) => Math.max(0, TIME_LIMIT - g.time);
 export { laneOf };
+
+// ---------- Tiburones voladores ----------
+function addFlyer(g: SharkGame) {
+  const p = g.player, side = g.rand() < 0.5 ? -1 : 1;
+  const x = Math.max(2, Math.min(g.width - 2, p.x + side * (16 + g.rand() * 6)));
+  const type = pick(g.rand, ['blanco', 'martillo', 'blanco', 'ballena'] as const);
+  g.flyers.push({ id: g.nextId++, type, x, y: Math.max(6, p.y + 4.3), dir: -side as 1 | -1, state: 'cruise', t: 0, vx: 0, vy: 0, cool: 3, dist: 0 });
+  g.events.push({ type: 'flyerNew' });
+}
+function flyers(g: SharkGame, dt: number) {
+  const p = g.player;
+  if (g.flyers.length < flyersAt(g.time)) addFlyer(g);
+  const cruiseY = Math.max(6, p.y + 4.3);
+  for (const f of g.flyers) {
+    f.cool = Math.max(0, f.cool - dt);
+    if (f.state === 'cruise') {
+      // Patrulla de un lado al otro de la ciudad, a cierta altura arriba del bombero.
+      f.vx = f.dir * FLY_SPEED;
+      if (f.x < 2) f.dir = 1; else if (f.x > g.width - 2) f.dir = -1;
+      f.vy = Math.max(-2, Math.min(2, (cruiseY - f.y) * 1.5));
+      const dx = p.x - f.x;
+      if (!f.cool && p.inside === null && Math.abs(dx) < FLY_SIGHT && f.y > p.y + 2 && !g.flyers.some(o => o !== f && (o.state === 'warn' || o.state === 'dive'))) {
+        f.state = 'warn'; f.t = FLY_WARN; f.dir = dx >= 0 ? 1 : -1; g.events.push({ type: 'flyerWarn' });
+      }
+    } else if (f.state === 'warn') {
+      // Se frena arriba del bombero y lo apunta.
+      f.vx *= Math.max(0, 1 - dt * 4); f.vy = 0; f.t -= dt;
+      f.dir = p.x >= f.x ? 1 : -1;
+      if (p.inside !== null) { f.state = 'cruise'; f.cool = 2; } // se metió en un edificio: lo pierde de vista
+      else if (f.t <= 0) {
+        const tx = p.x + p.vx * 0.25, ty = p.y + PLAYER_H * 0.5, d = Math.hypot(tx - f.x, ty - f.y) || 1;
+        f.state = 'dive'; f.vx = ((tx - f.x) / d) * FLY_DIVE; f.vy = ((ty - f.y) / d) * FLY_DIVE; f.dist = d + 1.5; f.dir = f.vx >= 0 ? 1 : -1;
+        g.events.push({ type: 'flyerDive' });
+      }
+    } else if (f.state === 'dive') {
+      f.dist -= FLY_DIVE * dt;
+      const m = flyerMouth(f);
+      if (p.inside === null && Math.abs(m.x - p.x) < PLAYER_W / 2 + 0.3 && m.y > p.y - 0.2 && m.y < p.y + PLAYER_H + 0.2) { lose(g, 'flyer', f.id); return; }
+      if (f.dist <= 0 || f.y < -0.3) { f.state = 'climb'; f.vy = 4; f.vx = f.dir * FLY_SPEED; f.cool = 4 + g.rand() * 3; }
+    } else if (f.state === 'climb') {
+      f.vx = f.dir * FLY_SPEED; f.vy = 4;
+      if (f.y >= cruiseY) f.state = 'cruise';
+    }
+    f.x += f.vx * dt; f.y += f.vy * dt;
+  }
+}
