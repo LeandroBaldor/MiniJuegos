@@ -1180,3 +1180,10 @@ body::after{inset:0;background:repeating-linear-gradient(0deg,#ffffff07 0 1px,tr
 .games-title .eyebrow{color:#38bdf8}
 .games-byline{color:#a855f7}
 .games-art{text-shadow:none}
+/* Encabezado fijo arriba al bajar: cartel, meme, calendario y hora sobre un verde oscuro transparente que deja
+   ver un poco los hexágonos (desenfocados). Ocupa todo el ancho, por encima del relleno de main. El relleno de abajo
+   es --title-gap, así el meme, el calendario y el reloj (que bajan hasta ese espacio) quedan adentro. */
+.games-title{--main-pad:clamp(1rem,2.5vw,2.5rem);position:sticky;top:0;z-index:20;
+  margin:calc(-1 * var(--main-pad)) calc(-1 * var(--main-pad)) .9rem;padding:calc(var(--main-pad) * .6) var(--main-pad) var(--title-gap);
+  background:#03321acc;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  border-bottom:2px solid #39ff1466;box-shadow:0 6px 24px #000a}

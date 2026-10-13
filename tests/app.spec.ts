@@ -25,6 +25,19 @@ test('Juegos: las tarjetas van justo debajo del encabezado y el meme ocupa el lu
   await expect(page.locator('.games-clock')).toHaveAttribute('aria-label', /^Son las \d\d:\d\d$/);
 });
 
+test('Juegos: el encabezado (cartel, meme, calendario y hora) queda fijo arriba al bajar', async ({ page }) => {
+  await page.goto('/MiniJuegos/#/juegos');
+  await page.evaluate(() => window.scrollTo(0, 900));
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
+  const header = (await page.locator('.games-title').boundingBox())!;
+  expect(Math.abs(header.y)).toBeLessThanOrEqual(1);
+  for (const part of ['.games-heading', '.games-art img', '.games-calendar', '.games-clock']) {
+    const box = (await page.locator(part).boundingBox())!;
+    expect(box.y).toBeGreaterThanOrEqual(0);
+    expect(box.y + box.height).toBeLessThanOrEqual(header.y + header.height);
+  }
+});
+
 test('Juegos: en pantallas anchas el meme queda centrado arriba de Tiki-Taka, en el medio de la pantalla', async ({ page }) => {
   await page.setViewportSize({ width: 1920, height: 1000 });
   await page.goto('/MiniJuegos/#/juegos');
