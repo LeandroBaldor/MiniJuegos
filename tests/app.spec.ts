@@ -31,11 +31,23 @@ test('Juegos: el encabezado (cartel, meme, calendario y hora) queda fijo arriba 
   await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
   const header = (await page.locator('.games-title').boundingBox())!;
   expect(Math.abs(header.y)).toBeLessThanOrEqual(1);
+  // Va de borde a borde de la ventana.
+  expect(Math.abs(header.x)).toBeLessThanOrEqual(1);
+  expect(Math.abs(header.width - page.viewportSize()!.width)).toBeLessThanOrEqual(1);
   for (const part of ['.games-heading', '.games-art img', '.games-calendar', '.games-clock']) {
     const box = (await page.locator(part).boundingBox())!;
     expect(box.y).toBeGreaterThanOrEqual(0);
     expect(box.y + box.height).toBeLessThanOrEqual(header.y + header.height);
   }
+});
+
+test('Juegos: en pantallas más anchas que el contenido el encabezado igual llega de borde a borde', async ({ page }) => {
+  await page.setViewportSize({ width: 2600, height: 900 });
+  await page.goto('/MiniJuegos/#/juegos');
+  const header = (await page.locator('.games-title').boundingBox())!;
+  expect(Math.abs(header.x)).toBeLessThanOrEqual(1);
+  expect(Math.abs(header.width - 2600)).toBeLessThanOrEqual(1);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(2600);
 });
 
 test('Juegos: en pantallas anchas el meme queda centrado arriba de Tiki-Taka, en el medio de la pantalla', async ({ page }) => {
