@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
-  BLOCKS, buildCity, FLOAT_Y, GOAL, newShark, PLAYER_TARGET, REACH, rescueX, SHARKS, sharksAt, step, takeEvents, TIME_LIMIT, WATER_Y, windAt, WIND_CALM, WIND_TURN, sharkMouth, GALE_TIME,
+  BLOCKS, buildCity, flyersAt, FLOAT_Y, GOAL, newShark, PLAYER_TARGET, REACH, rescueX, SHARKS, sharksAt, step, takeEvents, TIME_LIMIT, WATER_Y, windAt, WIND_CALM, WIND_TURN, sharkMouth, GALE_TIME, mouthOpen, EAT_SHUT, swimY, flyerMouthOpen,
   type Input, type Lane, type Plat, type SharkGame,
 } from './shark';
 
@@ -79,7 +79,7 @@ describe('Ciudad Tiburón: el juego', () => {
     const g = newShark(4);
     Object.assign(g.player, { y: 40 }); g.player.ground = null; // lejos del agua, que no lo coman
     const types = new Set<string>();
-    for (let t = 0; t < 200; t += 1 / 30) { g.player.y = 40; g.player.vy = 0; step(g, idle, 1 / 30); for (const s of g.sharks) types.add(s.type); }
+    for (let t = 0; t < 200; t += 1 / 30) { g.player.y = 40; g.player.vy = 0; g.flyers = []; step(g, idle, 1 / 30); for (const s of g.sharks) types.add(s.type); } // sin tiburones voladores, que no lo agarren
     expect(g.sharks.length).toBe(sharksAt(g.time));
     expect(types).toEqual(new Set(['blanco', 'martillo', 'ballena']));
     expect(takeEvents(g).some(e => e.type === 'newType')).toBe(true);
@@ -280,7 +280,7 @@ describe('Ciudad Tiburón: el juego', () => {
     expect(s.state).toBe('bite');
     run(g, 0.3);
     expect(s.y).toBeGreaterThan(0); // salió del agua
-    run(g, 0.3);
+    run(g, 0.6); // ya cerró la boca (CHOMP): lo tiene entre los dientes
     const m = sharkMouth(s);
     expect(Math.abs(m.x - g.player.x)).toBeLessThan(0.05);
     run(g, 1.5);
@@ -323,6 +323,19 @@ describe('Ciudad Tiburón: el juego', () => {
     expect(g.player.inside).toBeNull();
     expect(g.player.ground?.kind).toBe('roof');
     expect(g.player.y).toBeCloseTo(b.top, 1);
+  });
+
+  it('también se puede entrar a las casas por el balconcito del costado y ahí no te ven los tiburones', () => {
+    const g = calm();
+    const b = g.blocks.find(b => b.kind === 'house' && b.id > 0)!;
+    const balcony = g.plats.find(p => p.kind === 'balcony' && Math.abs(p.x + p.w - b.x1) < 0.05)!;
+    stand(g, balcony);
+    runAlone(g, 0.8, { right: true });
+    expect(g.player.inside).toBe(b.id);
+    expect(g.player.ground?.kind).toBe('floor');
+    g.sharks = [{ id: 77, type: 'blanco', lane: 0, x: g.player.x + 2, dir: -1, state: 'patrol', t: 0, y: -0.5, vy: 0, vx: 0, target: 0, hunger: 99, rest: 0, turn: 9, born: 0 }];
+    run(g, 0.3);
+    expect(g.sharks[0].state).toBe('patrol');
   });
 
   it('desde afuera las paredes no se atraviesan si no hay puerta', () => {
@@ -420,6 +433,11 @@ describe('Ciudad Tiburón: el juego', () => {
     g.rescues.push({ id: 1, kind: 'persona', float: 'goma', look: 0, state: 'drift', at: 0, fromX: 0, fromY: 0, plat, lane: lane.id, speed: 0, dir: 1, min: lane.pole, max: lane.pole });
     for (let i = 0; i < 60 * 6 && !g.rescues.some(r => r.id === 1 && r.state === 'taken'); i++) { g.player.y = 40; g.player.vy = 0; step(g, idle, 1 / 60); }
     expect(g.rescues.some(r => r.id === 1 && r.state === 'taken')).toBe(true);
+    const s = g.sharks[0];
+    expect(s.prey?.kind).toBe('persona'); // la tiene entre los dientes…
+    expect(mouthOpen(s, g)).toBe(true); // …con la boca abierta
+    for (let i = 0; i < 60; i++) { g.player.y = 40; g.player.vy = 0; step(g, idle, 1 / 60); }
+    expect(mouthOpen(s, g)).toBe(false); // y después cierra la boca: se la comió
   });
 
   it('el que flota se mueve con la corriente sin salirse de su calle', () => {
@@ -430,5 +448,76 @@ describe('Ciudad Tiburón: el juego', () => {
     const x0 = rescueX(r);
     for (let i = 0; i < 600; i++) { g.player.y = 40; g.player.vy = 0; step(g, idle, 1 / 60); if (r.state === 'drift') { moved = Math.max(moved, Math.abs(rescueX(r) - x0)); expect(r.plat.x).toBeGreaterThanOrEqual(lane.x1); expect(r.plat.x + r.plat.w).toBeLessThanOrEqual(lane.x2); } }
     expect(moved).toBeGreaterThan(0.5);
+  });
+});
+
+describe('Ciudad Tiburón: tiburones voladores', () => {
+  const flyerOver = (g: SharkGame) => {
+    g.time = 30; g.sharks = []; g.rescues = []; g.windPower = 0;
+    const pl = g.plats.find(p => p.kind === 'roof')!;
+    stand(g, pl);
+    step(g, idle, 1 / 60); // aparece el primero
+    const f = g.flyers[0];
+    Object.assign(f, { x: g.player.x - 3, y: g.player.y + 5, state: 'cruise', cool: 0 });
+    return f;
+  };
+
+  it('aparecen con el tiempo (más cuanto más avanza la partida)', () => {
+    expect(flyersAt(0)).toBe(0);
+    expect(flyersAt(30)).toBe(1);
+    expect(flyersAt(TIME_LIMIT - 1)).toBeGreaterThan(flyersAt(60));
+    const g = newShark(2);
+    g.time = 30; step(g, idle, 1 / 60);
+    expect(g.flyers.length).toBe(1);
+    expect(takeEvents(g).some(e => e.type === 'flyerNew')).toBe(true);
+  });
+
+  it('cuando ve al bombero avisa, se tira en picada y, si no se mueve, se lo lleva volando', () => {
+    const g = newShark(3), f = flyerOver(g);
+    takeEvents(g);
+    step(g, idle, 1 / 60);
+    expect(f.state).toBe('warn');
+    expect(takeEvents(g).some(e => e.type === 'flyerWarn')).toBe(true);
+    for (let i = 0; i < 60 * 4 && !g.dying; i++) step(g, idle, 1 / 60);
+    expect(g.dying?.reason).toBe('flyer');
+    expect(f.state).toBe('carry');
+    const y0 = g.player.y;
+    for (let i = 0; i < 60; i++) step(g, idle, 1 / 60);
+    expect(g.player.y).toBeGreaterThan(y0); // se lo lleva para arriba
+  });
+
+  it('abre la boca cuando te apunta y en la picada', () => {
+    const g = newShark(3), f = flyerOver(g);
+    expect(flyerMouthOpen(f, g)).toBe(false);
+    step(g, idle, 1 / 60);
+    expect(f.state).toBe('warn');
+    expect(flyerMouthOpen(f, g)).toBe(true);
+  });
+
+  it('adentro de un edificio no te ve', () => {
+    const g = newShark(3), f = flyerOver(g);
+    g.player.inside = g.blocks.find(b => b.kind === 'building')!.id;
+    for (let i = 0; i < 60 * 4; i++) { g.player.inside = g.blocks.find(b => b.kind === 'building')!.id; step(g, idle, 1 / 60); }
+    expect(f.state).toBe('cruise');
+    expect(g.dying).toBeNull();
+  });
+});
+
+describe('Ciudad Tiburón: la boca del tiburón', () => {
+  it('nadando la tiene cerrada; salta con la boca abierta y la cierra al agarrar a alguien o al volver al agua', () => {
+    const g = newShark(5), s = g.sharks[0];
+    expect(mouthOpen(s, g)).toBe(false); // nadando: cerrada
+    s.state = 'warn';
+    expect(mouthOpen(s, g)).toBe(true); // en posición para saltar: ya la abre abajo del agua
+    Object.assign(s, { state: 'jump', vy: 14, y: 0 });
+    expect(mouthOpen(s, g)).toBe(true); // salta a atacar: abierta
+    s.vy = -6;
+    expect(mouthOpen(s, g)).toBe(true); // bajando todavía la tiene abierta
+    s.y = swimY(s);
+    expect(mouthOpen(s, g)).toBe(false); // se mete de vuelta al agua sin agarrar a nadie: cerrada
+    Object.assign(s, { y: 1, vy: 2, ate: true, ateAt: g.time });
+    expect(mouthOpen(s, g)).toBe(true); // agarró a alguien: un ratito con la boca abierta…
+    g.time += EAT_SHUT + 0.01;
+    expect(mouthOpen(s, g)).toBe(false); // …y después la cierra: se lo come
   });
 });

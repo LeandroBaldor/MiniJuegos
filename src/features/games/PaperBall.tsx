@@ -8,6 +8,8 @@ import {
   burst, drawBall, drawBackground, drawBinBack, drawBinFront, drawClock, drawDrops, drawEyes, drawFan, drawHeld, drawLoad, drawRobot, drawStains,
   drawVignette, drawWindow, loadOffice, stepDrops, VIEW_H, X, Y, type Drop, type Stain, type View,
 } from './paperArt';
+import { playBinHit, playGameOver, playRobotThrow, playScore, playSplat, playStart, playWhistle, preloadSkynetSounds, setFanSound } from './sounds';
+import { EndBanner } from './EndBanner';
 
 const RECORD_KEY = 'escritorio-personal-juegos:cesto-t800-record';
 export const readPaperRecord = () => { try { return Number(localStorage.getItem(RECORD_KEY)) || 0; } catch { return 0; } };
@@ -150,10 +152,13 @@ export function PaperBall() {
   }, [status, paint]);
 
   const start = useCallback(() => {
+    playStart();
+    preloadSkynetSounds();
     gameRef.current = newPaper(); aimRef.current = null; popsRef.current = []; goreRef.current = { drops: [], stains: [], shake: 0 }; bannerRef.current = { quarter: 0, at: 0 };
     setHud({ left: QUARTER, quarter: 0, pause: false, score: 0, step: 0, round: 0, dir: 0 });
     setToast({ text: 'Hacé clic, tirá para atrás y soltá 🗑️', id: Date.now() });
     setStatus('playing');
+    playWhistle(); // arranca el primer cuarto
   }, []);
 
   useEffect(() => {
@@ -164,6 +169,9 @@ export function PaperBall() {
       last = now;
       step(g, dt);
       for (const e of takeEvents(g)) {
+        if (e.type === 'throw') playRobotThrow();
+        if (e.type === 'rim') playBinHit(); // pegó en el borde del tacho
+        if (e.type === 'score') playScore();
         if (e.type === 'score') popsRef.current.push({ text: `${e.points} PTS`, x: e.x, y: e.y + 0.6, at: g.time, color: '#ff4d4d' });
         if (e.type === 'splat') {
           burst(gore.drops, e.x, e.y, e.vx, e.vy, e.surface, e.hard, Math.random);
@@ -171,13 +179,15 @@ export function PaperBall() {
           gore.stains.push({ x: e.x, y: e.surface === 'floor' ? 0.02 : e.y, r: e.surface === 'floor' ? r : r * 0.9, at: g.time, kind: e.surface === 'floor' ? 'pool' : 'wall', seed: Math.random() });
           gore.shake = Math.max(gore.shake, 0.4 + e.hard * 0.6);
           popsRef.current.push({ text: '¡Splat!', x: e.x, y: Math.max(0.6, e.y) + 0.4, at: g.time, color: '#ef4444' });
+          playSplat(e.hard);
         }
         if (e.type === 'round') {
           setToast({ text: `¡Ciclo ${e.round} completo en ${Math.round(e.seconds)} s! Embocaste ${e.made} de 9: +${e.bonus} por velocidad ⚡`, id: now });
         }
         if (e.type === 'fan') setToast({ text: e.dir > 0 ? 'Se prende el ventilador: sopla para la derecha →' : 'El ventilador se pasa a la derecha: sopla para la izquierda ←', id: now });
-        if (e.type === 'quarter') bannerRef.current = { quarter: e.quarter, at: g.time };
+        if (e.type === 'quarter') { bannerRef.current = { quarter: e.quarter, at: g.time }; playWhistle(); }
       }
+      setFanSound(g.fan.dir ? 0.6 + 0.4 * g.quarter / 3 : 0); // el ventilador suena mientras está prendido
       gore.drops = stepDrops(gore.drops, gore.stains, dt, g.time);
       gore.stains = gore.stains.filter(st => g.time - st.at < 25).slice(-400);
       gore.shake = Math.max(0, gore.shake - dt * 3);
@@ -191,7 +201,7 @@ export function PaperBall() {
         const prev = readPaperRecord(), isNew = g.score > prev;
         if (isNew) { saveRecord(g.score); setRecord(g.score); }
         setResult({ score: g.score, made: g.made, shots: g.shots, rounds: g.round, bonus: g.speedBonus, newRecord: isNew && prev > 0 });
-        aimRef.current = null; setToast(null); setStatus('over');
+        aimRef.current = null; setToast(null); setStatus('over'); playGameOver();
         return;
       }
       frame = requestAnimationFrame(tick);
@@ -199,7 +209,7 @@ export function PaperBall() {
     frame = requestAnimationFrame(tick);
     const hide = () => { if (document.hidden) setStatus('paused'); };
     document.addEventListener('visibilitychange', hide);
-    return () => { cancelAnimationFrame(frame); document.removeEventListener('visibilitychange', hide); };
+    return () => { cancelAnimationFrame(frame); document.removeEventListener('visibilitychange', hide); setFanSound(0); };
   }, [status, paint]);
 
   useEffect(() => {
@@ -261,7 +271,8 @@ export function PaperBall() {
               <button type="button" onClick={() => setStatus('playing')} autoFocus>Seguir</button>
             </>}
             {status === 'over' && <>
-              <h2 id="bol-message">¡Final del partido! ⏰</h2>
+              <EndBanner win={false} id="bol-message" />
+              <p className="end-reason">¡Final del partido! ⏰</p>
               <p>Hiciste <strong>{result.score}</strong> puntos: embocaste {result.made} de {result.shots} humanos, completaste {result.rounds} {result.rounds === 1 ? 'ciclo' : 'ciclos'} y sumaste {result.bonus} por velocidad.{result.newRecord && ' ¡Nuevo récord!'}</p>
               <button type="button" onClick={start} autoFocus>Jugar de nuevo</button>
             </>}

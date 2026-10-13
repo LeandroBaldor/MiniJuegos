@@ -1,6 +1,6 @@
 // Dibujos de "Ciudad Tiburón": los edificios (de distintos estilos, con puertas y departamentos por dentro),
 // los autos, las cosas que flotan, los árboles, los faroles y los efectos (salpicaduras y sangre).
-import { doorAt, FLOAT_Y, type Block, type Debris, type Decor, type Plat, type SharkGame } from './shark';
+import { doorAt, enterable, FLOAT_Y, type Block, type Debris, type Decor, type Plat, type SharkGame } from './shark';
 import { windAt as baseWind } from './shark';
 // El viento de siempre más el súper viento (que dobla los árboles y hace volar la ropa).
 const windAt = (t: number) => baseWind(t) + scene.gale * 3;
@@ -18,7 +18,7 @@ export function doorsOf(g: SharkGame, b: Block) {
   let list = byGame.get(b.id);
   if (!list) {
     list = [];
-    if (b.kind === 'building') for (let k = 1; k < b.floors; k++) for (const side of [-1, 1] as const) if (doorAt(g, b, side, yk(b, k))) list.push({ side, y: yk(b, k) });
+    if (enterable(b)) for (let k = 1; k < b.floors; k++) for (const side of [-1, 1] as const) if (doorAt(g, b, side, yk(b, k))) list.push({ side, y: yk(b, k) });
     byGame.set(b.id, list);
   }
   return list;
@@ -197,6 +197,14 @@ export function drawHouse(ctx: CanvasRenderingContext2D, b: Block, v: View) {
   ctx.fillStyle = '#3f2a14'; rect(ctx, v, dx - 0.08, -0.5, 0.86, 1.95);
   ctx.fillStyle = '#7c4a1e'; rect(ctx, v, dx, -0.5, 0.7, 1.87);
   ctx.fillStyle = 'rgba(0,0,0,0.25)'; rect(ctx, v, dx + 0.1, 0.9, 0.5, 1.7); rect(ctx, v, dx + 0.1, 0, 0.5, 0.75);
+  // Las puertas de los balconcitos de los costados (por ahí se entra a la casa).
+  for (const d of [b.x1 + 0.08, b.x2 - 0.68]) {
+    const y1 = yk(b, 1);
+    ctx.fillStyle = '#3f2a14'; rect(ctx, v, d - 0.05, y1, 0.7, y1 + 1.75);
+    ctx.fillStyle = hsl((b.hue + 160) % 360, 40, 32); rect(ctx, v, d, y1, 0.6, y1 + 1.7);
+    ctx.fillStyle = 'rgba(186,230,253,0.55)'; rect(ctx, v, d + 0.1, y1 + 0.95, 0.4, y1 + 1.55);
+    ctx.fillStyle = '#fbbf24'; rect(ctx, v, d + 0.45, y1 + 0.75, 0.08, y1 + 0.85); // picaporte
+  }
   weather(ctx, v, b.x1, b.x2, b.top, b.id * 17);
   // Baranda de la terraza, plantas y una soga con ropa colgada.
   ctx.fillStyle = '#e5e7eb'; rect(ctx, v, b.x1, b.top, w, b.top + 0.12); rect(ctx, v, b.x1, b.top + 0.75, w, b.top + 0.85);
@@ -275,9 +283,11 @@ export function drawInterior(ctx: CanvasRenderingContext2D, g: SharkGame, b: Blo
     // Muebles a los dos lados de la escalera.
     const spots = [b.x1 + 0.6 + (doors.some(d => d.side < 0 && Math.abs(d.y - y1) < 0.05) ? 1.2 : 0), sx + 0.9];
     spots.forEach((x0, j) => furniture(ctx, v, Math.floor(hash(seed * 7 + j) * 7), x0, y1, Math.min(2.2, (j ? b.x2 - 0.4 - (doors.some(d => d.side > 0 && Math.abs(d.y - y1) < 0.05) ? 1.2 : 0) : sx - 0.8) - x0), hue));
-    // Un cuadro en la pared.
-    ctx.fillStyle = '#3f2a14'; rect(ctx, v, sx - 2, y1 + 1.4, 0.8, y1 + 2);
-    ctx.fillStyle = hsl((hue + 150) % 360, 50, 55); rect(ctx, v, sx - 1.93, y1 + 1.47, 0.66, y1 + 1.93);
+    // Un cuadro en la pared (si entra sin tapar las puertas).
+    if (w > 6.6) {
+      ctx.fillStyle = '#3f2a14'; rect(ctx, v, sx - 2, y1 + 1.4, 0.8, y1 + 2);
+      ctx.fillStyle = hsl((hue + 150) % 360, 50, 55); rect(ctx, v, sx - 1.93, y1 + 1.47, 0.66, y1 + 1.93);
+    }
     // Las puertas, vistas de adentro.
     for (const d of doors) if (Math.abs(d.y - y1) < 0.05) { const dx = d.side < 0 ? b.x1 + 0.2 : b.x2 - 1.1; ctx.fillStyle = '#5b3a1e'; rect(ctx, v, dx, y1, 0.9, y1 + 1.98); ctx.fillStyle = 'rgba(186,230,253,0.5)'; rect(ctx, v, dx + 0.15, y1 + 1.15, 0.6, y1 + 1.8); }
   }
@@ -384,10 +394,17 @@ export function drawVehicle(ctx: CanvasRenderingContext2D, p: Plat, v: View, shi
   const s = v.s, x = X(v, p.x) - shift, y = Y(v, p.y), w = p.w * s, t = v.t;
   const base = hsl(p.hue, 62, 44), hi = hsl(p.hue, 60, 60), lo = hsl(p.hue, 58, 26);
   const blink = Math.floor(t * 2.5 + p.id) % 2 === 0; // balizas
+  // Rueda: cubierta con dibujo, llanta de rayos con brillo y la tuerca del centro.
   const wheel = (cx: number, cy: number) => {
     ctx.fillStyle = '#0a0a0a'; ctx.beginPath(); ctx.arc(cx, cy, s * 0.34, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = '#9ca3af'; ctx.beginPath(); ctx.arc(cx, cy, s * 0.17, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = '#4b5563'; ctx.beginPath(); ctx.arc(cx, cy, s * 0.06, 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = '#262626'; ctx.lineWidth = Math.max(1, s * 0.03); ctx.beginPath(); ctx.arc(cx, cy, s * 0.29, 0, Math.PI * 2); ctx.stroke();
+    const rim = ctx.createRadialGradient(cx - s * 0.05, cy - s * 0.05, 0, cx, cy, s * 0.19);
+    rim.addColorStop(0, '#e5e7eb'); rim.addColorStop(1, '#6b7280');
+    ctx.fillStyle = rim; ctx.beginPath(); ctx.arc(cx, cy, s * 0.19, 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = '#4b5563'; ctx.lineWidth = Math.max(1, s * 0.025); ctx.beginPath();
+    for (let i = 0; i < 5; i++) { const a = (i / 5) * Math.PI * 2 + p.id; ctx.moveTo(cx, cy); ctx.lineTo(cx + Math.cos(a) * s * 0.17, cy + Math.sin(a) * s * 0.17); }
+    ctx.stroke();
+    ctx.fillStyle = '#374151'; ctx.beginPath(); ctx.arc(cx, cy, s * 0.05, 0, Math.PI * 2); ctx.fill();
   };
   const glass = (gx: number, gy: number, gw: number, gh: number) => {
     const gr = ctx.createLinearGradient(0, gy, 0, gy + gh);
@@ -419,6 +436,17 @@ export function drawVehicle(ctx: CanvasRenderingContext2D, p: Plat, v: View, shi
     ctx.fillStyle = '#dc2626'; ctx.fillRect(L, y + s * 0.7, s * 0.07, s * 0.1);
     if (blink) { ctx.fillStyle = '#fb923c'; ctx.beginPath(); ctx.arc(R - s * 0.08, y + s * 0.83, s * 0.05, 0, Math.PI * 2); ctx.arc(L + s * 0.08, y + s * 0.83, s * 0.05, 0, Math.PI * 2); ctx.fill(); }
     ctx.fillStyle = lo; ctx.fillRect(x + w + s * 0.25, y + s * 0.35, s * 0.12, s * 0.08); // espejo
+    // Paragolpes cromados, la moldura del costado, el pasarruedas y las gotas de lluvia en el techo.
+    const chrome = ctx.createLinearGradient(0, bottom - s * 0.35, 0, bottom - s * 0.12);
+    chrome.addColorStop(0, '#f3f4f6'); chrome.addColorStop(1, '#6b7280');
+    ctx.fillStyle = chrome; ctx.beginPath(); ctx.roundRect(R - s * 0.1, bottom - s * 0.36, s * 0.2, s * 0.22, s * 0.06); ctx.roundRect(L - s * 0.1, bottom - s * 0.36, s * 0.2, s * 0.22, s * 0.06); ctx.fill();
+    ctx.fillStyle = 'rgba(229,231,235,0.7)'; ctx.fillRect(L + s * 0.15, y + s * 0.78, R - L - s * 0.3, s * 0.035);
+    ctx.fillStyle = 'rgba(0,0,0,0.45)'; for (const wx of [L + s * 0.6, R - s * 0.6]) { ctx.beginPath(); ctx.arc(wx, bottom - s * 0.02, s * 0.4, Math.PI, Math.PI * 2); ctx.fill(); }
+    wheel(L + s * 0.6, bottom); wheel(R - s * 0.6, bottom);
+    ctx.fillStyle = 'rgba(255,255,255,0.55)'; for (let i = 0; i < 6; i++) { ctx.beginPath(); ctx.arc(x + s * 0.3 + hash(p.id + i) * (w - s * 0.6), y + s * 0.015, Math.max(0.8, s * 0.025), 0, Math.PI * 2); ctx.fill(); }
+    const beam = ctx.createRadialGradient(R, y + s * 0.7, 0, R, y + s * 0.7, s * 0.9);
+    beam.addColorStop(0, 'rgba(254,249,195,0.45)'); beam.addColorStop(1, 'rgba(254,249,195,0)');
+    ctx.fillStyle = beam; ctx.fillRect(R - s * 0.1, y - s * 0.2, s * 1, s * 1.8);
     if (hash(p.id) < 0.2) { ctx.fillStyle = '#92400e'; ctx.beginPath(); ctx.ellipse(x + w * 0.5, y - s * 0.17, s * 0.25, s * 0.15, 0, 0, Math.PI * 2); ctx.fill(); ctx.beginPath(); ctx.arc(x + w * 0.5 + s * 0.25, y - s * 0.3, s * 0.13, 0, Math.PI * 2); ctx.fill(); } // un perrito arriba
   } else if (p.kind === 'van') {
     const bottom = y + s * 1.55;

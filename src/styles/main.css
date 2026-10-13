@@ -1,4 +1,4 @@
-:root{font-family:Nunito,system-ui,sans-serif;color:#332317;background:#010a04;line-height:1.5;font-synthesis:none}*{box-sizing:border-box}body{margin:0;min-width:320px;min-height:100vh;background:url(../assets/images/fondo-hexagonos.svg) 0 0/336px 290.98px,radial-gradient(ellipse 55% 50% at 88% 12%,#16a34a55,transparent 70%),radial-gradient(ellipse 50% 45% at 5% 60%,#22c55e33,transparent 70%),linear-gradient(160deg,#010a04 0,#03160a 50%,#062312 100%);background-attachment:fixed}button,input,select,textarea{font:inherit}button,a{touch-action:manipulation}button{cursor:pointer;border:0;border-radius:8px;padding:.6rem .85rem;background:#603c29;color:#fff}button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #f4bd58;outline-offset:2px}header{position:sticky;z-index:10;top:0;display:flex;align-items:center;gap:1rem;padding:.75rem clamp(1rem,4vw,3rem);background:#2e1c14e8;color:#fff;box-shadow:0 4px 15px #1a0d0788}.brand{font:700 1.7rem Caveat,cursive;color:#ffe0a5;text-decoration:none}nav{display:flex;gap:.35rem;flex:1}nav a{color:#ead8c8;padding:.45rem .7rem;text-decoration:none;border-radius:6px}nav a.active{background:#91603f;color:#fff}.backup{display:flex;gap:.4rem}.backup button{background:#856047}main{padding:clamp(1rem,4vw,3rem);max-width:1500px;margin:auto}.warning{margin:1rem;padding:1rem;background:#ffe2a2;border-radius:8px}.section-title{display:flex;justify-content:space-between;align-items:end;gap:1rem;margin-bottom:1.4rem;color:#fff;text-shadow:0 2px 3px #30170d}.section-title h1{font:700 clamp(2.4rem,7vw,4.7rem)/.9 Caveat,cursive;margin:0}.eyebrow{text-transform:uppercase;letter-spacing:.16em;font-weight:700;margin:0}.new-note{display:flex;align-items:end;gap:.6rem;background:#f4e1bf;padding:.8rem;border-radius:10px;box-shadow:0 5px 15px #2d130c66;text-shadow:none;color:#332317}.new-note label{font-size:.8rem}.new-note input,.new-note select{display:block;padding:.5rem;border:1px solid #b69a73;border-radius:6px}.board{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.column{min-height:60vh;padding:1rem;border-radius:12px;background:#efe2ccbd;box-shadow:inset 0 0 30px #7b573333,0 8px 20px #2d140c55}.column h2{font:700 2rem Caveat,cursive;margin:.2rem}.column h2 span{float:right;background:#76513b;color:#fff;border-radius:50%;font:1rem Nunito;padding:.2rem .55rem}.note{padding:1rem;margin:1rem 0;box-shadow:2px 6px 10px #4d321e55;transform:rotate(-.3deg);border-radius:2px}.note textarea{width:100%;min-height:90px;border:0;resize:vertical;background:transparent;font:600 1.35rem Caveat,cursive}.palette{display:flex;gap:.35rem}.palette button{width:22px;height:22px;padding:0;border:1px solid #665}.palette .chosen{outline:2px solid #332317}.note label{display:block;margin-top:.6rem;font-size:.8rem}.note small{display:block;margin-top:.5rem}.delete{margin-top:.5rem;background:#8e3c33}.journal-layout{display:grid;grid-template-columns:220px 1fr;gap:1rem}.journal-layout aside{background:#dac29c;padding:1rem;border-radius:10px}.journal-layout aside button{width:100%;margin:.3rem 0;text-align:left;background:#866047}.journal-layout aside button.active{background:#3d291d}.book{max-width:900px;margin:auto;width:100%;padding:2rem;background:#4f281f;border:10px solid #3e211a;border-radius:14px;box-shadow:10px 15px 30px #24100888}.paper{min-height:580px;padding:2.5rem;background:repeating-linear-gradient(#fbf1d8 0,#fbf1d8 31px,#b9c9d0 32px);box-shadow:inset 25px 0 30px #9f805733}.paper .page-editor{width:100%;min-height:470px;border:0;background:transparent;resize:none;font:1.2rem/32px Georgia,serif}.page-meta{font:1.5rem Caveat;color:#74503c}.page-buttons{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.6rem;margin-top:1rem}.empty{background:#f4e5c8;padding:3rem;text-align:center}.calculator{max-width:1060px;margin:auto;background:#36322f;padding:1.5rem;border-radius:18px;box-shadow:8px 12px 24px #25100888}.calculator form{display:grid;grid-template-columns:2fr 1fr auto;gap:.7rem;background:#d9d3c3;padding:1rem;border-radius:8px}.calculator label input{display:block;width:100%;padding:.7rem}.calculator form p{grid-column:1/-1;color:#8b1717}.total{background:#d8e0c1;color:#1d3020;text-shadow:none;padding:.6rem 1.2rem;border-radius:6px;text-align:right}.total strong{display:block;font-size:1.8rem}.expense-list{margin-top:1rem;padding:0 1rem}.expense-row{display:grid;grid-template-columns:2fr 1fr auto;gap:.7rem;margin:.5rem 0}.expense-row input,.expense-row select{padding:.7rem;background:#15803d;border:0;border-radius:4px}.modal{position:fixed;inset:0;z-index:20;background:#0009;display:grid;place-items:center;padding:1rem}.modal>div{max-width:520px;background:#fff4d9;padding:2rem;border-radius:12px}.modal button{margin-right:.5rem}
+:root{font-family:Nunito,system-ui,sans-serif;color:#332317;background:#010a04;line-height:1.5;font-synthesis:none}*{box-sizing:border-box}body{margin:0;min-width:320px;min-height:100vh;background:radial-gradient(circle at 30% 20%,#a96e47aa,transparent 35%),repeating-linear-gradient(93deg,#75452d 0,#8c5738 4px,#70422a 8px,#985f3c 14px);background-attachment:fixed}button,input,select,textarea{font:inherit}button,a{touch-action:manipulation}button{cursor:pointer;border:0;border-radius:8px;padding:.6rem .85rem;background:#603c29;color:#fff}button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #f4bd58;outline-offset:2px}header{position:sticky;z-index:10;top:0;display:flex;align-items:center;gap:1rem;padding:.75rem clamp(1rem,4vw,3rem);background:#2e1c14e8;color:#fff;box-shadow:0 4px 15px #1a0d0788}.brand{font:700 1.7rem Caveat,cursive;color:#ffe0a5;text-decoration:none}nav{display:flex;gap:.35rem;flex:1}nav a{color:#ead8c8;padding:.45rem .7rem;text-decoration:none;border-radius:6px}nav a.active{background:#91603f;color:#fff}.backup{display:flex;gap:.4rem}.backup button{background:#856047}main{padding:clamp(1rem,4vw,3rem);max-width:1500px;margin:auto}.warning{margin:1rem;padding:1rem;background:#ffe2a2;border-radius:8px}.section-title{display:flex;justify-content:space-between;align-items:end;gap:1rem;margin-bottom:1.4rem;color:#fff;text-shadow:0 2px 3px #30170d}.section-title h1{font:700 clamp(2.4rem,7vw,4.7rem)/.9 Caveat,cursive;margin:0}.eyebrow{text-transform:uppercase;letter-spacing:.16em;font-weight:700;margin:0}.new-note{display:flex;align-items:end;gap:.6rem;background:#f4e1bf;padding:.8rem;border-radius:10px;box-shadow:0 5px 15px #2d130c66;text-shadow:none;color:#332317}.new-note label{font-size:.8rem}.new-note input,.new-note select{display:block;padding:.5rem;border:1px solid #b69a73;border-radius:6px}.board{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.column{min-height:60vh;padding:1rem;border-radius:12px;background:#efe2ccbd;box-shadow:inset 0 0 30px #7b573333,0 8px 20px #2d140c55}.column h2{font:700 2rem Caveat,cursive;margin:.2rem}.column h2 span{float:right;background:#76513b;color:#fff;border-radius:50%;font:1rem Nunito;padding:.2rem .55rem}.note{padding:1rem;margin:1rem 0;box-shadow:2px 6px 10px #4d321e55;transform:rotate(-.3deg);border-radius:2px}.note textarea{width:100%;min-height:90px;border:0;resize:vertical;background:transparent;font:600 1.35rem Caveat,cursive}.palette{display:flex;gap:.35rem}.palette button{width:22px;height:22px;padding:0;border:1px solid #665}.palette .chosen{outline:2px solid #332317}.note label{display:block;margin-top:.6rem;font-size:.8rem}.note small{display:block;margin-top:.5rem}.delete{margin-top:.5rem;background:#8e3c33}.journal-layout{display:grid;grid-template-columns:220px 1fr;gap:1rem}.journal-layout aside{background:#dac29c;padding:1rem;border-radius:10px}.journal-layout aside button{width:100%;margin:.3rem 0;text-align:left;background:#866047}.journal-layout aside button.active{background:#3d291d}.book{max-width:900px;margin:auto;width:100%;padding:2rem;background:#4f281f;border:10px solid #3e211a;border-radius:14px;box-shadow:10px 15px 30px #24100888}.paper{min-height:580px;padding:2.5rem;background:repeating-linear-gradient(#fbf1d8 0,#fbf1d8 31px,#b9c9d0 32px);box-shadow:inset 25px 0 30px #9f805733}.paper .page-editor{width:100%;min-height:470px;border:0;background:transparent;resize:none;font:1.2rem/32px Georgia,serif}.page-meta{font:1.5rem Caveat;color:#74503c}.page-buttons{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.6rem;margin-top:1rem}.empty{background:#f4e5c8;padding:3rem;text-align:center}.calculator{max-width:1060px;margin:auto;background:#36322f;padding:1.5rem;border-radius:18px;box-shadow:8px 12px 24px #25100888}.calculator form{display:grid;grid-template-columns:2fr 1fr auto;gap:.7rem;background:#d9d3c3;padding:1rem;border-radius:8px}.calculator label input{display:block;width:100%;padding:.7rem}.calculator form p{grid-column:1/-1;color:#8b1717}.total{background:#d8e0c1;color:#1d3020;text-shadow:none;padding:.6rem 1.2rem;border-radius:6px;text-align:right}.total strong{display:block;font-size:1.8rem}.expense-list{margin-top:1rem;padding:0 1rem}.expense-row{display:grid;grid-template-columns:2fr 1fr auto;gap:.7rem;margin:.5rem 0}.expense-row input,.expense-row select{padding:.7rem;background:#15803d;border:0;border-radius:4px}.modal{position:fixed;inset:0;z-index:20;background:#0009;display:grid;place-items:center;padding:1rem}.modal>div{max-width:520px;background:#fff4d9;padding:2rem;border-radius:12px}.modal button{margin-right:.5rem}
 .backup{margin-left:auto}.note{position:relative;cursor:grab}.note:active{cursor:grabbing}.note::after{content:"";position:absolute;pointer-events:none;top:0;right:0;width:0;height:0;border-style:solid;border-width:0 0 20px 20px;border-color:transparent transparent #0002 transparent;filter:drop-shadow(-1px 1px 1px #4d321e44)}.note-text{min-height:45px;padding-right:1.5rem;white-space:pre-wrap;overflow-wrap:anywhere;font:600 1.05rem Caveat,cursive}.note button,.note summary{cursor:pointer}
 @media(max-width:800px),(orientation:portrait) and (max-width:1100px){header{flex-wrap:wrap}.brand{flex:1}.backup{order:3;width:100%}.board{grid-template-columns:1fr}.column{min-height:250px}.section-title{align-items:stretch;flex-direction:column}.new-note{align-items:stretch;flex-direction:column}.journal-layout{grid-template-columns:1fr}.journal-layout aside{display:flex;overflow-x:auto;gap:.5rem}.journal-layout aside h2{display:none}.journal-layout aside button{width:auto;white-space:nowrap}.book{padding:.6rem}.paper{padding:1.2rem;min-height:500px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
@@ -159,7 +159,7 @@ main{max-width:2200px;padding:clamp(1rem,2.5vw,2.5rem)}
 .note-text,.note textarea{font-size:1.2rem}
 /* El disquete de Mis gastos se ve grande para encontrarlo rápido. */
 .floppy--small{zoom:1.45}
-@media(min-width:900px){.desk-objects{zoom:1.3}.floppy--small{zoom:1.9}}
+@media(min-width:900px){.desk-objects{zoom:0.88}.floppy--small{zoom:1.4}}@media(min-width:1200px){.desk-objects{zoom:1}.floppy--small{zoom:1.6}}@media(min-width:1500px){.desk-objects{zoom:1.15}.floppy--small{zoom:1.7}}@media(min-width:1900px){.desk-objects{zoom:1.3}.floppy--small{zoom:1.9}}
 @media(max-width:600px){.floppy-page-body{width:100%;aspect-ratio:auto;min-height:70vh}}
 /* Con la letra más grande, los subtotales pasan debajo de la calculadora hasta que la pantalla tiene lugar para ambos. */
 @media(max-width:1459px){.expenses-layout{grid-template-columns:minmax(0,1fr)}}
@@ -230,6 +230,7 @@ main{max-width:2200px;padding:clamp(1rem,2.5vw,2.5rem)}
 
 /* Kalam (SIL OFL 1.1), letra manuscrita incluida en la app para que se vea igual en todos los dispositivos. */
 @font-face{font-family:"Kalam";font-style:normal;font-weight:700;font-display:swap;src:url("../assets/fonts/kalam-bold-latin.woff2") format("woff2")}
+@font-face{font-family:"Press Start 2P";font-style:normal;font-weight:400;font-display:swap;src:url("../assets/fonts/press-start-2p-latin.woff2") format("woff2")}
 /* Accesos entre secciones (Mi diario y Mis gastos): en blanco y con letra manuscrita, uno abajo del otro a la derecha del título. */
 .section-links{display:flex;flex:none;flex-direction:column;align-items:flex-start;gap:.05rem;align-self:center}
 .section-links a{color:#fff;text-decoration:none;font:700 clamp(1rem,1.35vw,1.3rem)/1.25 Kalam,"Segoe Print","Bradley Hand",cursive;text-shadow:0 2px 3px #30170d}
@@ -330,7 +331,7 @@ main{max-width:2200px;padding:clamp(1rem,2.5vw,2.5rem)}
 .desk-row .drag-hint{margin-bottom:0}
 @media(max-width:800px),(orientation:portrait) and (max-width:1100px){.desk-row{grid-template-columns:minmax(0,1fr)}.desk-row .desk-objects,.desk-row .drag-hint{grid-column:1}.desk-art{grid-row:3;margin-top:.75rem}}
 /* Mi diario: íconos más grandes y a la derecha del encabezado. */
-.section-objects--large{zoom:1.3}
+.section-objects--large{zoom:0.82}
 @media(min-width:801px) and (orientation:landscape),(min-width:1101px){.section-title:has(>.section-objects--large){grid-template-columns:minmax(0,1fr) auto;column-gap:1.4rem}.section-title>.section-objects--large{justify-self:end}}
 /* Imagen apoyada arriba del cuaderno, en el espacio libre entre el título y la tapa. */
 /* Meme del diario: sentado en el borde de arriba del libro, con las piernas colgando sobre la hoja.
@@ -349,7 +350,7 @@ main{max-width:2200px;padding:clamp(1rem,2.5vw,2.5rem)}
 /* Mis gastos: íconos grandes donde termina el rectángulo de gastos e imagen en el medio, apoyada sobre su borde. */
 .calc-art{display:none}
 @media(min-width:801px) and (orientation:landscape),(min-width:1101px){
-.section-title:has(>.calc-art){display:grid;grid-template-columns:auto minmax(0,1fr) auto;column-gap:1rem;align-items:start}
+.section-title:has(>.calc-art){display:grid;grid-template-columns:auto minmax(10rem,1fr) auto;column-gap:1rem;align-items:start}
 .section-title:has(>.calc-art)>.title-with-floppy{grid-column:1;grid-row:1}
 .section-title:has(>.calc-art)>.section-objects{grid-column:3;grid-row:1;justify-self:end;align-self:end}
 /* El meme va en la misma fila que los íconos, lo más grande que entra en esa fila, con su borde de abajo apoyado
@@ -481,7 +482,9 @@ radial-gradient(circle at 50% 120%,#4f8df0 0,#2563eb 45%,#1e3a8a 100%)}
 .cal-more{font-size:.6rem}
 }
 /* En celular los accesos de arriba no se agrandan y bajan de línea si no entran (ahora son hasta cuatro con el calendario). */
-@media(max-width:800px),(orientation:portrait) and (max-width:1100px){.section-objects--large{zoom:1}.section-objects{flex-wrap:wrap;gap:.8rem;max-width:100%}}
+@media(max-width:800px),(orientation:portrait) and (max-width:1100px){.section-objects--large{zoom:0.75}.section-objects{flex-wrap:wrap;gap:.8rem;max-width:100%}}
+@media(min-width:1200px) and (orientation:landscape),(min-width:1400px){.section-objects--large{zoom:1}}@media(min-width:1600px) and (orientation:landscape),(min-width:1800px){.section-objects--large{zoom:1.15}}
+@media(min-width:1900px){.section-objects--large{zoom:1.3}}
 /* Mis gastos: con el calendario son tres accesos; un poco más chicos para que la imagen del medio siga entrando. */
 /* Calendario: lista "¿Son fechas?" (flecha para ponerla en el calendario, X para dejar de preguntar) y cambio de fecha de una nota. */
 .cal-doubts>p{margin:0 0 .6rem;font-size:.85rem;color:#6b5a48}
@@ -585,6 +588,8 @@ radial-gradient(circle at 50% 120%,#4f8df0 0,#2563eb 45%,#1e3a8a 100%)}
 .game-card-text strong{font-size:1.35rem}
 .game-card-text span{color:#ddd6fe}
 .game-card-text small{color:#facc15;font-weight:700}
+.game-card-text .game-card-win{margin-top:.2rem;padding:.5rem .65rem;border-left:3px solid #facc15;border-radius:6px;background:rgba(250,204,21,.08);color:#fef3c7;font-size:.92rem;line-height:1.35}
+.game-card-win b{display:block;color:#facc15;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}
 .game-card-play{align-self:flex-end;margin:.4rem 1rem 1rem;padding:.45rem 1rem;background:#22c55e;color:#062b13;border-radius:999px;font-weight:900}
 .game-card-foot{display:flex;align-items:center;justify-content:flex-end;gap:.6rem;margin:.4rem 1rem 1rem}
 .game-card-foot small{display:grid;min-width:0;color:#facc15;font-weight:800;font-size:.85rem;line-height:1.2;text-align:right;white-space:nowrap}
@@ -781,6 +786,9 @@ h2 .tt-trophy{width:clamp(56px,10vw,90px)}
 .runner-trap{position:absolute;top:10%;left:50%;transform:translateX(-50%);padding:.6rem 1.2rem;background:#7f1d1df0;border:3px solid #fca5a5;border-radius:12px;color:#fff;font-weight:900;font-size:clamp(1.1rem,3vw,1.6rem);white-space:nowrap;pointer-events:none;animation:runner-blink .5s steps(2) infinite alternate;box-shadow:0 8px 24px #000a}
 .runner-trap strong{font-size:1.3em;color:#fde047;margin-left:.2rem}
 @keyframes runner-blink{to{background:#b91c1cf0}}
+.runner-level{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);padding:.8rem 2.2rem;background:#1e1b4bf0;border:4px solid #fde047;border-radius:18px;color:#fff;font:900 clamp(2rem,7vw,4rem)/1 Nunito,system-ui,sans-serif;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap;pointer-events:none;box-shadow:0 0 32px #fde04788,0 10px 30px #000b;animation:runner-level 3s ease-out forwards}
+.runner-level strong{color:#fde047;margin-left:.3em}
+@keyframes runner-level{0%{opacity:0;transform:translate(-50%,-50%) scale(.4)}12%{opacity:1;transform:translate(-50%,-50%) scale(1.12)}20%{transform:translate(-50%,-50%) scale(1)}80%{opacity:1}100%{opacity:0;transform:translate(-50%,-50%) scale(1)}}
 
 /* Trepaluna */
 .trepa-main{flex:1;min-height:0;display:flex;gap:.5rem}
@@ -808,6 +816,16 @@ h2 .tt-trophy{width:clamp(56px,10vw,90px)}
 @keyframes trepa-record{0%{transform:translate(-50%,-50%) rotate(-4deg) scale(.2);opacity:0}12%{transform:translate(-50%,-50%) rotate(-4deg) scale(1.15);opacity:1}20%{transform:translate(-50%,-50%) rotate(-4deg) scale(1)}85%{opacity:1}100%{opacity:0;transform:translate(-50%,-70%) rotate(-4deg)}}
 .trepa-gameover{font:900 clamp(2.4rem,7vw,4rem)/1 "Courier New",ui-monospace,monospace!important;color:#ef4444;letter-spacing:.08em;text-shadow:4px 4px 0 #450a0a}
 .trepa-win{font:900 clamp(1.6rem,4.5vw,2.4rem)/1.1 Nunito,system-ui,sans-serif!important;color:#fde047;text-shadow:0 4px 0 #92400e}
+/* Cartel del final (GANASTE!!! o GAME OVER): todo el cartel va en un cuadro negro con borde de neón azul que
+   titila, y el título en letra de 8 bits que se achica según el ancho del cuadro (nunca se corta). */
+.runner .runner-overlay>div:has(>.end-banner){container-type:inline-size;width:min(100%,30rem);max-width:none;padding:1.4rem clamp(.9rem,4vw,1.6rem);background:#000;border:3px solid #38bdf8;border-radius:14px;box-shadow:0 0 6px #38bdf8,0 0 18px #0ea5e9,0 0 42px #0ea5e966,inset 0 0 14px #0ea5e955;overflow-x:hidden;animation:end-neon 2.6s ease-in-out infinite}
+.runner .runner-overlay>div:has(>.end-banner) p{color:#e0f2fe}
+.runner-overlay .end-banner{margin:.2rem 0 .8rem!important;font-family:"Press Start 2P","Courier New",ui-monospace,monospace!important;font-weight:400!important;font-size:clamp(.9rem,8.6cqi,2.4rem)!important;line-height:1.3!important;letter-spacing:0!important;white-space:nowrap;overflow:visible;text-align:center;animation:end-banner .7s cubic-bezier(.2,1.6,.4,1) both}
+.runner-overlay .end-banner.end-banner--over{color:#ef4444!important;text-shadow:.12em .12em 0 #450a0a!important}
+.runner-overlay .end-banner.end-banner--win{color:#fde047!important;text-shadow:.12em .12em 0 #92400e!important;animation:end-banner .7s cubic-bezier(.2,1.6,.4,1) both,end-banner-glow 1.2s ease-in-out .7s infinite alternate}
+@keyframes end-banner{from{transform:scale(.2) rotate(-6deg);opacity:0}}
+@keyframes end-banner-glow{to{color:#fff7ae}}
+@keyframes end-neon{0%,100%{box-shadow:0 0 6px #38bdf8,0 0 18px #0ea5e9,0 0 42px #0ea5e966,inset 0 0 14px #0ea5e955;border-color:#38bdf8}45%{box-shadow:0 0 10px #7dd3fc,0 0 30px #38bdf8,0 0 70px #0ea5e9aa,inset 0 0 22px #38bdf888;border-color:#bae6fd}50%{box-shadow:0 0 2px #38bdf8,0 0 6px #0ea5e9,inset 0 0 4px #0ea5e933;border-color:#0369a1}53%{box-shadow:0 0 10px #7dd3fc,0 0 30px #38bdf8,0 0 70px #0ea5e9aa,inset 0 0 22px #38bdf888;border-color:#bae6fd}}
 @media(max-width:800px),(orientation:portrait) and (max-width:1100px){
   .trepa.runner{padding:.4rem .4rem .5rem;gap:.35rem}
   .trepa-main{position:relative}
@@ -838,7 +856,7 @@ h2 .tt-trophy{width:clamp(56px,10vw,90px)}
 .cal-art-room{position:relative;pointer-events:none;user-select:none}
 .cal-art{position:absolute;z-index:3;left:50%;bottom:calc(-1 * (var(--title-gap) + 1.1rem));transform:translateX(-50%);width:auto;height:auto;max-width:100%;max-height:calc(100% + var(--title-gap) + 1.1rem);border-radius:10px 10px 0 0;box-shadow:0 -4px 14px #24100866}
 @media(min-width:801px) and (orientation:landscape),(min-width:1101px){
-  .cal-page .section-title{display:grid;grid-template-columns:auto minmax(0,1fr) auto;column-gap:1rem;align-items:end}
+  .cal-page .section-title{display:grid;grid-template-columns:auto minmax(10rem,1fr) auto;column-gap:1rem;align-items:end}
   .cal-art-room{align-self:stretch}
   /* El mes y el año van a la izquierda (debajo de "Calendario") y el meme baja hasta el borde de abajo del
      encabezado azul del mes, así queda más grande. El encabezado azul tiene un alto fijo para saber dónde termina. */
@@ -848,11 +866,11 @@ h2 .tt-trophy{width:clamp(56px,10vw,90px)}
   .cal-page .cal-band-wrap .cal-arrow:last-child{margin-left:auto}
   .cal-page .cal-band h2 span,.cal-page .cal-band h2 small{font-size:min(2.5rem,calc((40cqi - var(--arrow) - var(--pad) - var(--gap)) / (var(--len) * .8)))}
   .cal-art{bottom:calc(-1 * (var(--title-gap) + 1.1rem + var(--band-h)));max-height:calc(100% + var(--title-gap) + 1.1rem + var(--band-h));border-radius:10px}
-}
+}@media(min-width:1200px) and (max-width:1499px) and (orientation:landscape){.section-objects--large{zoom:0.75}.cal-page .section-objects--large{zoom:0.75}.section-objects--large:has(>:nth-child(4)){display:grid;grid-template-columns:repeat(2,max-content);justify-items:center;align-items:center;gap:.5rem .7rem}.journal-objects .section-objects--large{display:flex}.section-title:has(>.calc-art){align-items:stretch}.calc-art{container-type:normal}.calc-art img{position:relative;left:auto;bottom:auto;transform:none;display:block;width:100%;height:100%;max-width:100%;max-height:100%;object-fit:contain;object-position:center bottom}.cal-art-room{align-self:end}.cal-art{position:relative;left:auto;bottom:auto;transform:none;width:auto;height:7.5rem;max-height:7.5rem;max-width:27rem;object-fit:contain;object-position:left bottom;border-radius:10px}.games-art img{transform:translateX(-50%) scale(1.25)}}
 @media(min-width:1001px){.cal-page .cal-band-wrap{--padb:.4rem}}
 @media(max-width:800px),(orientation:portrait) and (max-width:1100px){
   .cal-page .cal-band-wrap{--pad:.6rem;--gap:.4rem}
-  .cal-art-room{order:3;display:flex;justify-content:center;align-items:flex-end;height:9rem;margin-bottom:calc(-1 * (var(--title-gap) + 1.1rem))}
+  .cal-art-room{order:3;display:flex;justify-content:center;align-items:flex-end;height:11.25rem;margin-bottom:calc(-1 * (var(--title-gap) + 1.1rem))}
   .cal-art{position:relative;left:auto;bottom:auto;transform:none;max-height:100%}
 }
 /* Calendario en pantallas medianas: no hay lugar para el meme en el encabezado; los íconos pasan a otra línea si no entran. */
@@ -1042,12 +1060,12 @@ h2 .tt-trophy{width:clamp(56px,10vw,90px)}
    apoyado sobre el rectángulo de gastos. */
 @media(max-width:800px),(orientation:portrait) and (max-width:1100px){
   .calc-art{display:block;width:100%;pointer-events:none;user-select:none}
-  .calc-art img{display:block;width:100%;max-width:34rem;height:auto;margin:0 auto -.4rem;border-radius:10px;box-shadow:0 6px 14px #2d140c88}
+  .calc-art img{display:block;width:100%;max-width:43rem;height:auto;margin:0 auto -.4rem;border-radius:10px;box-shadow:0 6px 14px #2d140c88}
 }
 @media(pointer:coarse) and (min-width:801px) and (max-width:1859px) and (orientation:landscape){
   .section-title:has(>.calc-art)>.section-objects{grid-column:2/-1}
   .calc-art{display:block;grid-column:1/-1;grid-row:2;align-self:auto;container-type:normal}
-  .calc-art img{display:block;position:static;transform:none;width:auto;max-width:100%;height:min(15rem,45vh);margin:0 auto -1.6rem}
+  .calc-art img{display:block;position:static;transform:none;width:auto;max-width:100%;height:min(18.75rem,56vh);margin:0 auto -1.6rem}
 }
 @media(pointer:coarse) and (min-width:1101px) and (max-width:1279px) and (orientation:landscape){.section-title:has(>.calc-art)>.section-objects{zoom:1.1}}
 /* Mis gastos fuera de la notebook: entre 848 y 1088px de ancho las 6 columnas quedan apretadas (cortan el texto),
@@ -1094,10 +1112,10 @@ h2 .tt-trophy{width:clamp(56px,10vw,90px)}
 /* Calendario en horizontal mediano: el meme va en su propia fila, centrado, apoyado sobre el encabezado azul,
    y los íconos quedan en una sola fila. */
 @media(pointer:coarse) and (min-width:801px) and (max-width:1150px) and (orientation:landscape){
-  .cal-art-room{display:flex;grid-column:1/-1;grid-row:2;justify-content:center;align-items:flex-end;height:9rem;margin-bottom:calc(-1 * (var(--title-gap) + 1.1rem))}
+  .cal-art-room{display:flex;grid-column:1/-1;grid-row:2;justify-content:center;align-items:flex-end;height:11.25rem;margin-bottom:calc(-1 * (var(--title-gap) + 1.1rem))}
   .cal-art{position:relative;left:auto;bottom:auto;transform:none;max-height:100%;border-radius:10px 10px 0 0}
   .cal-page .section-title>.section-objects{flex-wrap:nowrap}
-  .cal-page .section-objects--large{zoom:1}
+  .cal-page .section-objects--large{zoom:0.75}
 }
 @media(pointer:coarse) and (min-width:1001px) and (max-width:1150px){.cal-layout{grid-template-columns:1fr}.cal-day-panel{position:static;max-height:none}}
 /* Juegos en horizontal mediano: el meme va en su propia fila, centrado y entero, llegando hasta las tarjetas;
@@ -1110,7 +1128,7 @@ h2 .tt-trophy{width:clamp(56px,10vw,90px)}
   .games-art img,.games-clock,.games-calendar{position:static;width:min(calc(11rem * 1200 / 666),calc((100% - 1.6rem) * 1200 / 3240));height:auto;aspect-ratio:1200/666}
   .games-art .games-calendar{width:min(calc(11rem * 840 / 666),calc((100% - 1.6rem) * 840 / 3240));aspect-ratio:840/666}
 }
-@media(pointer:coarse) and (min-width:801px) and (max-width:1100px) and (orientation:landscape){.games-title>.section-objects--large{zoom:1}}
+@media(pointer:coarse) and (min-width:801px) and (max-width:1100px) and (orientation:landscape){.games-title>.section-objects--large{zoom:0.75}}
 /* Juegos en pantallas bajas (celular en horizontal): el cartel de inicio siempre entra entero (si hace falta,
    se desplaza adentro) y los controles táctiles son más bajos para dejarle lugar al juego. */
 .runner-overlay>div{max-height:100%;overflow-y:auto}
@@ -1161,25 +1179,199 @@ h2 .tt-trophy{width:clamp(56px,10vw,90px)}
   .bol-stat strong{font-size:1.05rem}
   .bol-toast{white-space:normal}
 }
+/* Reloj del encabezado, al lado de "Escritorio Personal": pantalla futurista azul oscuro con marco de esquinas
+   cortadas que pasa de celeste a azul y violeta, rayitas arriba y abajo, horas:minutos grandes en blanco sólido y
+   los segundos más chicos en celeste. */
+.brand-row{display:flex;align-items:center;gap:1rem;min-width:0}
+.hud-clock{--hud:#f4f8ff;--hud2:#22d3ee;--edge:#22d3ee;position:relative;display:inline-flex;align-items:baseline;gap:.15rem;padding:.45rem 1.15rem .4rem;border:2px solid transparent;background:linear-gradient(180deg,#071028,#030716) padding-box,linear-gradient(90deg,#22d3ee 0%,#2563eb 55%,#3b82f6 75%,#c084fc 100%) border-box;color:var(--hud);font:800 1.85rem/1 Bahnschrift,"DIN Alternate","Roboto Condensed","Arial Narrow",Nunito,system-ui,sans-serif;font-variant-numeric:tabular-nums;letter-spacing:.03em;clip-path:polygon(12px 0,calc(100% - 12px) 0,100% 12px,100% calc(100% - 12px),calc(100% - 12px) 100%,12px 100%,0 calc(100% - 12px),0 12px);box-shadow:0 0 12px #2563eb55;user-select:none;white-space:nowrap}
+.hud-clock::before{content:"";position:absolute;inset:3px;clip-path:inherit;border:1px solid #1d4ed8aa;pointer-events:none}
+.hud-clock::after{content:"";position:absolute;inset:0;background:linear-gradient(#1e3a8a22 1px,transparent 1px) 0 0/100% 8px,linear-gradient(90deg,#1e3a8a22 1px,transparent 1px) 0 0/12px 100%;pointer-events:none}
+.hud-clock-main{position:relative;z-index:1;text-shadow:none}
+.hud-clock-digit{display:inline-block;width:.6em;text-align:center}
+.hud-clock-colon{position:relative;display:inline-block;width:.42em;height:.72em;vertical-align:-.16em;margin:0 .02em;color:transparent;text-shadow:none}
+.hud-clock-colon::before,.hud-clock-colon::after{content:"";position:absolute;left:50%;width:.15em;height:.15em;transform:translateX(-50%);background:var(--hud)}
+.hud-clock-colon::before{top:.12em}.hud-clock-colon::after{bottom:.12em}
+.hud-clock-sec{position:relative;z-index:1;color:var(--hud2);font-size:.62em;text-shadow:none}
+.hud-clock-bars{position:absolute;height:4px;pointer-events:none}
+.hud-clock-bars--top{top:3px;left:8%;right:8%;background:repeating-linear-gradient(115deg,#7dd3fc 0 6px,transparent 6px 10px) 0 0/34% 100% no-repeat,linear-gradient(90deg,#a78bfa,#93c5fd) 62% 0/24% 2px no-repeat,linear-gradient(90deg,#c084fc,#c084fc) 100% 0/6% 100% no-repeat}
+.hud-clock-bars--bottom{bottom:3px;left:8%;right:8%;background:repeating-linear-gradient(115deg,#22d3ee 0 6px,transparent 6px 10px) 0 0/40% 100% no-repeat,repeating-linear-gradient(115deg,#38bdf8 0 4px,transparent 4px 9px) 100% 0/26% 100% no-repeat,linear-gradient(90deg,#3b82f6,#c084fc) 100% 100%/14% 1px no-repeat}
+@media(max-width:600px){.hud-clock{font-size:1.1rem;padding:.32rem .6rem .28rem}.hud-clock-bars{height:3px}.brand-row{gap:.5rem}}
+@media(max-width:900px){.brand-row{flex:1 1 auto}}
+/* La fecha, a la derecha del reloj: una tira de papel cuadriculado con los bordes rotos, pegada con cinta en las
+   puntas, escrita a mano en negro, con el número del día en un círculo rojo y el mes subrayado. */
+.paper-date{position:relative;display:inline-flex;align-items:center;padding:.42rem 1.6rem .38rem;color:#1d1a17;font:700 1.35rem/1 Kalam,"Segoe Print","Bradley Hand",cursive;white-space:nowrap;user-select:none;transform:rotate(-.6deg);filter:drop-shadow(0 3px 4px #0007)}
+.paper-date::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(#9fb6c933 1px,transparent 1px) 0 0/11px 11px,linear-gradient(90deg,#9fb6c933 1px,transparent 1px) 0 0/11px 11px,radial-gradient(ellipse at 30% 40%,#fffdf6,#efe8d8 70%,#e2d8c2);clip-path:polygon(0 6%,3% 0,9% 4%,15% 1%,22% 5%,30% 0,38% 3%,46% 0,54% 4%,62% 1%,70% 5%,78% 0,86% 3%,93% 0,100% 5%,99% 50%,100% 95%,94% 100%,87% 96%,79% 100%,71% 97%,63% 100%,55% 96%,47% 100%,39% 97%,31% 100%,23% 96%,15% 100%,8% 97%,0 100%,1% 50%)}
+.paper-date::after{content:"";position:absolute;top:-.35rem;left:-.5rem;width:2.6rem;height:1.05rem;background:linear-gradient(90deg,#d8c39acc,#c9b083cc);transform:rotate(-24deg);box-shadow:0 1px 2px #0003;clip-path:polygon(0 8%,5% 0,95% 6%,100% 0,98% 100%,92% 92%,6% 100%,2% 90%);pointer-events:none}
+.paper-date-text{position:relative;display:inline-flex;align-items:baseline;gap:.35em}
+.paper-date-text::after{content:"";position:absolute;bottom:-.55rem;right:-2.2rem;width:2.5rem;height:1.05rem;background:linear-gradient(90deg,#d8c39acc,#c9b083cc);transform:rotate(-28deg);box-shadow:0 1px 2px #0003;clip-path:polygon(0 0,96% 8%,100% 100%,4% 92%);pointer-events:none}
+.paper-date-day{position:relative;display:inline-block;padding:0 .3em;font-size:1.25em}
+.paper-date-circle{position:absolute;left:-.12em;right:-.12em;top:-.08em;bottom:-.12em;width:calc(100% + .24em);height:calc(100% + .2em);fill:none;stroke:#d4241c;stroke-width:4;stroke-linecap:round;overflow:visible}
+.paper-date-month{position:relative;display:inline-block}
+.paper-date-line{position:absolute;left:-.05em;bottom:-.12em;width:calc(100% + .1em);height:.3em;fill:none;stroke:#1d1a17;stroke-width:3;stroke-linecap:round;overflow:visible}
+@media(max-width:1100px){.paper-date{font-size:1.1rem;padding:.36rem 1.3rem .32rem}}
+@media(max-width:760px){.brand-row{flex-wrap:wrap;row-gap:.45rem}.paper-date{font-size:.95rem;padding:.3rem 1.1rem .26rem}}
+/* Nombre, reloj y fecha comparten el lugar de la izquierda del encabezado: si no entran en una línea, la fecha
+   baja abajo (sin tapar los botones de la derecha). */
+header .brand-row{flex:1 1 0;min-width:0;flex-wrap:wrap;row-gap:.45rem}
+header .brand{white-space:nowrap}
+/* El logo de "Escritorio Personal": cartel de neón verde (con las esquinas cortadas como el marco). */
+header .brand--logo{display:block;flex:none;line-height:0}
+header .brand--logo img{display:block;height:58px;width:auto;clip-path:polygon(2.4% 0,97.6% 0,100% 10%,100% 90%,97.6% 100%,2.4% 100%,0 90%,0 10%);filter:drop-shadow(0 0 6px #22c55e66)}
+@media(max-width:1100px){header .brand--logo img{height:48px}}
+@media(max-width:600px){header .brand--logo img{height:40px}}
 
-/* Fondo gamer: panal de hexágonos neón en verdes (en body), piso de grilla neón en perspectiva (estilo synthwave) y líneas de pantalla vieja por encima.
-   Van fijos detrás de todo y no se pueden tocar. */
+/* Juegos (igual que en MiniJuegos): fondo gamer con panal de hexágonos neón en verdes, brillos verdes, piso de
+   grilla neón en perspectiva (estilo synthwave) y líneas de pantalla vieja por encima. En el escritorio va solo en
+   la sección Juegos; fijos detrás de todo y no se pueden tocar. */
+body{background:url(../assets/images/fondo-hexagonos.svg) 0 0/336px 290.98px,radial-gradient(ellipse 55% 50% at 88% 12%,#16a34a55,transparent 70%),radial-gradient(ellipse 50% 45% at 5% 60%,#22c55e33,transparent 70%),linear-gradient(160deg,#010a04 0,#03160a 50%,#062312 100%);background-attachment:fixed}
 body::before,body::after{content:"";position:fixed;pointer-events:none;z-index:0}
 body>#root{position:relative;z-index:1}
 body::before{left:-50%;right:-50%;bottom:0;height:100vh;transform:perspective(600px) rotateX(58deg);transform-origin:50% 100%;
   background:linear-gradient(#16a34a 2px,transparent 2px) 0 0/100% 48px,linear-gradient(90deg,#4ade80 2px,transparent 2px) 50% 0/64px 100%;
   opacity:.6;-webkit-mask-image:linear-gradient(to top,#000 25%,transparent 95%);mask-image:linear-gradient(to top,#000 25%,transparent 95%)}
-body::after{inset:0;background:repeating-linear-gradient(0deg,#ffffff07 0 1px,transparent 1px 3px)}
+body::after{inset:0;background:repeating-linear-gradient(0deg,#ffffff07 0 1px,transparent 1px 3px)}body:has(.board-page){background:url(../assets/images/fondo-hexagonos-azul.svg) 0 0/336px 290.98px,radial-gradient(ellipse 55% 50% at 88% 12%,#1d4ed855,transparent 70%),radial-gradient(ellipse 50% 45% at 5% 60%,#3b82f633,transparent 70%),linear-gradient(160deg,#010408 0,#020c1a 50%,#051228 100%);background-attachment:fixed}body:has(.board-page)::before,body:has(.board-page)::after{content:"";position:fixed;pointer-events:none;z-index:0}body:has(.board-page)>#root{position:relative;z-index:1}body:has(.board-page)::before{left:-50%;right:-50%;bottom:0;height:100vh;transform:perspective(600px) rotateX(58deg);transform-origin:50% 100%;background:linear-gradient(#1d4ed8 2px,transparent 2px) 0 0/100% 48px,linear-gradient(90deg,#60a5fa 2px,transparent 2px) 50% 0/64px 100%;opacity:.6;-webkit-mask-image:linear-gradient(to top,#000 25%,transparent 95%);mask-image:linear-gradient(to top,#000 25%,transparent 95%)}body:has(.board-page)::after{inset:0;background:repeating-linear-gradient(0deg,#ffffff07 0 1px,transparent 1px 3px)}.board-page .section-title>div:first-child{background:#000;border:4px solid #93c5fd;border-radius:14px;padding:calc(.7rem - 2px) calc(1.1rem - 2px) calc(.8rem - 2px);box-shadow:0 0 18px #60a5fa26,0 8px 22px #000b}.board-page .section-title h1{color:#fff;text-shadow:0 0 12px #ffffff55}.board-page .section-title .eyebrow{color:#93c5fd}
 /* El título con brillo neón para que combine con el fondo. */
 .games-title{text-shadow:0 2px 3px #000}
 /* Título, bajada y firma adentro de un recuadro negro: la bajada en celeste, "MiniJuegos" en blanco y la firma en violeta. */
-/* Contorno neón en el verde más claro del fondo (el de los hexágonos encendidos), con un destello que se
-   desvanece hacia afuera. */
-.games-heading{background:#000;border:3px solid #39ff14;border-radius:14px;padding:.7rem 1.1rem .8rem;box-shadow:0 0 4px #39ff14,0 0 12px #39ff14cc,0 0 26px #39ff1488,0 0 48px #39ff1444,inset 0 0 10px #39ff1440}
+.games-heading{background:#000;border:4px solid #39ff14;border-radius:14px;padding:calc(.7rem - 2px) calc(1.1rem - 2px) calc(.8rem - 2px);box-shadow:0 0 18px #39ff1426,0 8px 22px #000b}
 .games-title h1{color:#fff;text-shadow:0 0 12px #ffffff55}
 .games-title .eyebrow{color:#38bdf8}
 .games-byline{color:#a855f7}
 .games-art{text-shadow:none}
+
+/* ── Mobile navigation bar ──────────────────────────────────────────────── */
+.mobile-nav{display:none}
+@media(max-width:800px),(orientation:portrait) and (max-width:1100px){
+  .mobile-nav{display:flex;position:fixed;bottom:0;left:0;right:0;height:3.75rem;background:#0a0a0a;border-top:1px solid #1c1c1c;z-index:200;padding-bottom:env(safe-area-inset-bottom,0px)}
+  .mobile-nav a{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15rem;padding:.45rem .1rem .35rem;color:#424242;text-decoration:none;font-size:.55rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;position:relative;-webkit-tap-highlight-color:transparent;transition:color .2s}
+  .mobile-nav a svg{width:1.3rem;height:1.3rem;flex-shrink:0}
+  .mobile-nav a.active{color:#d4d4d4}
+  .mobile-nav a[data-section=board].active{color:#60a5fa}
+  .mobile-nav a[data-section=journal].active{color:#fbbf24}
+  .mobile-nav a[data-section=expenses].active{color:#4ade80}
+  .mobile-nav a[data-section=calendar].active{color:#c084fc}
+  .mobile-nav a[data-section=games].active{color:#39ff14}
+  .mobile-nav a.active::before{content:'';position:absolute;top:0;left:12%;right:12%;height:2px;background:currentColor;border-radius:0 0 2px 2px}
+  main{padding-bottom:4.5rem}
+}
+/* Calendar: dot-only on small portrait screens */
+@media(max-width:500px),(orientation:portrait) and (max-width:500px){
+  .cal-chip{display:inline-block;width:.42rem;height:.42rem;border-radius:50%;font-size:0;padding:0;margin:.05rem;line-height:0;overflow:hidden}
+  .cal-day{min-height:2rem}
+}
+
+/* Board notes: allow vertical scroll on touch devices */
+@media(pointer:coarse){
+  .note{touch-action:pan-y}
+}
+
+/* ── 1. Header: blue transparency (replaces brown) ───────────────────── */
+header{background:#0d1b3ee8;box-shadow:0 4px 15px #060f2288}
+
+/* ── 2. Backup buttons (Exportar/Importar/Salir): dark violet ─────── */
+.backup button{background:#4c1d95}
+.backup button:hover{background:#5b21b6}
+
+/* ── 3-5. Mobile: brand/clock/date bigger + no red circle + bigger note text */
+@media(pointer:coarse),(max-width:600px){
+  .brand{font-size:1.7rem}
+  .hud-clock{font-size:1.25rem;padding:.38rem .65rem .34rem}
+  .paper-date{font-size:1.1rem;padding:.36rem 1.25rem .32rem}
+  .paper-date-circle{display:none}
+  .note-text,.note textarea{font-size:1.2rem}
+}
+
+/* ── Mobile header reorder: backup top, brand+clock+date bottom ──────── */
+@media(pointer:coarse),(max-width:600px){
+  header{display:flex;flex-direction:column-reverse;gap:.2rem;padding:.4rem .75rem .45rem;align-items:stretch}
+  header .brand-row{display:flex;align-items:center;gap:.5rem;padding:.1rem 0}
+  header .backup{display:flex;align-items:center;gap:.4rem;flex-wrap:nowrap}
+  header .backup-actions{display:flex;gap:.3rem;flex:1}
+  header .backup-actions button{flex:0 1 auto;padding:.3rem .65rem;font-size:.8rem}
+  header .backup>button{grid-column:unset;grid-row:unset;justify-self:unset;padding:.3rem .65rem;font-size:.8rem}
+  header .account-summary{flex-shrink:1;min-width:0;border:0;padding:0;max-width:7.5rem;text-align:right;justify-self:unset;grid-column:unset;grid-row:unset}
+  .brand{font-size:2rem}
+  .hud-clock{font-size:1.45rem;padding:.4rem .7rem .36rem}
+  .paper-date{font-size:1.2rem;padding:.38rem 1.35rem .34rem}
+}
+
+/* ── Global: hide date red circle ────────────────────────────── */
+.paper-date-circle{display:none}
+
+/* ── Desktop ≥1100px: consistent layout + proportional sizes ─────── */
+@media(min-width:1100px){
+  header{justify-content:space-between;flex-wrap:nowrap;padding:.5rem clamp(.75rem,3vw,2.5rem);gap:.75rem}
+  header .brand-row{flex:1 1 auto;min-width:0;align-items:stretch}
+  header .backup{flex:0 0 auto;align-items:center}
+  .brand{font-size:clamp(1.7rem,2.3vw,2.6rem);display:flex;align-items:center}
+  .hud-clock{font-size:clamp(1.6rem,2.2vw,2.4rem);padding:clamp(.38rem,.48vw,.5rem) clamp(.75rem,.95vw,1rem)}
+  .paper-date{font-size:clamp(1.2rem,1.6vw,1.8rem);padding:clamp(.34rem,.4vw,.44rem) clamp(1.1rem,1.6vw,1.7rem)}
+  .note-text,.note textarea{font-size:clamp(1.05rem,1.2vw,1.4rem)}
+}
+
+/* ── Large screens ≥1500px (1920x1080@125% and above) ────────── */
+@media(min-width:1500px){
+  header{align-items:stretch}
+  .brand{font-size:2.5rem;align-self:stretch;box-sizing:border-box;display:flex;align-items:center}
+  .hud-clock{font-size:2.3rem;padding:.44rem .95rem;align-self:center}
+  .paper-date{font-size:1.75rem;padding:.42rem 1.65rem}
+  .note-text,.note textarea{font-size:1.7rem}
+}
+
+/* ── Journal page: violet hexagonal background ───────────────── */
+body:has(.journal-page){overflow-x:hidden;background:url(../assets/images/fondo-hexagonos-violeta.svg) 0 0/336px 290.98px,radial-gradient(ellipse 55% 50% at 88% 12%,#7c3aed55,transparent 70%),radial-gradient(ellipse 50% 45% at 5% 60%,#a855f733,transparent 70%),linear-gradient(160deg,#08010f 0,#130229 50%,#1e0440 100%);background-attachment:fixed}
+body:has(.journal-page)::before,body:has(.journal-page)::after{content:"";position:fixed;pointer-events:none;z-index:0}
+body:has(.journal-page)>#root{position:relative;z-index:1}
+body:has(.journal-page)::before{inset:0 0 0 0;bottom:0;height:100vh;transform:perspective(600px) rotateX(58deg);transform-origin:50% 100%;background:linear-gradient(#7c3aed 2px,transparent 2px) 0 0/100% 48px,linear-gradient(90deg,#c084fc 2px,transparent 2px) 50% 0/64px 100%;opacity:.6;-webkit-mask-image:linear-gradient(to top,#000 25%,transparent 95%);mask-image:linear-gradient(to top,#000 25%,transparent 95%)}
+body:has(.journal-page)::after{inset:0;background:repeating-linear-gradient(0deg,#ffffff07 0 1px,transparent 1px 3px)}
+.journal-page .section-title>div:first-child{background:#000;border:4px solid #c084fc;border-radius:14px;padding:calc(.7rem - 2px) calc(1.1rem - 2px) calc(.8rem - 2px);box-shadow:0 0 18px #a855f726,0 8px 22px #000b}
+.journal-page .section-title h1{color:#fff;text-shadow:0 0 12px #ffffff55}
+.journal-page .section-title .eyebrow{color:#c084fc}
+
+/* ── Expenses page: red hexagonal background ────────────────── */
+body:has(.expenses-page){overflow-x:hidden;background:url(../assets/images/fondo-hexagonos-rojo.svg) 0 0/336px 290.98px,radial-gradient(ellipse 55% 50% at 88% 12%,#dc262655,transparent 70%),radial-gradient(ellipse 50% 45% at 5% 60%,#ef444433,transparent 70%),linear-gradient(160deg,#0f0100 0,#1c0202 50%,#2d0404 100%);background-attachment:fixed}
+body:has(.expenses-page)::before,body:has(.expenses-page)::after{content:"";position:fixed;pointer-events:none;z-index:0}
+body:has(.expenses-page)>#root{position:relative;z-index:1}
+body:has(.expenses-page)::before{inset:0 0 0 0;bottom:0;height:100vh;transform:perspective(600px) rotateX(58deg);transform-origin:50% 100%;background:linear-gradient(#dc2626 2px,transparent 2px) 0 0/100% 48px,linear-gradient(90deg,#f87171 2px,transparent 2px) 50% 0/64px 100%;opacity:.6;-webkit-mask-image:linear-gradient(to top,#000 25%,transparent 95%);mask-image:linear-gradient(to top,#000 25%,transparent 95%)}
+body:has(.expenses-page)::after{inset:0;background:repeating-linear-gradient(0deg,#ffffff07 0 1px,transparent 1px 3px)}
+.expenses-page .section-title>div:first-child{background:#000;border:4px solid #f87171;border-radius:14px;padding:calc(.7rem - 2px) calc(1.1rem - 2px) calc(.8rem - 2px);box-shadow:0 0 18px #ef444426,0 8px 22px #000b}
+.expenses-page .section-title h1{color:#fff;text-shadow:0 0 12px #ffffff55}
+.expenses-page .section-title .eyebrow{color:#f87171}
+
+/* ── Calendar page: yellow hexagonal background ──────────────── */
+body:has(.cal-page){overflow-x:hidden;background:url(../assets/images/fondo-hexagonos-amarillo.svg) 0 0/336px 290.98px,radial-gradient(ellipse 55% 50% at 88% 12%,#eab30855,transparent 70%),radial-gradient(ellipse 50% 45% at 5% 60%,#facc1533,transparent 70%),linear-gradient(160deg,#0d0900 0,#1c1400 50%,#2d2000 100%);background-attachment:fixed}
+body:has(.cal-page)::before,body:has(.cal-page)::after{content:"";position:fixed;pointer-events:none;z-index:0}
+body:has(.cal-page)>#root{position:relative;z-index:1}
+body:has(.cal-page)::before{inset:0 0 0 0;bottom:0;height:100vh;transform:perspective(600px) rotateX(58deg);transform-origin:50% 100%;background:linear-gradient(#eab308 2px,transparent 2px) 0 0/100% 48px,linear-gradient(90deg,#facc15 2px,transparent 2px) 50% 0/64px 100%;opacity:.6;-webkit-mask-image:linear-gradient(to top,#000 25%,transparent 95%);mask-image:linear-gradient(to top,#000 25%,transparent 95%)}
+body:has(.cal-page)::after{inset:0;background:repeating-linear-gradient(0deg,#ffffff07 0 1px,transparent 1px 3px)}
+.cal-page .section-title>div:first-child{background:#000;border:4px solid #facc15;border-radius:14px;padding:calc(.7rem - 2px) calc(1.1rem - 2px) calc(.8rem - 2px);box-shadow:0 0 18px #eab30826,0 8px 22px #000b}
+.cal-page .section-title h1{color:#fff;text-shadow:0 0 12px #ffffff55}
+.cal-page .section-title .eyebrow{color:#facc15}
+
+/* Prevent horizontal scroll from ::before perspective grid on themed pages */
+html:has(.journal-page),html:has(.expenses-page),html:has(.cal-page){overflow-x:hidden}
+
+/* ── Desktop ≥1100px: logo, reloj y fecha con la altura completa del encabezado, todo en una fila ── */
+@media(min-width:1100px){
+  header{--header-row:clamp(54px,7.5vw - 50px,96px)}
+  header .brand-row{display:flex;flex-wrap:nowrap;align-items:center;gap:.75rem;height:var(--header-row);container-type:inline-size}
+  header .brand--logo{align-self:stretch}
+  header .brand--logo img{height:var(--header-row)}
+  .hud-clock{flex:none;align-self:stretch;flex-wrap:wrap;white-space:nowrap;align-content:center;height:var(--header-row);font-size:calc(var(--header-row)*.5);padding:0 calc(var(--header-row)*.22)}
+  /* La fecha ocupa la altura completa; su letra se achica si no entra en el lugar que dejan el logo y el reloj. */
+  .paper-date{flex:none;align-self:stretch;height:var(--header-row);padding:0 calc(var(--header-row)*.3);font-size:min(calc(var(--header-row)*.4),calc((100cqw - var(--header-row)*7.6 - 2rem)/14))}
+  /* Si no queda lugar al lado del reloj (pantalla angosta o mail largo), la fecha se oculta en vez de pisar los botones. */
+  @container(max-width:600px){.paper-date{display:none}}
+}
+
+/* ── Recuadros de los títulos de sección: efecto neón, un resplandor del mismo color que se desvanece hacia afuera ── */
+.board-page .section-title>div:first-child{--neon:#93c5fd}
+.journal-page .section-title>div:first-child{--neon:#c084fc}
+.expenses-page .section-title>div:first-child{--neon:#f87171}
+.cal-page .section-title>div:first-child{--neon:#facc15}
+.games-heading{--neon:#39ff14}
+:is(.board-page,.journal-page,.expenses-page,.cal-page) .section-title>div:first-child,.games-heading{box-shadow:0 0 3px var(--neon),0 0 9px color-mix(in srgb,var(--neon) 75%,transparent),0 0 20px color-mix(in srgb,var(--neon) 45%,transparent),0 0 36px color-mix(in srgb,var(--neon) 20%,transparent),inset 0 0 8px color-mix(in srgb,var(--neon) 35%,transparent),0 8px 22px #000b}
+
 /* Encabezado fijo arriba al bajar: cartel, meme, calendario y hora sobre un verde oscuro transparente que deja
    ver un poco los hexágonos (desenfocados). Ocupa todo el ancho, por encima del relleno de main. El relleno de abajo
    es --title-gap, así el meme, el calendario y el reloj (que bajan hasta ese espacio) quedan adentro. */
