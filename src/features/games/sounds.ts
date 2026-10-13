@@ -19,6 +19,11 @@ import patadaUrl from './assets/sonidos/patada.mp3';
 import trueno1Url from './assets/sonidos/trueno-1.mp3';
 import trueno2Url from './assets/sonidos/trueno-2.mp3';
 import trueno3Url from './assets/sonidos/trueno-3.mp3';
+import lavaUrl from './assets/sonidos/lava.mp3';
+import helicopteroUrl from './assets/sonidos/helicoptero.mp3';
+import electricidadUrl from './assets/sonidos/electricidad.mp3';
+import fuegoUrl from './assets/sonidos/fuego.mp3';
+import personaQuemaUrl from './assets/sonidos/persona-quema.mp3';
 
 type WithWebkit = typeof globalThis & { webkitAudioContext?: typeof AudioContext };
 let ctx: AudioContext | null = null;
@@ -501,11 +506,26 @@ export function playExplosion() {
 
 // ---------- ¡El piso es de lava! ----------
 let lavaAmbient: Record<LavaChannel, Channel> | null = null;
+export function preloadLavaSounds() { for (const url of [lavaUrl, helicopteroUrl, electricidadUrl, fuegoUrl, personaQuemaUrl]) loadSample(url); }
+// Un sonido de ambiente grabado que se repite sin corte (el mp3 deja un silencito en las puntas, se saltea).
+// Mientras carga suena el sintetizado (`synth`) y, apenas está, se pasa a la grabación.
+function recorded(c: AudioContext, url: string, volume: number, out: GainNode, synth: (out: GainNode) => void) {
+  const fallback = c.createGain(); fallback.connect(out);
+  synth(fallback);
+  whenLoaded(url, buffer => {
+    const loop = c.createBufferSource(), level = c.createGain();
+    loop.buffer = buffer; loop.loop = true; loop.loopStart = 0.03; loop.loopEnd = buffer.duration - 0.03;
+    level.gain.value = volume;
+    loop.connect(level).connect(out); loop.start(0, 0.03);
+    fallback.gain.setTargetAtTime(0, c.currentTime, 0.3);
+  });
+}
 function buildLavaAmbient(c: AudioContext): Record<LavaChannel, Channel> {
   const channel = (max: number, make: (out: GainNode) => void) => ambientChannel(c, max, make);
   return {
-    // Lava: un retumbo grave y espeso, burbujas que revientan ("blup") y un chirrido de piedra que se quema.
-    lava: channel(0.7, out => {
+    // Lava: la grabación del burbujeo (mientras carga, un retumbo grave y espeso, burbujas que revientan
+    // ("blup") y un chirrido de piedra que se quema).
+    lava: channel(0.7, out => recorded(c, lavaUrl, 1.2, out, out => {
       const rumble = noiseSource(c), low = filter(c, 'lowpass', 150), level = c.createGain();
       level.gain.value = 0.9; wobble(c, level.gain, 0.4, 0.25);
       rumble.connect(low).connect(level).connect(out); rumble.start();
@@ -519,27 +539,28 @@ function buildLavaAmbient(c: AudioContext): Record<LavaChannel, Channel> {
       const sizzle = noiseSource(c), hi = filter(c, 'highpass', 4500), hiss = c.createGain();
       hiss.gain.value = 0.06; wobble(c, hiss.gain, 0.9, 0.04);
       sizzle.connect(hi).connect(hiss).connect(out); sizzle.start();
-    }),
-    // Departamentos incendiados: el rugido de las llamas y la madera que cruje y chisporrotea.
-    fire: channel(0.8, out => {
+    })),
+    // Departamentos incendiados: la grabación del fuego (mientras carga, el rugido de las llamas y la madera
+    // que cruje y chisporrotea).
+    fire: channel(0.8, out => recorded(c, fuegoUrl, 1.3, out, out => {
       const roar = noiseSource(c), body = filter(c, 'lowpass', 600), level = c.createGain();
       level.gain.value = 0.85; wobble(c, level.gain, 2.3, 0.15);
       roar.connect(body).connect(level).connect(out); roar.start();
       const crackle = noiseSource(c), hi = filter(c, 'bandpass', 2800, 3), pops = c.createGain();
       pops.gain.value = 0.22; wobble(c, pops.gain, 11, 0.22, 'square'); wobble(c, pops.gain, 3.7, 0.12, 'square');
       crackle.connect(hi).connect(pops).connect(out); crackle.start();
-    }),
-    // Cortocircuitos: el zumbido de la corriente y chispazos que restallan.
-    electric: channel(0.4, out => {
+    })),
+    // Cortocircuitos: la grabación de la electricidad (mientras carga, un zumbido y chispazos que restallan).
+    electric: channel(0.4, out => recorded(c, electricidadUrl, 1.6, out, out => {
       const hum = osc(c, 'sawtooth', 100), band = filter(c, 'bandpass', 900, 2), level = c.createGain();
       level.gain.value = 0.6; wobble(c, level.gain, 50, 0.3, 'square');
       hum.connect(band).connect(level).connect(out); hum.start();
       const arc = noiseSource(c), hi = filter(c, 'highpass', 3200), snap = c.createGain();
       snap.gain.value = 0.45; wobble(c, snap.gain, 17, 0.45, 'square'); wobble(c, snap.gain, 6.3, 0.3, 'square');
       arc.connect(hi).connect(snap).connect(out); arc.start();
-    }),
-    // Helicóptero: el "chop-chop" de las palas, la turbina que silba y el motor.
-    heli: channel(0.75, out => {
+    })),
+    // Helicóptero: la grabación (mientras carga, el "chop-chop" de las palas, la turbina que silba y el motor).
+    heli: channel(0.75, out => recorded(c, helicopteroUrl, 1.2, out, out => {
       const air = noiseSource(c), low = filter(c, 'lowpass', 700), chop = c.createGain();
       chop.gain.value = 0.5; wobble(c, chop.gain, 12, 0.5);
       air.connect(low).connect(chop).connect(out); air.start();
@@ -549,7 +570,7 @@ function buildLavaAmbient(c: AudioContext): Record<LavaChannel, Channel> {
       const turbine = osc(c, 'sine', 2100), whine = c.createGain();
       whine.gain.value = 0.025; wobble(c, turbine.frequency, 0.3, 25);
       turbine.connect(whine).connect(out); turbine.start();
-    }),
+    })),
     // Ascensor: el motor eléctrico que zumba y el cable que roza en las poleas.
     elevator: channel(0.32, out => {
       const motor = osc(c, 'sawtooth', 82), low = filter(c, 'lowpass', 280), level = c.createGain();
@@ -596,12 +617,17 @@ export function playLavaFall() {
   tone(c, 'sine', 140, 40, t + 0.15, 0.35, 0.7);
   sizzle(c, t + 0.15, 1);
 }
-// Una persona del juego alcanzada por la lava: grita (cada una con su voz) y se quema.
+// Una persona del juego alcanzada por la lava: grita (cada una con su voz) y se quema (la grabación, un poco
+// más grave o más aguda según la persona; si todavía no cargó, el siseo sintetizado).
 export function playPersonBurn(volume: number, pitch: number) {
   const c = running(); if (!c || volume <= 0.03) return;
   const t = c.currentTime;
   scream(c, t, pitch, 0.9 * volume);
-  sizzle(c, t + 0.05, volume * 0.8);
+  const buffer = samples.get(personaQuemaUrl);
+  if (!(buffer instanceof AudioBuffer)) { loadSample(personaQuemaUrl); sizzle(c, t + 0.05, volume * 0.8); return; }
+  const source = c.createBufferSource(), gain = c.createGain();
+  source.buffer = buffer; source.playbackRate.value = 0.9 + (pitch - 0.8) * 0.35; gain.gain.value = 1.1 * volume;
+  source.connect(gain).connect(out(c)); source.start(t + 0.05);
 }
 
 // ---------- Ciudad Tiburón ----------
@@ -612,7 +638,7 @@ function buildStorm(c: AudioContext): Record<StormChannel, Channel> {
     // Lluvia: el siseo parejo del aguacero y gotas gruesas que golpean cerca.
     // Lluvia: la grabación (un tramo de 14 s que se repite sin que se note el corte); mientras carga, un
     // aguacero sintetizado.
-    rain: channel(0.5, out => {
+    rain: channel(0.16, out => {
       const synth = c.createGain(); synth.connect(out);
       const shower = noiseSource(c), hi = filter(c, 'highpass', 500), low = filter(c, 'lowpass', 7000), level = c.createGain();
       level.gain.value = 0.8; wobble(c, level.gain, 0.23, 0.1);
@@ -628,7 +654,7 @@ function buildStorm(c: AudioContext): Record<StormChannel, Channel> {
       });
     }),
     // Viento: un soplido grave que sube y baja, con un silbido entre los edificios.
-    wind: channel(0.75, out => {
+    wind: channel(0.25, out => {
       const air = noiseSource(c), band = filter(c, 'bandpass', 480, 0.8), level = c.createGain();
       wobble(c, band.frequency, 0.17, 220);
       level.gain.value = 0.75; wobble(c, level.gain, 0.31, 0.25);
@@ -652,15 +678,16 @@ function buildStorm(c: AudioContext): Record<StormChannel, Channel> {
       pattern.gain.value = 0.5; wobble(c, pattern.gain, 0.4, 0.5, 'square');
       gurgle.connect(gate).connect(pattern).connect(out); gurgle.start();
     }),
-    // Hélice de los tiburones voladores: el "chop-chop" de las palas y el zumbido del motorcito.
-    rotor: channel(0.55, out => {
+    // Hélice de los tiburones voladores: la grabación del helicóptero (mientras carga, el "chop-chop" de las
+    // palas y el zumbido del motorcito).
+    rotor: channel(2, out => recorded(c, helicopteroUrl, 1.3, out, out => {
       const air = noiseSource(c), low = filter(c, 'lowpass', 900), chop = c.createGain();
       chop.gain.value = 0.5; wobble(c, chop.gain, 16, 0.5);
       air.connect(low).connect(chop).connect(out); air.start();
       const motor = osc(c, 'sawtooth', 190), band = filter(c, 'lowpass', 1200), hum = c.createGain();
       hum.gain.value = 0.18; wobble(c, motor.frequency, 16, 12);
       motor.connect(band).connect(hum).connect(out); motor.start();
-    }),
+    })),
   };
 }
 export function setStormAmbient(levels: Record<StormChannel, number> | null) {
@@ -674,7 +701,7 @@ export function setStormAmbient(levels: Record<StormChannel, number> | null) {
 }
 // Trueno: el chasquido del rayo y después un retumbo largo que rueda (más tarde y más grave si cayó lejos).
 const TRUENOS = [trueno1Url, trueno2Url, trueno3Url];
-export function preloadSharkSounds() { for (const url of [lluviaUrl, tiburonAtacaUrl, ...TRUENOS]) loadSample(url); }
+export function preloadSharkSounds() { for (const url of [lluviaUrl, tiburonAtacaUrl, helicopteroUrl, ...TRUENOS]) loadSample(url); }
 // Espera a que cargue una grabación y la entrega (si ya cargó, enseguida).
 function whenLoaded(url: string, ready: (buffer: AudioBuffer) => void) {
   loadSample(url);
@@ -683,7 +710,7 @@ function whenLoaded(url: string, ready: (buffer: AudioBuffer) => void) {
 }
 export function playThunder(near: number) {
   // La grabación (uno de los tres truenos, al azar): más tarde y más bajo si el rayo cayó lejos.
-  if (playSample(TRUENOS[Math.floor(Math.random() * TRUENOS.length)], 0.45 + near * 0.55, (1 - near) * 0.5)) return;
+  if (playSample(TRUENOS[Math.floor(Math.random() * TRUENOS.length)], 0.15 + near * 0.2, (1 - near) * 0.5)) return;
   const c = running(); if (!c) return;
   const t = c.currentTime + (1 - near) * 0.5;
   if (near > 0.4) { burst(c, 'highpass', 1800, t, 0.12, 0.6 * near); burst(c, 'lowpass', 3000, t, 0.25, 0.7 * near); }
