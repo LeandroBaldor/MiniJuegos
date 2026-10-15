@@ -9,6 +9,7 @@ import { ReverseSnake } from '../features/games/ReverseSnake';
 import { LavaFloor } from '../features/games/LavaFloor';
 import { SharkCity } from '../features/games/SharkCity';
 import { PaperBall } from '../features/games/PaperBall';
+import { Invasion } from '../features/games/Invasion';
 
 // Solo la sección de Juegos: sin cuenta, sin sincronización. Los récords quedan guardados en el navegador.
 export default function App() {
@@ -23,5 +24,6 @@ export default function App() {
     <Route path="juegos/lava" element={<LavaFloor />} />
     <Route path="juegos/tiburon" element={<SharkCity />} />
     <Route path="juegos/cesto" element={<PaperBall />} />
+    <Route path="juegos/invasion" element={<Invasion />} />
   </Route></Routes></HashRouter>;
 }
