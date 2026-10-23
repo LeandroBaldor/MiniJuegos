@@ -1,15 +1,15 @@
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import { Layout } from './Layout';
 import { Games } from '../features/games/Games';
-import { BlockRunner } from '../features/games/BlockRunner';
+import { BlockRunner } from '../features/games/BlockRunnerGame';
 import { PixelSolitaire } from '../features/games/PixelSolitaire';
-import { TikiTaka } from '../features/games/TikiTaka';
-import { Trepaluna } from '../features/games/Trepaluna';
-import { ReverseSnake } from '../features/games/ReverseSnake';
+import { TikiTaka } from '../features/games/TikiTakaGame';
+import { Trepaluna } from '../features/games/TrepalunaGame';
+import { ReverseSnake } from '../features/games/ReverseSnakeGame';
 import { LavaFloor } from '../features/games/LavaFloor';
 import { SharkCity } from '../features/games/SharkCity';
-import { PaperBall } from '../features/games/PaperBall';
-import { Invasion } from '../features/games/Invasion';
+import { PaperBall } from '../features/games/PaperBallGame';
+import { Invasion } from '../features/games/InvasionGame';
 
 // Solo la sección de Juegos: sin cuenta, sin sincronización. Los récords quedan guardados en el navegador.
 export default function App() {
