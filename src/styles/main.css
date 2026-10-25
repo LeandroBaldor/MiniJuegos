@@ -1453,3 +1453,6 @@ html:has(.games-title){overflow-x:hidden}
 .inv-bad strong{color:#f87171}
 .inv-clues{text-align:left;max-height:30vh;overflow:auto}
 .inv-clues ul{margin:.3rem 0 .6rem;padding-left:1.2rem;color:#d1fae5}
+
+/* Modo prueba (vidas ilimitadas): un aviso chiquito arriba de la lista de juegos. */
+.games-tester { margin: 8px 0 0; padding: 6px 12px; display: inline-block; border-radius: 999px; background: #14532d; color: #dcfce7; font-weight: 800; font-size: 0.85rem; }
