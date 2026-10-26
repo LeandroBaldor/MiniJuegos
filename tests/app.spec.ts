@@ -272,3 +272,26 @@ test('¡Huye de la serpiente!: se abre desde Juegos, suma puntos con las bolitas
 
 // Diseño adaptable: en celulares y tablets (en vertical y en horizontal) ninguna sección se sale de la pantalla
 // y los memes se ven enteros, sin deformarse.
+
+test('Kombat Football: se abre desde Juegos, se elige luchador, corre el reloj y se pausa con Esc', async ({ page }) => {
+  await page.goto('/MiniJuegos/#/juegos');
+  await page.getByRole('link', { name: /Kombat Football/ }).click();
+  await expect(page.getByRole('heading', { name: 'Kombat Football', level: 1 })).toBeVisible();
+  await page.getByRole('button', { name: /contra la máquina/ }).click();
+  await page.getByRole('group', { name: 'Tu luchador' }).getByRole('button', { name: /ESCARCHA/ }).click();
+  await page.getByRole('button', { name: /Volcán/ }).click();
+  await page.getByRole('button', { name: '¡A jugar!' }).click();
+  await expect(page.getByTestId('kf-score')).toHaveText('0 - 0');
+  await expect(page.getByTestId('kf-side-0')).toContainText('ESCARCHA');
+  await expect(page.getByTestId('kf-clock')).not.toHaveText('02:00', { timeout: 8000 });
+  await page.keyboard.down('ArrowRight'); await page.waitForTimeout(600); await page.keyboard.press('j'); await page.keyboard.up('ArrowRight');
+  await page.keyboard.press('Escape');
+  await expect(page.getByRole('heading', { name: 'Pausa' })).toBeVisible();
+  const paused = await page.getByTestId('kf-clock').textContent();
+  await page.waitForTimeout(1200);
+  await expect(page.getByTestId('kf-clock')).toHaveText(paused ?? '');
+  await page.getByRole('button', { name: 'Seguir' }).first().click();
+  await expect(page.getByRole('heading', { name: 'Pausa' })).toHaveCount(0);
+  await page.getByRole('link', { name: '‹ Juegos' }).click();
+  await expect(page.getByRole('heading', { name: 'MiniJuegos', exact: true })).toBeVisible();
+});

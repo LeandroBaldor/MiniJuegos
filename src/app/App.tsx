@@ -11,6 +11,7 @@ import { SharkCity } from '../features/games/SharkCity';
 import { PaperBall } from '../features/games/PaperBallGame';
 import { Invasion } from '../features/games/InvasionGame';
 import { GravitySwap } from '../features/games/GravitySwapGame';
+import { KombatFootball } from '../features/games/KombatFootballGame';
 
 // Solo la sección de Juegos: sin cuenta, sin sincronización. Los récords quedan guardados en el navegador.
 export default function App() {
@@ -27,5 +28,6 @@ export default function App() {
     <Route path="juegos/cesto" element={<PaperBall />} />
     <Route path="juegos/invasion" element={<Invasion />} />
     <Route path="juegos/gravedad" element={<GravitySwap />} />
+    <Route path="juegos/kombat" element={<KombatFootball />} />
   </Route></Routes></HashRouter>;
 }
