@@ -2,7 +2,6 @@ import { HashRouter, Route, Routes } from 'react-router-dom';
 import { Layout } from './Layout';
 import { Games } from '../features/games/Games';
 import { BlockRunner } from '../features/games/BlockRunnerGame';
-import { PixelSolitaire } from '../features/games/PixelSolitaire';
 import { Trepaluna } from '../features/games/TrepalunaGame';
 import { LavaFloor } from '../features/games/LavaFloor';
 import { SharkCity } from '../features/games/SharkCity';
@@ -17,7 +16,6 @@ export default function App() {
     <Route index element={<Games />} />
     <Route path="juegos" element={<Games />} />
     <Route path="juegos/bloques" element={<BlockRunner />} />
-    <Route path="juegos/solitario" element={<PixelSolitaire />} />
     <Route path="juegos/trepaluna" element={<Trepaluna />} />
     <Route path="juegos/lava" element={<LavaFloor />} />
     <Route path="juegos/tiburon" element={<SharkCity />} />

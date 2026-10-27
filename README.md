@@ -2,7 +2,7 @@
 
 La sección de **Juegos** de [Escritorio Personal](https://github.com/LeandroBaldor/escritorio-personal), sola: sin cuenta, sin sincronización y sin las otras secciones. Los récords se guardan en el navegador.
 
-Juegos: ¡Cuidado, bloques!, Solitario 3.000, Tiki-Taka, Trepaluna, ¡Huye de la serpiente!, ¡El piso es de lava!, Ciudad Tiburón y SkynetBall.
+Juegos: ¡Cuidado, bloques!, Trepaluna, ¡El piso es de lava!, SkynetBall, Ciudad Tiburón, Invasión, Gravity Swap y Kombat Football.
 
 ## Desarrollo
 
