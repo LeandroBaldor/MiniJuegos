@@ -614,6 +614,36 @@ radial-gradient(circle at 50% 120%,#4f8df0 0,#2563eb 45%,#1e3a8a 100%)}
 .runner-pad .runner-jump{flex:1.4;background:#22c55e;color:#062b13;font-weight:900;font-size:1.2rem}
 .runner-pad button:active{filter:brightness(1.25)}
 @media(pointer:coarse),(max-width:800px),(orientation:portrait) and (max-width:1100px){.runner-pad{display:flex}.runner-keys{display:none}}
+/* El joystick táctil: dos paneles tipo control de consola que flotan en las esquinas de abajo (a la izquierda el
+   botón de acción, a la derecha la cruz). --u es un píxel real aunque el juego esté achicado (fitScreen). */
+.runner{--u:calc(1px / var(--fit,1))}
+@media(max-height:500px){.runner{--u:calc(.82px / var(--fit,1))}} /* celulares: un poco más chicos */
+.runner .gpad{display:none;position:absolute;left:0;right:0;bottom:0;height:0;z-index:25;pointer-events:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+@media(pointer:coarse),(max-width:800px),(orientation:portrait) and (max-width:1100px){.runner .gpad{display:block}}
+.runner .gpad-panel{position:absolute;bottom:calc(12*var(--u));pointer-events:auto;display:flex;align-items:center;gap:calc(10*var(--u));padding:calc(12*var(--u));border-radius:calc(40*var(--u));
+  background:radial-gradient(ellipse at 30% 20%,#ecfccb99,#0000 55%),radial-gradient(ellipse at 80% 90%,#facc1555,#0000 60%),linear-gradient(135deg,#4ade80b3,#a3e635b3 45%,#22c55eb3);
+  border:calc(2*var(--u)) solid #ecfccbaa;box-shadow:0 calc(6*var(--u)) calc(18*var(--u)) #0008,inset 0 calc(2*var(--u)) calc(6*var(--u)) #ffffff66,inset 0 calc(-4*var(--u)) calc(10*var(--u)) #14532d88}
+.runner .gpad-panel--left{left:calc(14*var(--u))}
+.runner .gpad-panel--right{right:calc(14*var(--u))}
+.runner .gpad button{all:unset;box-sizing:border-box;display:grid;place-items:center;touch-action:none;cursor:pointer;-webkit-tap-highlight-color:transparent;flex:none;min-height:0}
+.runner .gpad .gpad-a,.runner .gpad .runner-jump.gpad-a{width:calc(92*var(--u));height:calc(92*var(--u));border-radius:50%;background:radial-gradient(circle at 35% 28%,#6b7280,#1f2937 45%,#030712 80%);
+  box-shadow:0 calc(5*var(--u)) 0 #052e16,0 calc(8*var(--u)) calc(14*var(--u)) #0009,inset 0 calc(2*var(--u)) calc(3*var(--u)) #ffffff55;color:#d9f99d;font:900 calc(15*var(--u))/1 Nunito,system-ui,sans-serif;letter-spacing:.04em;text-transform:uppercase;text-shadow:0 0 calc(6*var(--u)) #84cc16}
+.runner .gpad .gpad-a:active,.runner .gpad .runner-jump.gpad-a:active{transform:translateY(calc(4*var(--u)));box-shadow:0 calc(1*var(--u)) 0 #052e16,0 0 calc(18*var(--u)) #bef264,inset 0 calc(2*var(--u)) calc(3*var(--u)) #ffffff55}
+.runner .gpad-cross{position:relative;width:calc(150*var(--u));height:calc(150*var(--u))}
+.runner .gpad .gpad-dir{position:absolute;width:calc(52*var(--u));height:calc(52*var(--u));display:grid;place-items:center;font-size:calc(20*var(--u));color:#1a2e05;
+  background:linear-gradient(160deg,#f7fee7,#d9f99d 25%,#a3e635 55%,#65a30d);box-shadow:0 calc(4*var(--u)) 0 #3f6212,inset 0 calc(2*var(--u)) calc(2*var(--u)) #ffffffcc,inset 0 calc(-3*var(--u)) calc(5*var(--u)) #3f621266}
+.runner .gpad .gpad-dir--up{left:calc(49*var(--u));top:0;border-radius:calc(12*var(--u)) calc(12*var(--u)) calc(4*var(--u)) calc(4*var(--u))}
+.runner .gpad .gpad-dir--down{left:calc(49*var(--u));bottom:0;border-radius:calc(4*var(--u)) calc(4*var(--u)) calc(12*var(--u)) calc(12*var(--u))}
+.runner .gpad .gpad-dir--left{top:calc(49*var(--u));left:0;border-radius:calc(12*var(--u)) calc(4*var(--u)) calc(4*var(--u)) calc(12*var(--u))}
+.runner .gpad .gpad-dir--right{top:calc(49*var(--u));right:0;border-radius:calc(4*var(--u)) calc(12*var(--u)) calc(12*var(--u)) calc(4*var(--u))}
+.runner .gpad .gpad-dir--off{filter:saturate(.4) brightness(.8)}
+.runner .gpad button.gpad-dir:active{filter:brightness(1.2);box-shadow:0 calc(1*var(--u)) 0 #3f6212,0 0 calc(14*var(--u)) #ecfccb;transform:translateY(calc(3*var(--u)))}
+.runner .gpad-hub{position:absolute;left:calc(49*var(--u));top:calc(49*var(--u));width:calc(52*var(--u));height:calc(52*var(--u));background:linear-gradient(160deg,#ecfccb,#a3e635 50%,#65a30d)}
+.runner .gpad-hub::after{content:"";position:absolute;inset:30%;border-radius:50%;background:radial-gradient(circle at 40% 35%,#f7fee7,#84cc16)}
+.runner .gpad .kf-cast{width:calc(60*var(--u));height:calc(60*var(--u));border-radius:50%;font-size:calc(26*var(--u));color:#fff;background:radial-gradient(circle at 35% 28%,#fcd34d,#b45309 60%,#78350f);box-shadow:0 calc(4*var(--u)) 0 #451a03,0 calc(6*var(--u)) calc(10*var(--u)) #0008}
+.runner .gpad .kf-cast--off{opacity:.45}
+.runner .gpad .kf-cast--fatal{background:radial-gradient(circle at 35% 28%,#fca5a5,#b91c1c 60%,#450a0a);animation:kf-pulse-btn .6s ease-in-out infinite alternate}
+.runner .gpad.kf-pad .gpad-a{font-size:calc(40*var(--u))}
 
 /* Carga de neón verde tipo radiación detrás de cada columna y cada base: con pocas cartas apenas se
    nota y, a medida que se suman, se vuelve mucho más luminosa y late cada vez más rápido. */
@@ -1420,12 +1450,6 @@ html:has(.games-title){overflow-x:hidden}
 .kf-actions{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin-top:1rem}
 .kf-final{font-size:1.1rem}
 .kf-final b{font:900 1.6rem/1 Impact,"Arial Black",sans-serif;color:#fde047;margin:0 .4rem}
-.kf-pad{flex-wrap:wrap}
-.kf-pad button{min-height:52px;font-size:1.3rem;background:#3f0d0d;flex:1 1 10%}
-.kf-pad .kf-kick{background:#16a34a}
-.kf-pad .kf-cast{background:#a16207}
-.kf-pad .kf-cast--off{opacity:.45}
-.kf-pad .kf-cast--fatal{background:#b91c1c;animation:kf-pulse-btn .6s ease-in-out infinite alternate}
 @keyframes kf-pulse-btn{to{filter:brightness(1.35)}}
 .kf-vs{position:absolute;inset:0;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;justify-items:center;padding:8% 6% 6%;pointer-events:none;background:radial-gradient(circle,#0000 30%,#000a)}
 .kf-vs-side{display:grid;justify-items:center;gap:.4rem;animation:kf-vs-in .5s cubic-bezier(.2,1.4,.4,1) both}
