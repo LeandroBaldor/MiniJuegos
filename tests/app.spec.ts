@@ -25,7 +25,8 @@ test('Juegos: las tarjetas van justo debajo del encabezado y el meme ocupa el lu
   await expect(page.locator('.games-clock')).toHaveAttribute('aria-label', /^Son las \d\d:\d\d$/);
 });
 
-test('Juegos: el encabezado (cartel, meme, calendario y hora) queda fijo arriba al bajar', async ({ page }) => {
+test('Juegos: el encabezado (cartel, meme, calendario y hora) queda fijo arriba al bajar', async ({ page, isMobile }) => {
+  test.skip(isMobile, 'en celulares el encabezado no queda fijo (ver la prueba de abajo)');
   await page.goto('/MiniJuegos/#/juegos');
   await page.evaluate(() => window.scrollTo(0, 900));
   await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
@@ -39,6 +40,15 @@ test('Juegos: el encabezado (cartel, meme, calendario y hora) queda fijo arriba 
     expect(box.y).toBeGreaterThanOrEqual(0);
     expect(box.y + box.height).toBeLessThanOrEqual(header.y + header.height);
   }
+});
+
+test('Juegos: en celulares el encabezado se queda arriba y al bajar se ven solo los juegos', async ({ page, isMobile }) => {
+  test.skip(!isMobile, 'solo en celulares');
+  await page.goto('/MiniJuegos/#/juegos');
+  await page.evaluate(() => window.scrollTo(0, 1400));
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
+  const header = (await page.locator('.games-title').boundingBox())!;
+  expect(header.y + header.height).toBeLessThanOrEqual(0);
 });
 
 test('Juegos: en pantallas más anchas que el contenido el encabezado igual llega de borde a borde', async ({ page }) => {

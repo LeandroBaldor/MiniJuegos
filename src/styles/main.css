@@ -1259,6 +1259,8 @@ html:has(.games-title){overflow-x:hidden}
   margin:calc(-1 * var(--main-pad)) calc(-1 * var(--bleed)) .9rem;padding:calc(var(--main-pad) * .6) var(--bleed) var(--title-gap);
   background:#03321a6b;-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);
   border-bottom:2px solid #39ff1466;box-shadow:0 6px 24px #000a}
+/* En celulares y tablets (y pantallas bajas) el título no queda fijo: se queda arriba y al bajar se ven solo los juegos. */
+@media(pointer:coarse),(max-height:700px){.games-title{position:relative}}
 /* Invasión: verde militar, la mira ocupa toda la pantalla y arriba un plano chiquito de la cuadra. */
 .invasion .runner-back,.invasion .runner-scores{color:#86efac}
 .invasion .runner-bar button,.invasion .runner-pad button{background:#166534}
