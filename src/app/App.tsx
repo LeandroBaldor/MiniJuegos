@@ -10,6 +10,7 @@ import { Invasion } from '../features/games/InvasionGame';
 import { GravitySwap } from '../features/games/GravitySwapGame';
 import { KombatFootball } from '../features/games/KombatFootballGame';
 import { Vampyrium } from '../features/games/VampyriumGame';
+import { LandOfWarriors } from '../features/games/LandGame';
 
 // Solo la sección de Juegos: sin cuenta, sin sincronización. Los récords quedan guardados en el navegador.
 export default function App() {
@@ -25,5 +26,6 @@ export default function App() {
     <Route path="juegos/gravedad" element={<GravitySwap />} />
     <Route path="juegos/kombat" element={<KombatFootball />} />
     <Route path="juegos/vampyrium" element={<Vampyrium />} />
+    <Route path="juegos/land" element={<LandOfWarriors />} />
   </Route></Routes></HashRouter>;
 }
