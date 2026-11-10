@@ -1,3 +1,4 @@
+import { FartFactory } from '../features/games/FartFactoryGame';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import { Layout } from './Layout';
 import { Games } from '../features/games/Games';
@@ -17,7 +18,7 @@ export default function App() {
   return <HashRouter><Routes><Route element={<Layout />}>
     <Route index element={<Games />} />
     <Route path="juegos" element={<Games />} />
-    <Route path="juegos/bloques" element={<BlockRunner />} />
+    <Route path="juegos/fabrica" element={<FartFactory />} /><Route path="juegos/bloques" element={<BlockRunner />} />
     <Route path="juegos/trepaluna" element={<Trepaluna />} />
     <Route path="juegos/lava" element={<LavaFloor />} />
     <Route path="juegos/tiburon" element={<SharkCity />} />
