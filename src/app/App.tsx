@@ -1,3 +1,4 @@
+import { Vampyium2 } from '../features/games/Vampyium2Game';
 import { FartFactory } from '../features/games/FartFactoryGame';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import { Layout } from './Layout';
@@ -28,7 +29,7 @@ export default function App() {
     <Route path="juegos/gravedad" element={<GravitySwap />} />
     <Route path="juegos/kombat" element={<KombatFootball />} />
     <Route path="juegos/voley" element={<KombatVoley />} />
-    <Route path="juegos/vampyrium" element={<Vampyrium />} />
+    <Route path="juegos/vampyrium" element={<Vampyrium />} /><Route path="juegos/vampyium2" element={<Vampyium2/>}/>
     <Route path="juegos/land" element={<LandOfWarriors />} />
   </Route></Routes></HashRouter>;
 }
