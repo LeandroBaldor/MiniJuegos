@@ -10,6 +10,7 @@ import { PaperBall } from '../features/games/PaperBallGame';
 import { Invasion } from '../features/games/InvasionGame';
 import { GravitySwap } from '../features/games/GravitySwapGame';
 import { KombatFootball } from '../features/games/KombatFootballGame';
+import { KombatVoley } from '../features/games/KombatVoleyGame';
 import { Vampyrium } from '../features/games/VampyriumGame';
 import { LandOfWarriors } from '../features/games/LandGame';
 
@@ -26,6 +27,7 @@ export default function App() {
     <Route path="juegos/invasion" element={<Invasion />} />
     <Route path="juegos/gravedad" element={<GravitySwap />} />
     <Route path="juegos/kombat" element={<KombatFootball />} />
+    <Route path="juegos/voley" element={<KombatVoley />} />
     <Route path="juegos/vampyrium" element={<Vampyrium />} />
     <Route path="juegos/land" element={<LandOfWarriors />} />
   </Route></Routes></HashRouter>;
