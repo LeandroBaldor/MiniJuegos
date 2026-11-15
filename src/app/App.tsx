@@ -12,6 +12,7 @@ import { Invasion } from '../features/games/InvasionGame';
 import { GravitySwap } from '../features/games/GravitySwapGame';
 import { KombatFootball } from '../features/games/KombatFootballGame';
 import { KombatVoley } from '../features/games/KombatVoleyGame';
+import { KombatPenalties } from '../features/games/KombatPenaltiesGame';
 import { Vampyrium } from '../features/games/VampyriumGame';
 import { LandOfWarriors } from '../features/games/LandGame';
 
@@ -29,6 +30,7 @@ export default function App() {
     <Route path="juegos/gravedad" element={<GravitySwap />} />
     <Route path="juegos/kombat" element={<KombatFootball />} />
     <Route path="juegos/voley" element={<KombatVoley />} />
+    <Route path="juegos/penales" element={<KombatPenalties />} />
     <Route path="juegos/vampyrium" element={<Vampyrium />} /><Route path="juegos/vampyium2" element={<Vampyium2/>}/>
     <Route path="juegos/land" element={<LandOfWarriors />} />
   </Route></Routes></HashRouter>;
