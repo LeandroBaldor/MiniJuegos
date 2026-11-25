@@ -16,6 +16,7 @@ import { KombatPenalties } from '../features/games/KombatPenaltiesGame';
 import { Vampyrium } from '../features/games/VampyriumGame';
 import { LandOfWarriors } from '../features/games/LandGame';
 import { TiroAlBlanco } from '../features/games/TiroAlBlancoGame';
+import { Tiro2050Game } from '../features/games/Tiro2050Game';
 
 // Solo la sección de Juegos: sin cuenta, sin sincronización. Los récords quedan guardados en el navegador.
 export default function App() {
@@ -35,5 +36,6 @@ export default function App() {
     <Route path="juegos/vampyrium" element={<Vampyrium />} /><Route path="juegos/vampyium2" element={<Vampyium2/>}/>
     <Route path="juegos/land" element={<LandOfWarriors />} />
     <Route path="juegos/tiro" element={<TiroAlBlanco />} />
+    <Route path="juegos/tiro-al-blanco-2050" element={<Tiro2050Game />} />
   </Route></Routes></HashRouter>;
 }
